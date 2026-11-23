@@ -221,16 +221,30 @@ $("#pl-en").onclick = () => TTS.item && listen(TTS.item, "en");
    ========================================================= */
 const TV = {
   "tv-ticker": () => ["ticker-tape", {symbols:[
-    {proName:"IDX:COMPOSITE",title:"IHSG"},{proName:"FX_IDC:USDIDR",title:"USD/IDR"},{proName:"OANDA:XAUUSD",title:"Emas"},
-    {proName:"TVC:UKOIL",title:"Brent"},{proName:"FOREXCOM:SPXUSD",title:"S&P 500"},{proName:"TVC:NI225",title:"Nikkei"},
-    {proName:"TVC:HSI",title:"Hang Seng"},{proName:"BITSTAMP:BTCUSD",title:"Bitcoin"}],
+    {proName:"IDX:COMPOSITE",title:"IHSG"},{proName:"IDX:LQ45",title:"LQ45"},
+    {proName:"IDX:BBCA",title:"BBCA"},{proName:"IDX:BBRI",title:"BBRI"},{proName:"IDX:BMRI",title:"BMRI"},{proName:"IDX:BBNI",title:"BBNI"},
+    {proName:"IDX:TLKM",title:"TLKM"},{proName:"IDX:ASII",title:"ASII"},{proName:"IDX:UNVR",title:"UNVR"},{proName:"IDX:ICBP",title:"ICBP"},
+    {proName:"IDX:INDF",title:"INDF"},{proName:"IDX:KLBF",title:"KLBF"},{proName:"IDX:AMRT",title:"AMRT"},{proName:"IDX:UNTR",title:"UNTR"},
+    {proName:"IDX:ANTM",title:"ANTM"},{proName:"IDX:PGAS",title:"PGAS"},{proName:"IDX:CPIN",title:"CPIN"},{proName:"IDX:BRIS",title:"BRIS"},
+    {proName:"FX_IDC:USDIDR",title:"USD/IDR"},{proName:"OANDA:XAUUSD",title:"Emas"},{proName:"TVC:UKOIL",title:"Brent"},
+    {proName:"TVC:NI225",title:"Nikkei"},{proName:"TVC:HSI",title:"Hang Seng"},{proName:"FOREXCOM:SPXUSD",title:"S&P 500"},{proName:"BITSTAMP:BTCUSD",title:"Bitcoin"}],
     showSymbolLogo:true, isTransparent:true, displayMode:"adaptive", locale:"id"}],
   "tv-overview": () => ["market-overview", {dateRange:"1M", showChart:true, locale:"id", width:"100%", height:600, isTransparent:true, showSymbolLogo:true, showFloatingTooltip:true,
     tabs:[
-      {title:"Saham Indonesia", symbols:[{s:"IDX:COMPOSITE",d:"IHSG"},{s:"IDX:LQ45",d:"LQ45"},{s:"IDX:BBCA",d:"Bank Central Asia"},{s:"IDX:BBRI",d:"Bank Rakyat Indonesia"},{s:"IDX:BMRI",d:"Bank Mandiri"},{s:"IDX:TLKM",d:"Telkom Indonesia"},{s:"IDX:ASII",d:"Astra International"},{s:"IDX:ANTM",d:"Aneka Tambang"},{s:"IDX:AALI",d:"Astra Agro Lestari"},{s:"IDX:BRIS",d:"Bank Syariah Indonesia"}]},
+      {title:"Indeks Indonesia", symbols:[{s:"IDX:COMPOSITE",d:"IHSG"},{s:"IDX:LQ45",d:"LQ45"},{s:"IDX:IDX30",d:"IDX30"},{s:"IDX:IDXHIDIV20",d:"IDX High Dividend 20"},{s:"IDX:JII",d:"Jakarta Islamic Index"}]},
+      {title:"Blue Chip Perbankan", symbols:[{s:"IDX:BBCA",d:"Bank Central Asia"},{s:"IDX:BBRI",d:"Bank Rakyat Indonesia"},{s:"IDX:BMRI",d:"Bank Mandiri"},{s:"IDX:BBNI",d:"Bank Negara Indonesia"},{s:"IDX:BRIS",d:"Bank Syariah Indonesia"}]},
+      {title:"Blue Chip Non-Bank", symbols:[{s:"IDX:TLKM",d:"Telkom Indonesia"},{s:"IDX:ASII",d:"Astra International"},{s:"IDX:UNVR",d:"Unilever Indonesia"},{s:"IDX:ICBP",d:"Indofood CBP"},{s:"IDX:INDF",d:"Indofood Sukses Makmur"},{s:"IDX:KLBF",d:"Kalbe Farma"},{s:"IDX:AMRT",d:"Sumber Alfaria Trijaya"},{s:"IDX:UNTR",d:"United Tractors"},{s:"IDX:CPIN",d:"Charoen Pokphand"}]},
+      {title:"Tambang & Agri", symbols:[{s:"IDX:ANTM",d:"Aneka Tambang"},{s:"IDX:PGAS",d:"Perusahaan Gas Negara"},{s:"IDX:PTBA",d:"Bukit Asam"},{s:"IDX:INCO",d:"Vale Indonesia"},{s:"IDX:MDKA",d:"Merdeka Copper Gold"},{s:"IDX:AALI",d:"Astra Agro Lestari"},{s:"IDX:LSIP",d:"PP London Sumatra"},{s:"IDX:JPFA",d:"Japfa Comfeed"}]},
       {title:"Global", symbols:[{s:"FOREXCOM:SPXUSD",d:"S&P 500"},{s:"FOREXCOM:NSXUSD",d:"Nasdaq 100"},{s:"FOREXCOM:DJI",d:"Dow Jones"},{s:"TVC:NI225",d:"Nikkei 225"},{s:"TVC:HSI",d:"Hang Seng"},{s:"TVC:STI",d:"Straits Times"}]},
       {title:"Komoditas", symbols:[{s:"OANDA:XAUUSD",d:"Emas"},{s:"OANDA:XAGUSD",d:"Perak"},{s:"TVC:UKOIL",d:"Minyak Brent"},{s:"MYX:FCPO1!",d:"CPO Malaysia"},{s:"CBOT:ZC1!",d:"Jagung"},{s:"CBOT:ZS1!",d:"Kedelai"},{s:"ICEUS:KC1!",d:"Kopi"},{s:"ICEUS:CC1!",d:"Kakao"}]},
       {title:"Kurs & Obligasi", symbols:[{s:"FX_IDC:USDIDR",d:"USD/IDR"},{s:"FX_IDC:SGDIDR",d:"SGD/IDR"},{s:"FX_IDC:EURIDR",d:"EUR/IDR"},{s:"FX_IDC:CNYIDR",d:"CNY/IDR"},{s:"TVC:ID10Y",d:"Yield SBN 10 th"},{s:"TVC:US10Y",d:"US Treasury 10 th"}]}]}],
+  "tv-bluechip": () => ["market-quotes", {width:"100%", height:620, locale:"id", isTransparent:true, showSymbolLogo:true,
+    symbolsGroups:[
+      {name:"Perbankan", symbols:[{name:"IDX:BBCA",displayName:"BCA"},{name:"IDX:BBRI",displayName:"BRI"},{name:"IDX:BMRI",displayName:"Mandiri"},{name:"IDX:BBNI",displayName:"BNI"},{name:"IDX:BRIS",displayName:"BSI"}]},
+      {name:"Konsumer & Ritel", symbols:[{name:"IDX:UNVR",displayName:"Unilever"},{name:"IDX:ICBP",displayName:"Indofood CBP"},{name:"IDX:INDF",displayName:"Indofood"},{name:"IDX:AMRT",displayName:"Alfamart"},{name:"IDX:KLBF",displayName:"Kalbe Farma"},{name:"IDX:CPIN",displayName:"Charoen Pokphand"}]},
+      {name:"Infrastruktur & Otomotif", symbols:[{name:"IDX:TLKM",displayName:"Telkom"},{name:"IDX:ASII",displayName:"Astra"},{name:"IDX:UNTR",displayName:"United Tractors"},{name:"IDX:PGAS",displayName:"PGN"}]},
+      {name:"Tambang & Agribisnis", symbols:[{name:"IDX:ANTM",displayName:"Antam"},{name:"IDX:PTBA",displayName:"Bukit Asam"},{name:"IDX:INCO",displayName:"Vale Indonesia"},{name:"IDX:AALI",displayName:"Astra Agro"},{name:"IDX:LSIP",displayName:"London Sumatra"},{name:"IDX:JPFA",displayName:"Japfa"}]}
+    ]}],
   "tv-ihsg": () => ["advanced-chart", {symbol:"IDX:COMPOSITE", interval:"D", timezone:"Asia/Jakarta", style:"1", locale:"id", allow_symbol_change:true, autosize:true, hide_side_toolbar:true}],
   "tv-ta": () => ["technical-analysis", {interval:"1D", width:"100%", height:440, isTransparent:true, symbol:"IDX:COMPOSITE", showIntervalTabs:true, locale:"id", displayMode:"multiple"}],
   "tv-gold": () => ["mini-symbol-overview", {symbol:"OANDA:XAUUSD", width:"100%", height:260, locale:"id", dateRange:"3M", isTransparent:true, autosize:false, largeChartUrl:""}],
@@ -895,7 +909,7 @@ $("#btnEdit").onclick = () => {
 let mktTab = "ringkas";
 function renderMarket() {
   renderKPIs();
-  const tabs = {ringkas:"Rupiah & Emas", overview:"Ikhtisar pasar", ihsg:"Grafik IHSG", ta:"Teknikal IHSG", kurs:"Tabel kurs"};
+  const tabs = {ringkas:"Rupiah & Emas", bluechip:"Saham Blue Chip", overview:"Ikhtisar pasar", ihsg:"Grafik IHSG", ta:"Teknikal IHSG", kurs:"Tabel kurs"};
   $("#mkt-tabs").innerHTML = Object.entries(tabs).map(([k, v]) => `<button data-v="${k}" aria-pressed="${k === mktTab}">${v}</button>`).join("");
   segBind("mkt-tabs", v => { mktTab = v; renderMktPanel(); });
   renderMktPanel();
@@ -919,7 +933,7 @@ function renderMktPanel() {
     P.innerHTML = `<div class="card"><table class="tbl"><thead><tr><th>Mata uang</th><th class="r">Rupiah</th><th class="r">Perubahan</th></tr></thead><tbody>${Object.keys(CUR).filter(k => FX.rates[k]).map(k => { const m = k === "JPY" ? 100 : 1, v = m / FX.rates[k], pv = FX.prevRates[k] ? m / FX.prevRates[k] : null; return `<tr><td>${CUR[k]} <span class="muted small">${k}</span></td><td class="r">${nf(v)}</td><td class="r">${chg(pct(v, pv))}</td></tr>`; }).join("")}</tbody></table>
       <p class="small muted" style="margin:8px 0 0">Hijau = naik, merah = turun (kurs naik berarti Rupiah melemah). Kurs referensi ECB per ${FX.date || "–"}; kurs JISDOR resmi: <a href="https://www.bi.go.id/id/statistik/informasi-kurs/jisdor/default.aspx" target="_blank" rel="noopener">bi.go.id</a>.</p></div>`;
   } else {
-    const id = {overview: "tv-overview", ihsg: "tv-ihsg", ta: "tv-ta"}[mktTab];
+    const id = {overview: "tv-overview", ihsg: "tv-ihsg", ta: "tv-ta", bluechip: "tv-bluechip"}[mktTab];
     P.innerHTML = `<div class="card"><div class="tv" id="${id}" style="${mktTab === "ihsg" ? "height:460px" : ""}"></div></div>`; loadTV(id);
   }
 }
