@@ -6,11 +6,14 @@ Asisten Ekonomi Harian adalah dashboard pribadi untuk memantau ekonomi Indonesia
 
 | File | Fungsi |
 |---|---|
-| `index.html` | Aplikasi dashboard (satu file, bisa langsung dibuka di peramban) |
+| `index.html` | Aplikasi dashboard hasil rakitan (jangan diedit langsung; edit `src/` lalu jalankan `python build.py`) |
+| `src/index.template.html`, `src/style.css`, `src/app.js` | Sumber tampilan (tema merah, slider, pembaca jurnal, suara) |
+| `data/berita.json` | Berita ekonomi per tema, diperbarui otomatis tiap jam |
+| `scripts/ambil_berita.py` + `.github/workflows/berita.yml` | Pengambil berita RSS (CNBC Indonesia, CNN Indonesia, Antara, Detik, Tempo, Republika, Liputan6, Google News, CNBC International) |
 | `data/indikator.json` | Angka indikator resmi BI, BPS, dan Kemenkeu yang Anda perbarui setiap ada rilis baru |
 | `scripts/kirim_wa.py` | Skrip penyusun dan pengirim ringkasan harian ke WhatsApp |
 | `.github/workflows/harian.yml` | Jadwal otomatis setiap hari pukul 06.00 WIT |
-| `src/index.template.html` dan `build.py` | Sumber dashboard. Jalankan `python build.py` setelah mengubah template |
+| `build.py` | Merakit `index.html` dari folder `src/` |
 
 ## Cara 1: Pakai langsung di HP atau laptop (paling cepat)
 
@@ -90,13 +93,32 @@ Kalender rilis di menu Ekonomi Indonesia menampilkan jadwal ini secara realtime.
 | IHSG di pesan WA | Yahoo Finance | Tidak resmi. Jika gagal, bagian IHSG dilewati. |
 | Terjemahan ringkasan | Google Translate | Layanan gratis tidak resmi. Jika gagal, teks asli tetap tampil. |
 
+## Fitur tampilan
+
+Dashboard memakai tema merah dan bisa diganti ke mode terang atau gelap lewat ikon bulan/matahari. Berita dan jurnal tampil dalam slider yang bisa digeser ke kiri dan kanan, dan bergerak otomatis. Slider berhenti sebentar saat disentuh dan bisa dijeda.
+
+**Berita** dikelompokkan per tema: Makro, Moneter & Perbankan, Fiskal & Pajak, Pasar & Investasi, Pertanian & Pangan, Energi & Tambang, Syariah, dan Global. Berita juga bisa disaring per media dan dicari dengan kata kunci.
+
+**Data ekonomi** dikelompokkan dalam tab Makro, Moneter, Fiskal, Pertanian & Mikro, serta Kalender Rilis. Setiap tab berisi angka indikator, analisis, grafik tren 20 tahun, berita terkait, dan referensi resmi Indonesia.
+
+**Jurnal dan berita bisa dibaca langsung di dalam aplikasi.** Ketuk sebuah kartu untuk membuka pembaca. Dari pembaca, Anda bisa:
+- menerjemahkan isi (Asli / Indonesia / English);
+- mendengarkan dalam Bahasa Indonesia atau Inggris;
+- menyalin sitasi APA;
+- menandai sudah dibaca;
+- menyimpan ke Arsip;
+- menampilkan PDF untuk artikel akses terbuka.
+
+Untuk berita, pembaca hanya menampilkan ringkasan dari RSS, karena artikel lengkapnya milik media yang bersangkutan.
+
 ## Menyesuaikan bidang jurnal
 
-Kata kunci tiap bidang ada di bagian `BIDANG`, yaitu di `src/index.template.html` (untuk dashboard) dan di `scripts/kirim_wa.py` (untuk WhatsApp). Contohnya `agricultural` untuk ekonomi pertanian dan `islamic` untuk ekonomi syariah. Ganti kata kunci sesuai minat Anda. Setelah mengubah template, jalankan `python build.py`.
+Kata kunci tiap bidang ada di bagian `BIDANG`, yaitu di `src/app.js` (untuk dashboard) dan di `scripts/kirim_wa.py` (untuk WhatsApp). Contohnya `agricultural` untuk ekonomi pertanian dan `islamic` untuk ekonomi syariah. Ganti kata kunci sesuai minat Anda. Setelah mengubah template, jalankan `python build.py`.
 
 ## Catatan penting
 
 - Ringkasan jurnal diambil dari kalimat pertama abstrak, bukan ditulis ulang oleh AI. Bagian "Mengapa masih relevan" dihitung dari data sitasi.
 - Analisis ekonomi harian disusun dengan aturan baku. Contohnya: inflasi dibandingkan dengan sasaran BI 2,5±1%, suku bunga riil dihitung dari BI-Rate dikurangi inflasi, defisit dibandingkan dengan batas 3% PDB, dan NTP dibandingkan dengan angka 100.
-- Jika ada simbol di widget TradingView yang bertuliskan "hanya tersedia di TradingView", ganti simbol tersebut di bagian `TV` pada template.
+- Jika ada simbol di widget TradingView yang bertuliskan "hanya tersedia di TradingView", ganti simbol tersebut di bagian `TV` pada `src/app.js`.
+- Jika salah satu media berita tidak muncul, cek statusnya di halaman Berita, bagian "Sumber berita & status", lalu ganti alamat RSS-nya di `scripts/ambil_berita.py`.
 - Seluruh informasi bersifat edukatif dan bukan rekomendasi investasi.

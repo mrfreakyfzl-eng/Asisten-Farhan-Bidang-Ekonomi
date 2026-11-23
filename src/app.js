@@ -1,0 +1,863 @@
+(() => {
+"use strict";
+
+/* =========================================================
+   UTILITAS
+   ========================================================= */
+const $ = (s, el = document) => el.querySelector(s);
+const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+const store = {
+  get(k, d) { try { const v = localStorage.getItem("ae_" + k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
+  set(k, v) { try { localStorage.setItem("ae_" + k, JSON.stringify(v)); } catch (e) {} },
+  del(k) { try { localStorage.removeItem("ae_" + k); } catch (e) {} }
+};
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const strip = s => String(s ?? "").replace(/<[^>]*>/g, "").replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&#39;/g, "'");
+const nf = (v, d = 2) => (v == null || isNaN(v)) ? "–" : Number(v).toLocaleString("id-ID", {minimumFractionDigits: d, maximumFractionDigits: d});
+const pct = (a, b) => (a != null && b) ? (a - b) / b * 100 : null;
+const ymd = d => d.toISOString().slice(0, 10);
+const addDays = (d, n) => { const x = new Date(d); x.setDate(x.getDate() + n); return x; };
+const TODAY = new Date(), YEAR = TODAY.getFullYear();
+const DOY = Math.floor((TODAY - new Date(YEAR, 0, 0)) / 864e5);
+const HARI = ["Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"];
+const fmtDate = (d, o = {day:"numeric", month:"short", year:"numeric"}) => { try { return new Date(d).toLocaleDateString("id-ID", o); } catch (e) { return ""; } };
+function ago(iso) {
+  const m = Math.round((Date.now() - new Date(iso)) / 6e4);
+  if (isNaN(m)) return "";
+  if (m < 1) return "baru saja"; if (m < 60) return m + " menit lalu";
+  const h = Math.round(m / 60); if (h < 24) return h + " jam lalu";
+  const d = Math.round(h / 24); return d < 7 ? d + " hari lalu" : fmtDate(iso);
+}
+function hash(s) { let h = 0; for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) | 0; return (h >>> 0).toString(36); }
+function toast(msg) { const t = $("#toast"); t.textContent = msg; t.classList.add("on"); clearTimeout(t._h); t._h = setTimeout(() => t.classList.remove("on"), 2300); }
+async function getJSON(url, timeout = 15000) {
+  const ctl = new AbortController(); const h = setTimeout(() => ctl.abort(), timeout);
+  try { const r = await fetch(url, {signal: ctl.signal}); if (!r.ok) throw new Error("HTTP " + r.status); return await r.json(); }
+  finally { clearTimeout(h); }
+}
+function chg(p, invert = false, d = 2) {
+  if (p == null || isNaN(p)) return '<span class="chg flat">–</span>';
+  const up = p > 0.0005, dn = p < -0.0005;
+  const cls = !up && !dn ? "flat" : ((up !== invert) ? "up" : "down");
+  return `<span class="chg ${cls}">${up ? "▲" : dn ? "▼" : "■"} ${nf(Math.abs(p), d)}%</span>`;
+}
+const SET = {
+  get lang() { return store.get("ttsLang", "id"); }, set lang(v) { store.set("ttsLang", v); },
+  get rate() { return store.get("ttsRate", 1); }, set rate(v) { store.set("ttsRate", v); },
+  get autoTr() { return store.get("autoTr", true); }, set autoTr(v) { store.set("autoTr", v); },
+  get autoplay() { return store.get("autoplay", true); }, set autoplay(v) { store.set("autoplay", v); }
+};
+// Lokasi repo GitHub (untuk membaca data terbaru langsung dari raw.githubusercontent.com)
+const REPO = (() => {
+  if (!/\.github\.io$/.test(location.hostname)) return null;
+  const owner = location.hostname.split(".")[0], repo = location.pathname.split("/").filter(Boolean)[0];
+  return repo ? `https://raw.githubusercontent.com/${owner}/${repo}/main/` : null;
+})();
+async function getData(path, timeout = 8000) {
+  // ambil dari situs sendiri dan dari repo, pakai yang paling baru
+  const tries = [getJSON(path + "?t=" + Date.now(), timeout).catch(() => null)];
+  if (REPO) tries.push(getJSON(REPO + path + "?t=" + Date.now(), timeout).catch(() => null));
+  const res = (await Promise.all(tries)).filter(Boolean);
+  if (!res.length) return null;
+  return res.sort((a, b) => String(b.diperbarui || "").localeCompare(String(a.diperbarui || "")))[0];
+}
+
+/* =========================================================
+   TEMA TERANG / GELAP
+   ========================================================= */
+const isDark = () => { const t = document.documentElement.dataset.theme; return t ? t === "dark" : matchMedia("(prefers-color-scheme: dark)").matches; };
+(function () { const t = store.get("theme", null); if (t) document.documentElement.dataset.theme = t; })();
+function themeIcon() { $("#btnTheme use").setAttribute("href", isDark() ? "#i-sun" : "#i-moon"); }
+$("#btnTheme").onclick = () => {
+  const n = isDark() ? "light" : "dark"; document.documentElement.dataset.theme = n; store.set("theme", n);
+  themeIcon(); rerenderTV(); redrawCharts();
+};
+themeIcon();
+$("#today").textContent = TODAY.toLocaleDateString("id-ID", {weekday:"long", day:"numeric", month:"long", year:"numeric"});
+
+/* =========================================================
+   NAVIGASI
+   ========================================================= */
+const PAGES = [["beranda","Beranda","i-home"],["berita","Berita","i-news"],["ekonomi","Ekonomi","i-eco"],["pasar","Pasar","i-mkt"],["jurnal","Jurnal","i-book"],["arsip","Arsip","i-save"]];
+$("#topnav").innerHTML = PAGES.map(([id, n]) => `<button data-page="${id}">${n}</button>`).join("");
+$("#botnav").innerHTML = PAGES.map(([id, n, ic]) => `<button data-page="${id}"><svg><use href="#${ic}"/></svg>${n}</button>`).join("");
+const opened = new Set();
+function go(id) {
+  if (!document.getElementById("page-" + id)) id = "beranda";
+  $$("[data-page]").forEach(b => { if (b.dataset.page === id) b.setAttribute("aria-current", "page"); else b.removeAttribute("aria-current"); });
+  $$("section.page").forEach(s => s.classList.toggle("active", s.id === "page-" + id));
+  if (!opened.has(id)) { opened.add(id); firstOpen(id); }
+  if (id === "arsip") renderArsip();
+  if (location.hash.slice(1) !== id) history.replaceState(null, "", "#" + id);
+  window.scrollTo({top: 0, behavior: "instant"});
+}
+document.addEventListener("click", e => { const b = e.target.closest("[data-page],[data-go]"); if (b) go(b.dataset.page || b.dataset.go); });
+$("#btnSet").onclick = () => go("atur");
+window.addEventListener("hashchange", () => go(location.hash.slice(1)));
+function firstOpen(id) {
+  if (id === "berita") renderNewsPage();
+  if (id === "ekonomi") renderEcoTabs();
+  if (id === "pasar") renderMarket();
+  if (id === "jurnal") { renderJChips(); loadJurnal(true); }
+}
+
+/* =========================================================
+   CAROUSEL (geser kiri-kanan + otomatis)
+   ========================================================= */
+function carousel(root, slides, opt = {}) {
+  if (root._timer) clearInterval(root._timer);
+  if (!slides.length) { root.innerHTML = `<div class="state">${opt.empty || "Belum ada data."}</div>`; return; }
+  root.innerHTML = `<div class="car-track">${slides.join("")}</div>
+    <button class="car-btn prev" aria-label="Sebelumnya">‹</button><button class="car-btn next" aria-label="Berikutnya">›</button>
+    <div class="car-foot"><div class="car-dots">${slides.map((_, i) => `<button aria-label="Slide ${i + 1}"></button>`).join("")}</div>${slides.length > 1 ? '<button class="car-play" title="Jeda/putar otomatis">❚❚</button>' : ""}</div>`;
+  const track = $(".car-track", root), dots = $$(".car-dots button", root), play = $(".car-play", root);
+  const step = () => { const c = track.children; return c.length > 1 ? c[1].offsetLeft - c[0].offsetLeft : track.clientWidth; };
+  const idx = () => Math.round(track.scrollLeft / Math.max(1, step()));
+  const atEnd = () => track.scrollLeft + track.clientWidth >= track.scrollWidth - 8;
+  const goTo = i => track.scrollTo({left: Math.max(0, i) * step(), behavior: "smooth"});
+  const next = () => atEnd() ? goTo(0) : goTo(idx() + 1);
+  const prev = () => idx() <= 0 ? goTo(slides.length - 1) : goTo(idx() - 1);
+  const mark = () => { const i = atEnd() ? slides.length - 1 : idx(); dots.forEach((d, k) => d.setAttribute("aria-current", k === i)); };
+  track.addEventListener("scroll", () => { cancelAnimationFrame(track._r); track._r = requestAnimationFrame(mark); }, {passive: true});
+  $(".next", root).onclick = () => { next(); hold(); }; $(".prev", root).onclick = () => { prev(); hold(); };
+  dots.forEach((d, i) => d.onclick = () => { goTo(i); hold(); });
+  mark();
+  const auto = Number(root.dataset.auto || 0);
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let paused = !SET.autoplay || reduce || !auto, holdUntil = 0, visible = true;
+  const tick = () => { if (!paused && visible && Date.now() > holdUntil && !document.hidden) next(); };
+  const hold = (ms = 9000) => { holdUntil = Date.now() + ms; };
+  if (auto && slides.length > 1) root._timer = setInterval(tick, auto);
+  ["pointerdown", "touchstart", "wheel", "focusin"].forEach(ev => root.addEventListener(ev, () => hold(), {passive: true}));
+  root.addEventListener("mouseenter", () => hold(60000)); root.addEventListener("mouseleave", () => hold(3000));
+  if (play) { const upd = () => play.textContent = paused ? "▶ Putar" : "❚❚"; upd(); play.onclick = () => { paused = !paused; upd(); }; }
+  if ("IntersectionObserver" in window) new IntersectionObserver(es => es.forEach(e => visible = e.isIntersecting)).observe(root);
+}
+
+/* =========================================================
+   TERJEMAHAN (gratis): Google Translate (tidak resmi) → MyMemory
+   ========================================================= */
+const TRC = store.get("trc", {});
+function saveTRC() { const k = Object.keys(TRC); if (k.length > 400) k.slice(0, k.length - 400).forEach(x => delete TRC[x]); store.set("trc", TRC); }
+function chunks(t, max) {
+  const s = t.match(/[^.!?]+[.!?]*\s*/g) || [t]; const out = []; let b = "";
+  for (const x of s) { if ((b + x).length > max && b) { out.push(b); b = ""; } b += x; }
+  if (b) out.push(b); return out.flatMap(c => c.length > max ? c.match(new RegExp(".{1," + max + "}", "g")) : [c]);
+}
+async function trChunk(c, to, from) {
+  try {
+    const d = await getJSON(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=${from || "auto"}&tl=${to}&dt=t&q=${encodeURIComponent(c)}`, 12000);
+    return d[0].map(x => x[0]).filter(Boolean).join("");
+  } catch (e) {
+    const src = from && from !== "auto" ? from : (to === "id" ? "en" : "id");
+    const parts = [];
+    for (const s of chunks(c, 480)) { const d = await getJSON(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(s)}&langpair=${src}|${to}`, 12000); parts.push(d.responseData.translatedText); }
+    return parts.join(" ");
+  }
+}
+async function translate(text, to, from) {
+  if (!text) return "";
+  if (from && from === to) return text;
+  const key = to + ":" + hash(text);
+  if (TRC[key]) return TRC[key];
+  const out = [];
+  for (const c of chunks(text, 1400)) out.push(await trChunk(c, to, from));
+  const res = out.join(" ").replace(/\s+/g, " ").trim();
+  TRC[key] = res; saveTRC(); return res;
+}
+
+/* =========================================================
+   SUARA: Indonesia & Inggris
+   ========================================================= */
+const TTS = {item: null, lang: SET.lang, paused: false, token: 0};
+function voiceFor(lang) {
+  const vs = speechSynthesis.getVoices();
+  return vs.find(v => v.lang.toLowerCase().replace("_", "-").startsWith(lang === "id" ? "id" : "en-us")) || vs.find(v => v.lang.toLowerCase().startsWith(lang)) || null;
+}
+if ("speechSynthesis" in window) speechSynthesis.onvoiceschanged = () => {};
+/* item: {judul, teks:[...paragraf], bahasa:'id'|'en'} */
+async function listen(item, lang) {
+  if (!("speechSynthesis" in window)) { toast("Peramban ini belum mendukung suara"); return; }
+  lang = lang || SET.lang; TTS.item = item; TTS.lang = lang; TTS.paused = false;
+  const my = ++TTS.token;
+  speechSynthesis.cancel();
+  showPlayer(item.judul, lang === "id" ? "Bahasa Indonesia" : "English", true);
+  let parts = [item.judul, ...item.teks].filter(Boolean);
+  if ((item.bahasa || "id") !== lang) {
+    $("#pl-s").textContent = "menerjemahkan…";
+    try { parts = await Promise.all(parts.map(p => translate(p, lang, item.bahasa))); } catch (e) { toast("Terjemahan gagal, dibacakan dalam bahasa asli"); lang = item.bahasa || "id"; }
+    if (my !== TTS.token) return;
+    $("#pl-s").textContent = lang === "id" ? "Bahasa Indonesia" : "English";
+  }
+  const v = voiceFor(lang);
+  if (!v) toast(lang === "id" ? "Suara Indonesia belum terpasang di perangkat; memakai suara bawaan" : "English voice not installed; using default voice");
+  const sentences = parts.flatMap(p => chunks(p, 200));
+  sentences.forEach((s, i) => {
+    const u = new SpeechSynthesisUtterance(s);
+    u.lang = lang === "id" ? "id-ID" : "en-US"; if (v) u.voice = v; u.rate = SET.rate;
+    if (i === sentences.length - 1) u.onend = () => { if (my === TTS.token) hidePlayer(); };
+    speechSynthesis.speak(u);
+  });
+}
+function showPlayer(t, s, on) {
+  $("#pl-t").firstChild.textContent = t.length > 70 ? t.slice(0, 68) + "…" : t;
+  $("#pl-s").textContent = s; $("#player").classList.add("on"); $("#player").classList.remove("paused");
+  $("#pl-pause").textContent = "❚❚";
+  $("#pl-id").classList.toggle("on", TTS.lang === "id"); $("#pl-en").classList.toggle("on", TTS.lang === "en");
+}
+function hidePlayer() { $("#player").classList.remove("on"); }
+$("#pl-stop").onclick = () => { TTS.token++; speechSynthesis.cancel(); hidePlayer(); };
+$("#pl-pause").onclick = () => {
+  if (TTS.paused) { speechSynthesis.resume(); TTS.paused = false; $("#pl-pause").textContent = "❚❚"; $("#player").classList.remove("paused"); }
+  else { speechSynthesis.pause(); TTS.paused = true; $("#pl-pause").textContent = "▶"; $("#player").classList.add("paused"); }
+};
+$("#pl-id").onclick = () => TTS.item && listen(TTS.item, "id");
+$("#pl-en").onclick = () => TTS.item && listen(TTS.item, "en");
+
+/* =========================================================
+   TRADINGVIEW
+   ========================================================= */
+const TV = {
+  "tv-ticker": () => ["ticker-tape", {symbols:[
+    {proName:"IDX:COMPOSITE",title:"IHSG"},{proName:"FX_IDC:USDIDR",title:"USD/IDR"},{proName:"OANDA:XAUUSD",title:"Emas"},
+    {proName:"TVC:UKOIL",title:"Brent"},{proName:"FOREXCOM:SPXUSD",title:"S&P 500"},{proName:"TVC:NI225",title:"Nikkei"},
+    {proName:"TVC:HSI",title:"Hang Seng"},{proName:"BITSTAMP:BTCUSD",title:"Bitcoin"}],
+    showSymbolLogo:true, isTransparent:true, displayMode:"adaptive", locale:"id"}],
+  "tv-overview": () => ["market-overview", {dateRange:"1M", showChart:true, locale:"id", width:"100%", height:600, isTransparent:true, showSymbolLogo:true, showFloatingTooltip:true,
+    tabs:[
+      {title:"Saham Indonesia", symbols:[{s:"IDX:COMPOSITE",d:"IHSG"},{s:"IDX:LQ45",d:"LQ45"},{s:"IDX:BBCA",d:"Bank Central Asia"},{s:"IDX:BBRI",d:"Bank Rakyat Indonesia"},{s:"IDX:BMRI",d:"Bank Mandiri"},{s:"IDX:TLKM",d:"Telkom Indonesia"},{s:"IDX:ASII",d:"Astra International"},{s:"IDX:ANTM",d:"Aneka Tambang"},{s:"IDX:AALI",d:"Astra Agro Lestari"},{s:"IDX:BRIS",d:"Bank Syariah Indonesia"}]},
+      {title:"Global", symbols:[{s:"FOREXCOM:SPXUSD",d:"S&P 500"},{s:"FOREXCOM:NSXUSD",d:"Nasdaq 100"},{s:"FOREXCOM:DJI",d:"Dow Jones"},{s:"TVC:NI225",d:"Nikkei 225"},{s:"TVC:HSI",d:"Hang Seng"},{s:"TVC:STI",d:"Straits Times"}]},
+      {title:"Komoditas", symbols:[{s:"OANDA:XAUUSD",d:"Emas"},{s:"OANDA:XAGUSD",d:"Perak"},{s:"TVC:UKOIL",d:"Minyak Brent"},{s:"MYX:FCPO1!",d:"CPO Malaysia"},{s:"CBOT:ZC1!",d:"Jagung"},{s:"CBOT:ZS1!",d:"Kedelai"},{s:"ICEUS:KC1!",d:"Kopi"},{s:"ICEUS:CC1!",d:"Kakao"}]},
+      {title:"Kurs & Obligasi", symbols:[{s:"FX_IDC:USDIDR",d:"USD/IDR"},{s:"FX_IDC:SGDIDR",d:"SGD/IDR"},{s:"FX_IDC:EURIDR",d:"EUR/IDR"},{s:"FX_IDC:CNYIDR",d:"CNY/IDR"},{s:"TVC:ID10Y",d:"Yield SBN 10 th"},{s:"TVC:US10Y",d:"US Treasury 10 th"}]}]}],
+  "tv-ihsg": () => ["advanced-chart", {symbol:"IDX:COMPOSITE", interval:"D", timezone:"Asia/Jakarta", style:"1", locale:"id", allow_symbol_change:true, autosize:true, hide_side_toolbar:true}],
+  "tv-ta": () => ["technical-analysis", {interval:"1D", width:"100%", height:440, isTransparent:true, symbol:"IDX:COMPOSITE", showIntervalTabs:true, locale:"id", displayMode:"multiple"}],
+  "tv-gold": () => ["mini-symbol-overview", {symbol:"OANDA:XAUUSD", width:"100%", height:260, locale:"id", dateRange:"3M", isTransparent:true, autosize:false, largeChartUrl:""}],
+  "tv-cal": () => ["events", {isTransparent:true, width:"100%", height:560, locale:"id", importanceFilter:"0,1", countryFilter:"id,us,cn,jp,eu"}]
+};
+function loadTV(id) {
+  const el = document.getElementById(id); if (!el || !TV[id]) return;
+  const [name, cfg] = TV[id](); cfg.colorTheme = isDark() ? "dark" : "light";
+  el.classList.add("tradingview-widget-container");
+  el.innerHTML = '<div class="tradingview-widget-container__widget" style="height:100%"></div>';
+  const s = document.createElement("script"); s.async = true;
+  s.src = "https://s3.tradingview.com/external-embedding/embed-widget-" + name + ".js"; s.innerHTML = JSON.stringify(cfg);
+  s.onerror = () => el.innerHTML = '<div class="state">Widget pasar tidak dapat dimuat. Periksa koneksi internet.</div>';
+  el.appendChild(s); el.dataset.loaded = 1;
+}
+function rerenderTV() { Object.keys(TV).forEach(id => { const el = document.getElementById(id); if (el && el.dataset.loaded) loadTV(id); }); }
+
+/* =========================================================
+   GRAFIK GARIS SVG (hover/sentuh)
+   ========================================================= */
+const charts = [];
+function lineChart(el, pts, opt = {}) { charts.push([el, pts, opt]); drawLine(el, pts, opt); }
+function redrawCharts() { charts.forEach(([el, p, o]) => document.body.contains(el) && drawLine(el, p, o)); }
+function drawLine(el, pts, {unit = "", d = 1, height = 150} = {}) {
+  if (!pts.length) { el.innerHTML = '<div class="state">Data tidak tersedia</div>'; return; }
+  const W = 340, H = height, L = 42, R = 10, T = 10, B = 22;
+  const ys = pts.map(p => p.y); let mn = Math.min(...ys), mx = Math.max(...ys);
+  if (mn === mx) { mn -= 1; mx += 1; } const pad = (mx - mn) * .12; mn -= pad; mx += pad;
+  const x = i => L + (W - L - R) * (pts.length === 1 ? .5 : i / (pts.length - 1));
+  const y = v => T + (H - T - B) * (1 - (v - mn) / (mx - mn));
+  const line = pts.map((p, i) => (i ? "L" : "M") + x(i).toFixed(1) + " " + y(p.y).toFixed(1)).join(" ");
+  const area = line + ` L${x(pts.length - 1)} ${H - B} L${x(0)} ${H - B} Z`;
+  const cs = getComputedStyle(document.documentElement), c = cs.getPropertyValue("--chart").trim(), ln = cs.getPropertyValue("--line").trim(), mu = cs.getPropertyValue("--muted").trim(), sf = cs.getPropertyValue("--surface").trim();
+  const gid = "g" + Math.random().toString(36).slice(2, 8);
+  const ticks = [mn + pad, (mn + mx) / 2, mx - pad];
+  el.innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img"><defs><linearGradient id="${gid}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${c}" stop-opacity=".22"/><stop offset="1" stop-color="${c}" stop-opacity="0"/></linearGradient></defs>
+    ${ticks.map(t => `<line x1="${L}" x2="${W - R}" y1="${y(t)}" y2="${y(t)}" stroke="${ln}"/><text x="${L - 6}" y="${y(t) + 4}" text-anchor="end" font-size="10" fill="${mu}">${nf(t, d)}</text>`).join("")}
+    ${(mn < 0 && mx > 0) ? `<line x1="${L}" x2="${W - R}" y1="${y(0)}" y2="${y(0)}" stroke="${mu}"/>` : ""}
+    <text x="${L}" y="${H - 5}" font-size="10" fill="${mu}">${esc(pts[0].x)}</text><text x="${W - R}" y="${H - 5}" font-size="10" fill="${mu}" text-anchor="end">${esc(pts[pts.length - 1].x)}</text>
+    <path d="${area}" fill="url(#${gid})"/><path d="${line}" fill="none" stroke="${c}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="${x(pts.length - 1)}" cy="${y(pts[pts.length - 1].y)}" r="4" fill="${c}" stroke="${sf}" stroke-width="2"/>
+    <line class="xh" y1="${T}" y2="${H - B}" stroke="${mu}" stroke-dasharray="3 3" opacity="0"/><circle class="hd" r="4.5" fill="${c}" stroke="${sf}" stroke-width="2" opacity="0"/>
+    <rect class="hit" x="${L}" y="0" width="${W - L - R}" height="${H}" fill="transparent"/></svg><div class="tip"></div>`;
+  const svg = $("svg", el), tip = $(".tip", el), xh = $(".xh", el), hd = $(".hd", el);
+  const mv = ev => {
+    const r = svg.getBoundingClientRect(), cx = (ev.clientX - r.left) / r.width * W;
+    const i = Math.max(0, Math.min(pts.length - 1, Math.round((cx - L) / (W - L - R) * (pts.length - 1))));
+    const px = x(i), py = y(pts[i].y);
+    xh.setAttribute("x1", px); xh.setAttribute("x2", px); xh.setAttribute("opacity", 1);
+    hd.setAttribute("cx", px); hd.setAttribute("cy", py); hd.setAttribute("opacity", 1);
+    tip.textContent = `${pts[i].x}: ${nf(pts[i].y, d)}${unit}`; tip.style.left = (px / W * 100) + "%"; tip.style.top = (py / H * r.height) + "px"; tip.classList.add("on");
+  };
+  const out = () => { xh.setAttribute("opacity", 0); hd.setAttribute("opacity", 0); tip.classList.remove("on"); };
+  const hit = $(".hit", el); hit.addEventListener("pointermove", mv); hit.addEventListener("pointerdown", mv); hit.addEventListener("pointerleave", out);
+}
+
+/* =========================================================
+   INDIKATOR & ANALISIS
+   ========================================================= */
+const DEFAULT_IND = JSON.parse($("#default-indikator").textContent);
+let IND = DEFAULT_IND;
+async function loadIndikator() {
+  const remote = await getData("data/indikator.json");
+  const local = store.get("indikator", null);
+  IND = remote || DEFAULT_IND;
+  if (local && (local.diperbarui || "") > (IND.diperbarui || "")) IND = local; else store.del("indikator");
+}
+const findInd = id => { for (const g of IND.kelompok) for (const i of g.indikator) if (i.id === id) return i; return null; };
+const V = id => { const i = findInd(id); return i ? Number(i.nilai) : null; };
+function analysis() {
+  const out = []; const A = (t, ic, s) => out.push({t, ic, s});
+  const bi = V("bi_rate"), inf = V("inflasi"), pdb = V("pdb"), def = V("defisit"), ntp = V("ntp"), ntn = V("ntn"), pg = V("inflasi_pangan"), cad = V("cadev"), pend = V("pendapatan"), nrc = V("neraca"), prim = V("primer");
+  if (pdb != null) A("makro", "📈", `Ekonomi tumbuh ${nf(pdb)}% (yoy) pada ${findInd("pdb").periode}. ` + (pdb >= 5.5 ? "Laju ini tergolong kuat, di atas tren lima persenan satu dekade terakhir." : pdb >= 5 ? "Laju ini sejalan dengan tren jangka panjang sekitar lima persen." : "Laju ini di bawah lima persen; dorongan permintaan domestik perlu dicermati."));
+  if (inf != null) A("makro", "🛒", `Inflasi tahunan ${nf(inf)}% (${findInd("inflasi").periode}) ` + (inf > 3.5 ? "di atas sasaran BI 2,5±1%, tekanan harga perlu diwaspadai." : inf < 1.5 ? "di bawah sasaran BI 2,5±1%, bisa menandakan permintaan melemah." : "masih dalam sasaran BI 2,5±1%."));
+  if (nrc != null) A("makro", "🚢", `Neraca perdagangan ${nrc >= 0 ? "surplus" : "defisit"} US$${nf(Math.abs(nrc))} miliar (${findInd("neraca").periode}), ` + (nrc >= 0 ? "menopang pasokan valas dan ketahanan eksternal." : "menambah tekanan pada pasokan valas."));
+  if (bi != null && inf != null) { const r = bi - inf; A("moneter", "🏦", `BI-Rate ${nf(bi)}% dan inflasi ${nf(inf)}% memberi suku bunga riil sekitar ${nf(r)}%. ` + (r > 2 ? "Cukup ketat: menjaga daya tarik aset Rupiah, namun menahan laju kredit." : r > 0 ? "Masih positif sehingga stabilitas Rupiah tetap didukung." : "Negatif, ruang pengetatan cenderung terbuka.")); }
+  if (cad != null) A("moneter", "💵", `Cadangan devisa US$${nf(cad, 1)} miliar (${findInd("cadev").periode}), ${findInd("cadev").keterangan}; di atas standar kecukupan internasional sekitar 3 bulan impor.`);
+  if (FX.usd && FX.prev) { const p = pct(FX.usd, FX.prev); A("moneter", "💱", `Kurs referensi US$ = Rp${nf(FX.usd, 0)} (${FX.date}); Rupiah ${p > 0 ? "melemah" : p < 0 ? "menguat" : "stabil"} ${nf(Math.abs(p))}% dari hari kerja sebelumnya.`); }
+  if (def != null) A("fiskal", "🧾", `Defisit APBN ${nf(def)}% PDB (${findInd("defisit").periode}) ` + (def < 2.5 ? "masih jauh di bawah batas 3% PDB." : def < 3 ? "mendekati batas 3% PDB; ruang fiskal mulai sempit." : "melewati batas 3% PDB.") + (pend != null ? ` Pendapatan negara sudah ${nf(pend, 1)}% dari target.` : ""));
+  if (prim != null) A("fiskal", "⚖️", `Keseimbangan primer ${prim >= 0 ? "surplus" : "defisit"} Rp${nf(Math.abs(prim), 1)} triliun: ` + (prim >= 0 ? "pendapatan sudah cukup membiayai belanja di luar bunga utang." : "sebagian belanja di luar bunga utang masih dibiayai utang baru."));
+  if (ntp != null) A("pertanian", "🌾", `NTP ${nf(ntp)} (${findInd("ntp").periode}) ` + (ntp > 100 ? "di atas 100: harga yang diterima petani lebih tinggi daripada yang dibayar, daya tukar petani surplus." : "di bawah 100: daya tukar petani tertekan."));
+  if (ntn != null) A("pertanian", "🐟", `Nilai Tukar Nelayan ${nf(ntn)}; ${findInd("ntn").keterangan}.`);
+  if (pg != null && inf != null) A("pertanian", "🌶️", `Inflasi bahan makanan ${nf(pg)}% yoy ` + (pg > inf ? "lebih tinggi dari inflasi umum, harga pangan menjadi sumber tekanan utama." : "lebih rendah dari inflasi umum."));
+  if (GOLD.usd) A("pasar", "🥇", `Emas dunia US$${nf(GOLD.usd)}/troy ons ≈ Rp${nf(GOLD.idrGram, 0)}/gram sebelum biaya cetak & pajak.`);
+  return out;
+}
+function briefParas() {
+  const nama = store.get("nama", ""); const h = new Date().getHours();
+  const sapa = (h < 11 ? "Selamat pagi" : h < 15 ? "Selamat siang" : h < 18 ? "Selamat sore" : "Selamat malam") + (nama ? ", " + nama : "") + ".";
+  const a = analysis(); const by = k => a.filter(x => x.t === k).map(x => x.s).join(" ");
+  const p = [sapa + " Ringkasan ekonomi " + HARI[TODAY.getDay()] + ", " + fmtDate(TODAY, {day:"numeric", month:"long", year:"numeric"}) + ".", by("moneter"), by("pasar"), by("makro"), by("fiskal"), by("pertanian")].filter(Boolean);
+  const top = NEWS.slice(0, 3).map(n => n.judul); if (top.length) p.push("Berita teratas: " + top.join("; ") + ".");
+  return p;
+}
+function renderBrief() {
+  const p = briefParas();
+  $("#brief").innerHTML = p.slice(1).map(x => `<p>${esc(x)}</p>`).join("");
+  $("#brief-sum").textContent = "📋 " + (p[1] || "Ringkasan ekonomi hari ini").slice(0, 90) + "…";
+}
+$("#btnListen").onclick = () => listen({judul: "Ringkasan ekonomi hari ini", teks: briefParas(), bahasa: "id"});
+$("#btnWa").onclick = () => {
+  const n = String(store.get("wa", "62895353066404")).replace(/\D/g, "");
+  const txt = ["*Ringkasan Ekonomi Harian*", ...briefParas(), "Buka dashboard: " + location.href.split("#")[0]].join("\n\n");
+  window.open("https://wa.me/" + n + "?text=" + encodeURIComponent(txt), "_blank");
+};
+
+/* =========================================================
+   KURS & EMAS
+   ========================================================= */
+const FX = {usd: null, prev: null, date: null, rates: {}, prevRates: {}, series: []};
+const GOLD = {usd: null, idrGram: null};
+const CUR = {USD:"Dolar AS", SGD:"Dolar Singapura", EUR:"Euro", JPY:"Yen (100)", CNY:"Yuan", AUD:"Dolar Australia", MYR:"Ringgit", GBP:"Poundsterling"};
+async function loadFX() {
+  try {
+    const ts = await getJSON(`https://api.frankfurter.dev/v1/${ymd(addDays(TODAY, -70))}..?from=USD&to=IDR`);
+    const days = Object.keys(ts.rates).sort();
+    FX.series = days.slice(-45).map(d => ({x: fmtDate(d, {day:"numeric", month:"short"}), y: ts.rates[d].IDR}));
+    FX.usd = ts.rates[days.at(-1)].IDR; FX.prev = ts.rates[days.at(-2)]?.IDR; FX.date = fmtDate(days.at(-1));
+    const list = Object.keys(CUR).join(",");
+    const [a, b] = await Promise.all([getJSON(`https://api.frankfurter.dev/v1/latest?from=IDR&to=${list}`), getJSON(`https://api.frankfurter.dev/v1/${days.at(-2)}?from=IDR&to=${list}`).catch(() => ({rates:{}}))]);
+    FX.rates = a.rates; FX.prevRates = b.rates;
+  } catch (e) { FX.err = true; }
+}
+async function loadGold() {
+  try {
+    const g = await getJSON("https://api.gold-api.com/price/XAU"); GOLD.usd = g.price; GOLD.updated = g.updatedAt;
+    const hist = store.get("goldHist", {}), t = ymd(TODAY), prevK = Object.keys(hist).filter(k => k < t).sort();
+    GOLD.prev = prevK.length ? hist[prevK.at(-1)] : null; GOLD.prevDate = prevK.at(-1);
+    hist[t] = GOLD.usd; store.set("goldHist", Object.fromEntries(Object.keys(hist).sort().slice(-60).map(k => [k, hist[k]])));
+  } catch (e) { GOLD.err = true; }
+  if (GOLD.usd && FX.usd) GOLD.idrGram = GOLD.usd * FX.usd / 31.1034768;
+}
+
+/* =========================================================
+   KPI
+   ========================================================= */
+function kpiHTML(lb, v, unit, meta, go, dot) {
+  return `<button class="kpi" data-go="${go}"><div class="lb"><i style="${dot ? "background:" + dot : ""}"></i>${lb}</div><div class="v">${v}<small>${esc(unit)}</small></div><div class="m">${meta}</div></button>`;
+}
+function renderKPIs() {
+  const k = [];
+  k.push(kpiHTML("USD/IDR", FX.usd ? nf(FX.usd, 0) : "…", "Rp", FX.usd ? chg(pct(FX.usd, FX.prev), true) + " hari ini" : "memuat", "pasar"));
+  k.push(kpiHTML("Emas dunia", GOLD.usd ? nf(GOLD.usd, 0) : "…", "US$/oz", GOLD.idrGram ? "≈ Rp" + nf(GOLD.idrGram, 0) + "/g" : "memuat", "pasar", "var(--gold)"));
+  [["bi_rate","BI-Rate"],["inflasi","Inflasi"],["pdb","Pertumbuhan PDB"],["defisit","Defisit APBN"],["cadev","Cadangan devisa"],["ntp","NTP petani"]].forEach(([id, lb]) => { const i = findInd(id); if (i) k.push(kpiHTML(lb, nf(i.nilai, 2), i.satuan, esc(i.periode), "ekonomi")); });
+  $("#kpis").innerHTML = k.join("");
+  $("#kpi-note").textContent = "ketuk kartu untuk detail";
+  const m = [k[0], k[1], kpiHTML("Emas per gram", GOLD.idrGram ? "Rp" + nf(GOLD.idrGram, 0) : "…", "", "harga dunia × kurs", "pasar", "var(--gold)")];
+  if ($("#mkt-kpis")) $("#mkt-kpis").innerHTML = m.join("");
+}
+
+/* =========================================================
+   BERITA
+   ========================================================= */
+const NTEMA = {semua:"Semua", makro:"Makro", moneter:"Moneter & Perbankan", fiskal:"Fiskal & Pajak", pasar:"Pasar & Investasi", pertanian:"Pertanian & Pangan", energi:"Energi & Tambang", syariah:"Syariah", global:"Global"};
+const KW = {
+  moneter:["bank indonesia","bi rate","bi-rate","suku bunga","rupiah","kurs","inflasi","moneter","kredit","perbankan","ojk","dolar","cadangan devisa"],
+  fiskal:["apbn","pajak","kemenkeu","menkeu","defisit","utang","sbn","subsidi","anggaran"],
+  pasar:["ihsg","saham","bursa","emiten","investor","reksa dana","obligasi","emas","antam","kripto","bitcoin"],
+  pertanian:["petani","pertanian","pangan","beras","padi","jagung","pupuk","bulog","sawit","cpo","kopi","perikanan","nelayan","ikan","hutan","kehutanan","peternak","cabai","gula"],
+  energi:["minyak","bbm","batu bara","listrik","pln","pertamina","nikel","tambang","energi","hilirisasi"],
+  syariah:["syariah","halal","zakat","wakaf","sukuk"],
+  global:["global","amerika","china","tiongkok","tarif","imf","bank dunia"],
+  makro:["ekonomi","pdb","bps","ekspor","impor","investasi","konsumsi","umkm","industri"]
+};
+function klasifikasi(t, def) {
+  t = t.toLowerCase(); let best = def || null, sc = 0;
+  for (const [k, ws] of Object.entries(KW)) { const s = ws.filter(w => t.includes(w)).length; if (s > sc) { sc = s; best = k; } }
+  return best || "makro";
+}
+let NEWS = [], NEWSMETA = null;
+async function loadNews() {
+  const d = await getData("data/berita.json");
+  if (d && d.berita && d.berita.length) { NEWS = d.berita; NEWSMETA = d; return; }
+  // Cadangan jika file berita belum dibuat oleh GitHub Actions
+  const feeds = [["https://www.cnnindonesia.com/ekonomi/rss","CNN Indonesia"],["https://www.antaranews.com/rss/ekonomi.xml","Antara"],["https://www.cnbcindonesia.com/market/rss","CNBC Indonesia","pasar"],["https://www.cnbcindonesia.com/news/rss","CNBC Indonesia"]];
+  const res = await Promise.all(feeds.map(([u, s, t]) => getJSON("https://api.rss2json.com/v1/api.json?rss_url=" + encodeURIComponent(u), 12000).then(j => (j.items || []).map(it => {
+    const desc = strip(it.description || "").replace(/\s+/g, " ").trim();
+    return {judul: strip(it.title), link: it.link, ringkasan: desc.slice(0, 400), gambar: it.enclosure?.link || it.thumbnail || (it.description || "").match(/<img[^>]+src="([^"]+)"/)?.[1] || null, sumber: s, tema: klasifikasi(it.title + " " + desc, t), bahasa: "id", waktu: new Date((it.pubDate || "").replace(" ", "T") + "Z").toISOString()};
+  })).catch(() => [])));
+  NEWS = res.flat().sort((a, b) => b.waktu.localeCompare(a.waktu));
+  NEWSMETA = {diperbarui: new Date().toISOString(), sumber: feeds.map(f => ({sumber: f[1], url: f[0], ok: true})), cadangan: true};
+}
+const newsId = n => "n_" + hash(n.link || n.judul);
+function newsImg(n, cls = "") {
+  const ph = `<div class="ph">${esc((n.sumber || "?").split(" ").map(w => w[0]).join("").slice(0, 3))}</div>`;
+  return ph + (n.gambar ? `<img src="${esc(n.gambar)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : "");
+}
+function newsCard(n) {
+  CACHE.set(newsId(n), {kind: "news", ...n});
+  return `<article class="ncard" data-open="${newsId(n)}"><div class="img">${newsImg(n)}<span class="pill">${esc(NTEMA[n.tema] || "Ekonomi")}</span></div>
+    <div class="body"><h3>${esc(n.judul)}</h3>${n.ringkasan ? `<p>${esc(n.ringkasan)}</p>` : ""}<div class="src"><b>${esc(n.sumber)}</b>· ${ago(n.waktu)}${n.bahasa === "en" ? " · EN" : ""}</div></div></article>`;
+}
+function newsHero(n) {
+  CACHE.set(newsId(n), {kind: "news", ...n});
+  return `<div class="hslide" data-open="${newsId(n)}">${n.gambar ? `<img class="bgimg" src="${esc(n.gambar)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : ""}
+    <div><span class="pill w">${esc(NTEMA[n.tema] || "Berita")}</span></div><h3>${esc(n.judul)}</h3>${n.ringkasan ? `<p>${esc(n.ringkasan)}</p>` : ""}<div class="meta">${esc(n.sumber)} · ${ago(n.waktu)}</div></div>`;
+}
+function newsItem(n) {
+  CACHE.set(newsId(n), {kind: "news", ...n});
+  return `<div class="litem" data-open="${newsId(n)}"><div class="th">${n.gambar ? `<img src="${esc(n.gambar)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : ""}</div><div style="min-width:0"><b>${esc(n.judul)}</b><small>${esc(n.sumber)} · ${ago(n.waktu)} · ${esc(NTEMA[n.tema] || "")}</small></div></div>`;
+}
+const byTema = t => t === "semua" ? NEWS : NEWS.filter(n => n.tema === t);
+function chipsHTML(sel, counts) { return Object.entries(NTEMA).map(([k, v]) => `<button class="chip" data-t="${k}" aria-pressed="${k === sel}">${v}${counts ? `<span class="n">${counts[k] || 0}</span>` : ""}</button>`).join(""); }
+let homeTema = "semua";
+function renderHomeNews() {
+  $("#home-news-chips").innerHTML = chipsHTML(homeTema);
+  $$("#home-news-chips .chip").forEach(c => c.onclick = () => { homeTema = c.dataset.t; renderHomeNews(); });
+  carousel($("#home-news"), byTema(homeTema).slice(0, 12).map(newsCard), {empty: "Belum ada berita untuk tema ini."});
+}
+const NP = {tema: "semua", src: "", q: "", page: 1};
+function renderNewsPage() {
+  const counts = {semua: NEWS.length}; NEWS.forEach(n => counts[n.tema] = (counts[n.tema] || 0) + 1);
+  $("#news-chips").innerHTML = chipsHTML(NP.tema, counts);
+  $$("#news-chips .chip").forEach(c => c.onclick = () => { NP.tema = c.dataset.t; NP.page = 1; renderNewsPage(); });
+  const srcs = [...new Set(NEWS.map(n => n.sumber))].sort();
+  const sel = $("#news-src"); if (sel.options.length - 1 !== srcs.length) sel.innerHTML = '<option value="">Semua media</option>' + srcs.map(s => `<option>${esc(s)}</option>`).join("");
+  sel.value = NP.src;
+  let list = byTema(NP.tema).filter(n => (!NP.src || n.sumber === NP.src) && (!NP.q || (n.judul + " " + n.ringkasan).toLowerCase().includes(NP.q)));
+  const withImg = list.filter(n => n.gambar).slice(0, 8), heroIds = new Set(withImg.map(newsId));
+  carousel($("#news-hero"), withImg.map(newsHero), {empty: "Tidak ada berita yang cocok."});
+  const rest = list.filter(n => !heroIds.has(newsId(n)));
+  $("#news-list").innerHTML = rest.slice(0, NP.page * 12).map(newsItem).join("") || '<div class="state">Tidak ada berita lain.</div>';
+  $("#news-more").classList.toggle("hide", rest.length <= NP.page * 12);
+  $("#news-list-title").textContent = (NP.tema === "semua" ? "Berita lainnya" : NTEMA[NP.tema]) + ` (${list.length})`;
+  if (NEWSMETA) {
+    $("#news-upd").textContent = "diperbarui " + ago(NEWSMETA.diperbarui);
+    $("#news-sources").innerHTML = (NEWSMETA.cadangan ? "<p>Mode cadangan: berita diambil langsung lewat rss2json karena file berita otomatis belum tersedia.</p>" : "") +
+      (NEWSMETA.sumber || []).map(s => `${s.ok ? "✅" : "⚠️"} ${esc(s.sumber)} — <a href="${esc(s.url)}" target="_blank" rel="noopener">feed</a>${s.jumlah != null ? ` (${s.jumlah})` : ""}`).join("<br>");
+  }
+}
+$("#news-src").onchange = e => { NP.src = e.target.value; NP.page = 1; renderNewsPage(); };
+$("#news-q").oninput = e => { clearTimeout(e.target._t); e.target._t = setTimeout(() => { NP.q = e.target.value.trim().toLowerCase(); NP.page = 1; renderNewsPage(); }, 250); };
+$("#news-more").onclick = () => { NP.page++; renderNewsPage(); };
+
+/* =========================================================
+   JURNAL (OpenAlex)
+   ========================================================= */
+const BIDANG = [
+  {id:"murni", nama:"Ekonomi Murni", hari:1, q:"macroeconomic", qid:"makroekonomi"},
+  {id:"syariah", nama:"Ekonomi Syariah", hari:2, q:"islamic", qid:"syariah"},
+  {id:"lingkungan", nama:"SDA & Lingkungan", hari:3, q:"environmental", qid:"lingkungan"},
+  {id:"pertanian", nama:"Ekonomi Pertanian", hari:4, q:"agricultural", qid:"pertanian"},
+  {id:"kehutanan", nama:"Ekonomi Kehutanan", hari:5, q:"forest", qid:"hutan"},
+  {id:"kelautan", nama:"Kelautan & Perikanan", hari:6, q:"fisheries", qid:"perikanan"},
+  {id:"pembangunan", nama:"Ekonomi Pembangunan", hari:0, q:"poverty", qid:"kemiskinan"},
+  {id:"moneter", nama:"Moneter & Perbankan", hari:-1, q:"monetary policy", qid:"moneter"},
+  {id:"investasi", nama:"Pasar Modal & Investasi", hari:-1, q:"stock market", qid:"saham"},
+  {id:"transmigrasi", nama:"Regional & Transmigrasi", hari:-1, q:"migration rural", qid:"transmigrasi"}
+];
+const SELECT = "id,doi,title,publication_year,publication_date,cited_by_count,counts_by_year,primary_location,best_oa_location,authorships,abstract_inverted_index,open_access,language,primary_topic,keywords";
+function oaURL({q, origin, yf, yt, from, to, sort, per = 25, page = 1, field = true}) {
+  const f = ["type:article", "has_abstract:true"];
+  if (field) f.push("primary_topic.field.id:20");
+  if (q) f.push("title_and_abstract.search:" + encodeURIComponent(q));
+  if (origin === "ID") f.push("authorships.countries:ID");
+  if (origin === "INT") f.push("authorships.countries:!ID");
+  if (origin === "LANG_ID") f.push("language:id");
+  if (yf) f.push(`publication_year:${yf}-${yt}`);
+  if (from) f.push("from_publication_date:" + from);
+  if (to) f.push("to_publication_date:" + to);
+  return `https://api.openalex.org/works?filter=${f.join(",")}&sort=${sort}&per_page=${per}&page=${page}&select=${SELECT}`;
+}
+function abstractOf(w) {
+  const inv = w.abstract_inverted_index; if (!inv) return "";
+  const a = []; for (const [k, ps] of Object.entries(inv)) for (const p of ps) a[p] = k;
+  return a.filter(Boolean).join(" ").replace(/\s+/g, " ").replace(/^(abstract|abstrak)\s*[:.\-–]?\s*/i, "").trim();
+}
+function ringkas(t, n = 3) {
+  if (!t) return "Abstrak tidak tersedia di basis data terbuka.";
+  const s = t.match(/[^.!?]+[.!?]+(?=\s|$)/g) || [t]; let o = s.slice(0, n).join(" ").trim();
+  return o.length > 700 ? o.slice(0, 690).replace(/\s\S*$/, "") + "…" : o;
+}
+function relevansi(w) {
+  const age = YEAR - (w.publication_year || YEAR), total = w.cited_by_count || 0;
+  const rec = (w.counts_by_year || []).filter(c => c.year >= YEAR - 1).reduce((a, c) => a + c.cited_by_count, 0);
+  let t = `Terbit ${age} tahun lalu dengan total ${total.toLocaleString("id-ID")} sitasi. `;
+  t += rec > 0 ? `Sepanjang ${YEAR - 1}–${YEAR} masih dikutip ${rec.toLocaleString("id-ID")} kali, tanda teori/temuannya masih dipakai riset terbaru.` : "Sitasi dua tahun terakhir belum tercatat.";
+  if (total && rec / total > .25) t += " Tren sitasinya sedang naik.";
+  return t;
+}
+function workObj(w, mode) {
+  const au = (w.authorships || []).map(a => a.author?.display_name).filter(Boolean);
+  return {
+    kind: "jurnal", id: w.id, mode, title: strip(w.title || "(tanpa judul)"), doi: w.doi,
+    url: w.doi || w.primary_location?.landing_page_url || w.id,
+    pdf: w.best_oa_location?.pdf_url || null, oa: w.open_access?.oa_url || null,
+    year: w.publication_year, date: w.publication_date, cites: w.cited_by_count || 0,
+    source: w.primary_location?.source?.display_name || "Sumber tidak tercatat",
+    authorsAll: au.slice(0, 20), authors: au.slice(0, 3).join(", ") + (au.length > 3 ? ", dkk." : ""),
+    countries: [...new Set((w.authorships || []).flatMap(a => a.countries || []))],
+    lang: w.language || "en", abstract: abstractOf(w), rel: relevansi(w),
+    topik: [w.primary_topic?.display_name, w.primary_topic?.subfield?.display_name].filter(Boolean),
+    kata: (w.keywords || []).map(k => k.display_name).slice(0, 6)
+  };
+}
+const CACHE = new Map();
+function jCard(o) {
+  CACHE.set(o.id, o); const saved = !!store.get("saved", {})[o.id];
+  return `<article class="jcard" data-open="${esc(o.id)}">
+    <div class="top"><span class="pill ${o.mode === "fondasi" ? "" : "gray"}">${o.mode === "fondasi" ? "Fondasi" : "Terbaru"}</span>${o.countries.includes("ID") ? '<span class="pill gold">Indonesia</span>' : ""}${o.lang === "id" ? '<span class="pill gray">Bahasa ID</span>' : ""}</div>
+    <h3>${esc(o.title)}</h3><div class="meta">${esc(o.authors || "Penulis tidak tercatat")} · <i>${esc(o.source)}</i> · ${o.mode === "fondasi" ? o.year : fmtDate(o.date)}</div>
+    <p>${esc(ringkas(o.abstract, 2))}</p>
+    <div class="foot"><span class="cite">★ ${o.cites.toLocaleString("id-ID")} sitasi</span><span style="display:flex;gap:6px"><button class="btn sm pri" data-open="${esc(o.id)}">Baca</button><button class="star" data-star="${esc(o.id)}" title="Simpan">${saved ? "★" : "☆"}</button></span></div>
+  </article>`;
+}
+const J = {mode: "fondasi", origin: "INT", field: (BIDANG.find(b => b.hari === TODAY.getDay()) || BIDANG[0]).id, page: 1, items: []};
+function renderJChips() {
+  $("#j-chips").innerHTML = BIDANG.map(b => `<button class="chip" data-f="${b.id}" aria-pressed="${b.id === J.field}">${b.nama}${b.hari === TODAY.getDay() ? " · hari ini" : ""}</button>`).join("");
+  $$("#j-chips .chip").forEach(c => c.onclick = () => { J.field = c.dataset.f; renderJChips(); loadJurnal(true); });
+}
+function segBind(id, fn) { $$("#" + id + " button").forEach(b => b.onclick = () => { $$("#" + id + " button").forEach(x => x.setAttribute("aria-pressed", x === b)); fn(b.dataset.v); }); }
+segBind("j-mode", v => { J.mode = v; loadJurnal(true); });
+segBind("j-origin", v => { J.origin = v; loadJurnal(true); });
+async function fetchWorks(b, mode, origin, page = 1, per = 25) {
+  const q = origin === "LANG_ID" ? b.qid : b.q;
+  const args = mode === "fondasi" ? {q, origin, yf: YEAR - 20, yt: YEAR - 2, sort: "cited_by_count:desc", page, per} : {q, origin, from: ymd(addDays(TODAY, origin === "INT" ? -30 : -90)), to: ymd(TODAY), sort: "publication_date:desc", page, per};
+  let d = await getJSON(oaURL(args));
+  if (!d.results.length && origin === "LANG_ID") d = await getJSON(oaURL({...args, field: false}));
+  return d.results.map(w => workObj(w, mode));
+}
+async function loadJurnal(reset) {
+  const b = BIDANG.find(x => x.id === J.field);
+  if (reset) { J.page = 1; J.items = []; $("#j-car").innerHTML = '<div class="skel" style="min-height:260px"></div>'; }
+  const asal = {INT: "internasional", ID: "dengan penulis berafiliasi Indonesia", LANG_ID: "berbahasa Indonesia"}[J.origin];
+  $("#j-desc").textContent = J.mode === "fondasi" ? `${b.nama} · artikel ${asal} terbit ${YEAR - 20}–${YEAR - 2}, urut dari yang paling banyak dikutip. Jurnal yang sudah dibaca disembunyikan.` : `${b.nama} · artikel ${asal} terbaru (${J.origin === "INT" ? "30" : "90"} hari terakhir).`;
+  $("#j-more").disabled = true;
+  try {
+    const read = store.get("read", {});
+    let list = await fetchWorks(b, J.mode, J.origin, J.page);
+    const more = list.length === 25;
+    if (J.mode === "fondasi") list = list.filter(o => !read[o.id]);
+    J.items = J.items.concat(list);
+    carousel($("#j-car"), J.items.map(jCard), {empty: "Belum ada artikel untuk pilihan ini. Coba tema atau asal lain."});
+    $("#j-more").disabled = !more;
+    if (!reset) { const t = $("#j-car .car-track"); t.scrollTo({left: t.scrollWidth, behavior: "smooth"}); }
+  } catch (e) { $("#j-car").innerHTML = `<div class="state">Jurnal belum dapat dimuat (${esc(e.message)}). Periksa koneksi.</div>`; }
+}
+$("#j-more").onclick = () => { J.page++; loadJurnal(false); };
+let HEAD = null;
+async function loadHomeJurnal() {
+  const b = BIDANG.find(x => x.hari === TODAY.getDay()) || BIDANG[0];
+  const read = store.get("read", {});
+  const pick = (arr, k) => { const p = arr.filter(o => !read[o.id]); return p.length ? p[(DOY + k) % Math.min(p.length, 10)] : null; };
+  try {
+    const [hd, fi, fn, ti, tn, tl] = await Promise.all([
+      getJSON(oaURL({from: ymd(addDays(TODAY, -365)), to: ymd(TODAY), sort: "cited_by_count:desc", per: 10})).then(d => d.results.map(w => workObj(w, "terbaru"))).catch(() => []),
+      fetchWorks(b, "fondasi", "INT").catch(() => []), fetchWorks(b, "fondasi", "ID").catch(() => []),
+      fetchWorks(b, "terbaru", "INT", 1, 5).catch(() => []), fetchWorks(b, "terbaru", "ID", 1, 5).catch(() => []), fetchWorks(b, "terbaru", "LANG_ID", 1, 5).catch(() => [])
+    ]);
+    HEAD = hd.find(o => o.year >= YEAR - 1) || hd[0] || null;
+    const picks = [pick(fi, 0), pick(fn, 3), ti[0], tn[0], tl[0], pick(fi, 5)].filter(Boolean);
+    const uniq = [...new Map(picks.map(o => [o.id, o])).values()];
+    carousel($("#home-jurnal"), uniq.map(jCard), {empty: "Jurnal belum dapat dimuat. Periksa koneksi."});
+  } catch (e) { $("#home-jurnal").innerHTML = '<div class="state">Jurnal belum dapat dimuat.</div>'; }
+}
+
+/* =========================================================
+   HERO BERANDA
+   ========================================================= */
+function renderHero() {
+  const slides = [];
+  const p = briefParas();
+  slides.push(`<div class="hslide plain" data-act="listen-brief"><div><span class="pill w">☀️ Ringkasan ${HARI[TODAY.getDay()]}</span></div>
+    <h3>${esc(analysis().find(a => a.t === "moneter")?.s.split(". ")[0] || "Ringkasan ekonomi hari ini")}.</h3>
+    <div class="hkpi"><div><small>USD/IDR</small><b>${FX.usd ? nf(FX.usd, 0) : "…"}</b></div><div><small>Emas US$/oz</small><b>${GOLD.usd ? nf(GOLD.usd, 0) : "…"}</b></div><div><small>BI-Rate</small><b>${nf(V("bi_rate"))}%</b></div></div>
+    <div class="acts"><button class="btn sm ghost-w" data-act="listen-brief">🔊 Dengarkan</button><button class="btn sm ghost-w" data-act="open-brief">Baca ringkasan</button></div></div>`);
+  if (HEAD) { CACHE.set(HEAD.id, HEAD); slides.push(`<div class="hslide plain" data-open="${esc(HEAD.id)}"><div><span class="pill w">🔥 Headline riset · paling ramai dikutip 12 bulan</span></div><h3>${esc(HEAD.title)}</h3><p>${esc(ringkas(HEAD.abstract, 2))}</p><div class="meta">${esc(HEAD.source)} · ${HEAD.cites.toLocaleString("id-ID")} sitasi</div></div>`); }
+  NEWS.filter(n => n.gambar).slice(0, 5).forEach(n => slides.push(newsHero(n)));
+  carousel($("#hero"), slides);
+}
+document.addEventListener("click", e => {
+  const a = e.target.closest("[data-act]"); if (!a) return;
+  e.stopPropagation();
+  if (a.dataset.act === "listen-brief") listen({judul: "Ringkasan ekonomi hari ini", teks: briefParas(), bahasa: "id"});
+  if (a.dataset.act === "open-brief") { $("#briefbox").open = true; $("#briefbox").scrollIntoView({behavior: "smooth", block: "center"}); }
+}, true);
+
+/* =========================================================
+   READER: buka jurnal/berita di dalam aplikasi
+   ========================================================= */
+const RD = {item: null, view: "asli"};
+document.addEventListener("click", e => {
+  const s = e.target.closest("[data-star]");
+  if (s) { e.stopPropagation(); const o = CACHE.get(s.dataset.star); if (o) { toggleSave(o); s.textContent = isSaved(o) ? "★" : "☆"; } return; }
+  const el = e.target.closest("[data-open]"); if (!el || e.target.closest("a")) return;
+  const o = CACHE.get(el.dataset.open); if (o) openReader(o);
+});
+const saveKey = o => o.kind === "news" ? "savedNews" : "saved";
+const itemKey = o => o.kind === "news" ? newsId(o) : o.id;
+const isSaved = o => !!store.get(saveKey(o), {})[itemKey(o)];
+function toggleSave(o) {
+  const s = store.get(saveKey(o), {}), k = itemKey(o);
+  if (s[k]) delete s[k]; else s[k] = {...o, at: new Date().toISOString()};
+  store.set(saveKey(o), s); toast(s[k] ? "Disimpan ke Arsip" : "Dihapus dari Arsip");
+}
+function apa(o) {
+  const au = (o.authorsAll || []).map(n => { const p = n.trim().split(/\s+/); const last = p.pop(); return last + (p.length ? ", " + p.map(x => x[0].toUpperCase() + ".").join(" ") : ""); });
+  const s = au.length > 1 ? au.slice(0, -1).join(", ") + ", & " + au.at(-1) : (au[0] || "Anonim");
+  return `${s} (${o.year}). ${o.title}. ${o.source}.${o.doi ? " " + o.doi : ""}`;
+}
+function srcLang(o) { return o.kind === "news" ? (o.bahasa || "id") : (o.lang === "id" ? "id" : "en"); }
+function rdTexts(o) {
+  if (o.kind === "news") return {judul: o.judul, paras: [o.ringkasan || "Ringkasan tidak tersedia dari sumber RSS."]};
+  const paras = (o.abstract || "Abstrak tidak tersedia di basis data terbuka.").match(/[^.!?]+[.!?]+(?=\s|$)/g) || [o.abstract || ""];
+  const grouped = []; for (let i = 0; i < paras.length; i += 3) grouped.push(paras.slice(i, i + 3).join(" ").trim());
+  return {judul: o.title, paras: grouped};
+}
+async function openReader(o, view) {
+  RD.item = o; RD.view = view || (SET.autoTr && srcLang(o) !== "id" ? "id" : "asli");
+  renderReader(); const d = $("#reader"); if (!d.open) d.showModal();
+  $(".rd-body", d).scrollTop = 0;
+}
+async function renderReader() {
+  const o = RD.item, src = srcLang(o), T = rdTexts(o), news = o.kind === "news";
+  const target = RD.view === "asli" ? null : RD.view;
+  const read = !news && !!store.get("read", {})[o.id];
+  $("#rd").innerHTML = `
+    <div class="rd-head"><button class="ibtn" data-rd="close" aria-label="Tutup">✕</button><div class="sp">${news ? "Berita · " + esc(o.sumber) : "Jurnal · " + esc(o.source)}</div>
+      <button class="ibtn" data-rd="save" title="Simpan">${isSaved(o) ? "★" : "☆"}</button>
+      <a class="ibtn" href="${esc(news ? o.link : o.url)}" target="_blank" rel="noopener" title="Buka sumber asli">↗</a></div>
+    <div class="rd-body">
+      ${news && o.gambar ? `<div class="rd-img"><img src="${esc(o.gambar)}" alt="" referrerpolicy="no-referrer" onerror="this.parentNode.remove()"></div>` : ""}
+      <div style="display:flex;gap:6px;flex-wrap:wrap">${news ? `<span class="pill">${esc(NTEMA[o.tema] || "Berita")}</span>` : `<span class="pill">${o.mode === "fondasi" ? "Fondasi" : "Terbaru"}</span><span class="pill gold">★ ${o.cites.toLocaleString("id-ID")} sitasi</span>`}</div>
+      <h1 id="rd-title">${esc(T.judul)}</h1><p class="trt" id="rd-trt"></p>
+      <div class="rd-meta">${news ? `${esc(o.sumber)} · ${fmtDate(o.waktu, {weekday:"long", day:"numeric", month:"long", year:"numeric", hour:"2-digit", minute:"2-digit"})}` : `${esc(o.authors || "")} · <i>${esc(o.source)}</i> · ${o.year}`}</div>
+      <div class="rd-tools">
+        <div class="seg" id="rd-view"><button data-v="asli" aria-pressed="${RD.view === "asli"}">Asli (${src.toUpperCase()})</button><button data-v="id" aria-pressed="${RD.view === "id"}">Indonesia</button><button data-v="en" aria-pressed="${RD.view === "en"}">English</button></div>
+        <button class="btn sm pri" data-rd="listen-id">🔊 Dengar ID</button><button class="btn sm" data-rd="listen-en">🔊 Listen EN</button>
+        ${news ? "" : `<button class="btn sm" data-rd="cite">📋 Kutip APA</button><button class="btn sm" data-rd="read">${read ? "✓ Sudah dibaca" : "○ Tandai dibaca"}</button>`}
+      </div>
+      <h4>${news ? "Ringkasan berita" : "Abstrak"}</h4>
+      <div class="rd-text" id="rd-text">${T.paras.map(p => `<p>${esc(p)}</p>`).join("")}</div>
+      ${news ? `<div class="rd-box">Artikel lengkap milik ${esc(o.sumber)} dan hanya dapat dibaca utuh di situsnya. <a href="${esc(o.link)}" target="_blank" rel="noopener">Baca selengkapnya ↗</a></div>` : `
+        ${o.mode === "fondasi" ? `<h4>Mengapa masih relevan</h4><div class="rd-box">${esc(o.rel)}</div>` : ""}
+        ${o.topik.length || o.kata.length ? `<h4>Topik & kata kunci</h4><div class="tags">${[...o.topik, ...o.kata].map(t => `<span>${esc(t)}</span>`).join("")}</div>` : ""}
+        <h4>Teks lengkap</h4>
+        ${o.pdf || o.oa ? `<div class="rd-box">Artikel ini <b>akses terbuka</b>. <button class="btn sm pri" data-rd="pdf" style="margin-left:6px">📄 Tampilkan di sini</button><div id="rd-pdf"></div></div>` : `<div class="rd-box">Teks lengkap artikel ini tidak tersedia secara terbuka. Abstrak di atas sudah bisa dibaca, diterjemahkan, dan didengarkan di sini.</div>`}
+        <h4>Sitasi (APA)</h4><div class="rd-box" id="rd-apa" style="font-size:13px">${esc(apa(o))}</div>`}
+    </div>`;
+  segBind("rd-view", v => { RD.view = v; applyTranslation(); });
+  applyTranslation();
+}
+async function applyTranslation() {
+  const o = RD.item, src = srcLang(o), T = rdTexts(o), box = $("#rd-text");
+  $$("#rd-view button").forEach(b => b.setAttribute("aria-pressed", b.dataset.v === RD.view));
+  const to = RD.view === "asli" ? null : RD.view;
+  if (!to || to === src) { box.innerHTML = T.paras.map(p => `<p>${esc(p)}</p>`).join(""); $("#rd-trt").textContent = ""; return; }
+  box.classList.add("loading"); $("#rd-trt").textContent = "Menerjemahkan…";
+  try {
+    const [tt, ...ps] = await Promise.all([translate(T.judul, to, src), ...T.paras.map(p => translate(p, to, src))]);
+    if (RD.item !== o) return;
+    $("#rd-trt").textContent = tt; box.innerHTML = ps.map(p => `<p>${esc(p)}</p>`).join("");
+  } catch (e) {
+    $("#rd-trt").innerHTML = `Terjemahan gagal dimuat. <a href="https://translate.google.com/?sl=auto&tl=${to}&op=translate&text=${encodeURIComponent((T.judul + "\n\n" + T.paras.join("\n\n")).slice(0, 4500))}" target="_blank" rel="noopener">Buka di Google Translate</a>`;
+  } finally { box.classList.remove("loading"); }
+}
+$("#reader").addEventListener("click", e => {
+  if (e.target === $("#reader")) { $("#reader").close(); return; }
+  const b = e.target.closest("[data-rd]"); if (!b) return; const o = RD.item;
+  const a = b.dataset.rd;
+  if (a === "close") $("#reader").close();
+  if (a === "save") { toggleSave(o); b.textContent = isSaved(o) ? "★" : "☆"; }
+  if (a === "listen-id" || a === "listen-en") { const T = rdTexts(o); listen({judul: T.judul, teks: T.paras, bahasa: srcLang(o)}, a.slice(-2)); }
+  if (a === "cite") { const t = apa(o); (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(() => toast("Sitasi APA disalin"), () => { const r = document.createRange(); r.selectNode($("#rd-apa")); getSelection().removeAllRanges(); getSelection().addRange(r); toast("Sitasi dipilih, salin manual"); }); }
+  if (a === "read") { const r = store.get("read", {}); if (r[o.id]) delete r[o.id]; else r[o.id] = {...o, at: new Date().toISOString()}; store.set("read", r); b.textContent = r[o.id] ? "✓ Sudah dibaca" : "○ Tandai dibaca"; }
+  if (a === "pdf") {
+    const url = o.pdf || o.oa;
+    $("#rd-pdf").innerHTML = `<iframe class="rd-frame" src="${esc(url)}" title="Teks lengkap" style="margin-top:10px"></iframe><p class="small muted" style="margin:6px 0 0">Jika halaman kosong, penerbit tidak mengizinkan tampilan di aplikasi lain. <a href="${esc(url)}" target="_blank" rel="noopener">Buka PDF ↗</a></p>`;
+    b.remove();
+  }
+});
+$("#reader").addEventListener("close", () => { $("#rd").innerHTML = ""; });
+
+/* =========================================================
+   EKONOMI PER TEMA
+   ========================================================= */
+const ETEMA = {
+  makro: {nama:"Makro", ind:["pdb","inflasi","neraca"], berita:"makro",
+    wb:[["NY.GDP.MKTP.KD.ZG","Pertumbuhan PDB","%"],["FP.CPI.TOTL.ZG","Inflasi (IHK)","%"],["SL.UEM.TOTL.ZS","Tingkat pengangguran","%"],["BN.CAB.XOKA.GD.ZS","Transaksi berjalan (% PDB)","%"],["NE.EXP.GNFS.ZS","Ekspor (% PDB)","%"]],
+    ref:[["BPS – Berita Resmi Statistik","https://www.bps.go.id/id/pressrelease"],["Kemenko Perekonomian","https://www.ekon.go.id/"],["Bappenas","https://www.bappenas.go.id/"],["World Bank Indonesia","https://www.worldbank.org/en/country/indonesia"],["IMF Indonesia","https://www.imf.org/en/Countries/IDN"]]},
+  moneter: {nama:"Moneter", ind:["bi_rate","cadev"], berita:"moneter",
+    wb:[["FR.INR.LEND","Suku bunga kredit","%"],["FM.LBL.BMNY.ZG","Pertumbuhan uang beredar (M2)","%"],["FI.RES.TOTL.MO","Cadangan devisa (bulan impor)"," bln"],["PA.NUS.FCRF","Kurs rata-rata Rp/US$",""]],
+    ref:[["BI – Siaran Pers","https://www.bi.go.id/id/publikasi/ruang-media/news-release/default.aspx"],["BI – SEKI","https://www.bi.go.id/id/statistik/ekonomi-keuangan/seki/default.aspx"],["Kurs JISDOR","https://www.bi.go.id/id/statistik/informasi-kurs/jisdor/default.aspx"],["OJK – Statistik","https://www.ojk.go.id/id/kanal/perbankan/data-dan-statistik/default.aspx"],["LPS","https://www.lps.go.id/"]]},
+  fiskal: {nama:"Fiskal", ind:["defisit","pendapatan","primer"], berita:"fiskal",
+    wb:[["GC.TAX.TOTL.GD.ZS","Penerimaan pajak (% PDB)","%"],["GC.XPN.TOTL.GD.ZS","Belanja pemerintah (% PDB)","%"],["GC.DOD.TOTL.GD.ZS","Utang pemerintah pusat (% PDB)","%"]],
+    ref:[["APBN KiTa","https://www.kemenkeu.go.id/informasi-publik/publikasi/apbn-kita"],["DJP – Pajak","https://www.pajak.go.id/"],["DJPPR – Utang & SBN","https://www.djppr.kemenkeu.go.id/"],["BKF Kemenkeu","https://fiskal.kemenkeu.go.id/"]]},
+  pertanian: {nama:"Pertanian & Mikro", ind:["ntp","ntn","inflasi_pangan"], berita:"pertanian",
+    wb:[["NV.AGR.TOTL.ZS","Pertanian, kehutanan & perikanan (% PDB)","%"],["SL.AGR.EMPL.ZS","Tenaga kerja pertanian (%)","%"],["AG.LND.FRST.ZS","Luas hutan (% daratan)","%"],["AG.PRD.FOOD.XD","Indeks produksi pangan",""]],
+    ref:[["Kementan – Satu Data","https://satudata.pertanian.go.id/"],["Bapanas – Panel Harga","https://panelharga.badanpangan.go.id/"],["PIHPS – Harga Pangan","https://www.bi.go.id/hargapangan"],["KKP","https://kkp.go.id/"],["KLHK/Kemenhut","https://www.menlhk.go.id/"],["BPS – NTP","https://www.bps.go.id/id/pressrelease"]]},
+  kalender: {nama:"Kalender Rilis"}
+};
+let ecoTema = "makro", editMode = false;
+function renderEcoTabs() {
+  $("#eco-tabs").innerHTML = Object.entries(ETEMA).map(([k, t]) => `<button data-v="${k}" aria-pressed="${k === ecoTema}">${t.nama}</button>`).join("");
+  segBind("eco-tabs", v => { ecoTema = v; renderEcoPanel(); });
+  renderEcoPanel();
+}
+function gauge(i) {
+  if (i.id === "inflasi") return `<div class="gauge" title="Sasaran BI 1,5–3,5%"><u style="left:${1.5 / 6 * 100}%;width:${2 / 6 * 100}%"></u><i style="width:${Math.min(100, i.nilai / 6 * 100)}%;opacity:.85"></i></div>`;
+  if (i.id === "defisit") return `<div class="gauge" title="Batas UU 3% PDB"><i style="width:${Math.min(100, i.nilai / 3 * 100)}%"></i></div>`;
+  if (i.id === "pendapatan") return `<div class="gauge"><i style="width:${Math.min(100, i.nilai)}%"></i></div>`;
+  return "";
+}
+function renderEcoPanel() {
+  const t = ETEMA[ecoTema], P = $("#eco-panel");
+  $("#btnEdit").classList.toggle("hide", ecoTema === "kalender");
+  if (ecoTema === "kalender") { P.innerHTML = `<div class="card"><div class="tv" id="tv-cal"></div></div>`; loadTV("tv-cal"); return; }
+  const inds = t.ind.map(findInd).filter(Boolean);
+  P.innerHTML = `
+    <div class="igrid">${inds.map(i => `<div class="icard"><div class="nm">${esc(i.nama)}</div>
+      ${editMode ? `<input type="number" step="any" data-id="${i.id}" data-f="nilai" value="${i.nilai}"><input data-id="${i.id}" data-f="periode" value="${esc(i.periode)}"><input data-id="${i.id}" data-f="keterangan" value="${esc(i.keterangan)}">`
+        : `<div class="v">${nf(i.nilai)}<small>${esc(i.satuan)}</small></div><div class="k">${esc(i.periode)} · ${esc(i.keterangan)}</div>${gauge(i)}<div class="s">Sumber: <a href="${esc(i.url)}" target="_blank" rel="noopener">${esc(i.sumber)}</a> · rilis ${esc(i.jadwal)}</div>`}</div>`).join("")}</div>
+    <div class="sec"><h2>Analisis ${esc(t.nama.toLowerCase())}</h2><button class="link" id="eco-listen">🔊 Dengarkan</button></div>
+    <ul class="ana">${analysis().filter(a => a.t === ecoTema).map(a => `<li><span>${a.ic}</span><div>${esc(a.s)}</div></li>`).join("") || '<li><span>ℹ️</span><div>Belum ada analisis untuk tema ini.</div></li>'}</ul>
+    <div class="sec"><h2>Tren 20 tahun</h2><span class="note">World Bank · geser untuk grafik lain</span></div>
+    <div class="car chart" id="eco-charts"></div>
+    <div class="sec"><h2>Berita ${esc(t.nama.toLowerCase())}</h2></div>
+    <div class="car" id="eco-news" data-auto="6000"></div>
+    <div class="sec"><h2>Referensi resmi Indonesia</h2></div>
+    <div class="refs">${t.ref.map(([n, u]) => `<a href="${u}" target="_blank" rel="noopener">${esc(n)} ↗</a>`).join("")}</div>`;
+  $("#eco-listen").onclick = () => listen({judul: "Analisis " + t.nama, teks: analysis().filter(a => a.t === ecoTema).map(a => a.s), bahasa: "id"});
+  carousel($("#eco-news"), byTema(t.berita).slice(0, 10).map(newsCard), {empty: "Belum ada berita untuk tema ini."});
+  carousel($("#eco-charts"), t.wb.map(([c, n]) => `<div class="ccard"><div style="display:flex;justify-content:space-between;gap:8px;align-items:baseline"><h3>${esc(n)}</h3><span class="last" id="wl-${c.replace(/\./g, "_")}"></span></div><div class="chart" id="wc-${c.replace(/\./g, "_")}"><div class="skel" style="min-height:140px"></div></div></div>`));
+  t.wb.forEach(([c, , u]) => loadWB(c, u));
+}
+const WBC = {};
+async function loadWB(code, unit) {
+  const k = code.replace(/\./g, "_");
+  try {
+    if (!WBC[code]) { const d = await getJSON(`https://api.worldbank.org/v2/country/IDN/indicator/${code}?format=json&per_page=60&date=${YEAR - 21}:${YEAR}`); WBC[code] = (d[1] || []).filter(r => r.value != null).map(r => ({x: r.date, y: r.value})).sort((a, b) => a.x - b.x); }
+    const pts = WBC[code], el = document.getElementById("wc-" + k); if (!el) return;
+    const dec = Math.abs(pts.at(-1)?.y || 0) > 1000 ? 0 : 1;
+    lineChart(el, pts, {unit, d: dec});
+    if (pts.length) document.getElementById("wl-" + k).textContent = nf(pts.at(-1).y, dec) + unit + " (" + pts.at(-1).x + ")";
+  } catch (e) { const el = document.getElementById("wc-" + k); if (el) el.innerHTML = '<div class="state">Data belum dapat dimuat</div>'; }
+}
+$("#btnEdit").onclick = () => {
+  if (editMode) {
+    $$("#eco-panel input[data-id]").forEach(inp => { const i = findInd(inp.dataset.id); if (i) i[inp.dataset.f] = inp.dataset.f === "nilai" ? Number(inp.value) : inp.value; });
+    IND.diperbarui = new Date().toISOString().slice(0, 16); store.set("indikator", IND); toast("Angka disimpan di perangkat ini");
+    renderKPIs(); renderBrief(); renderHero();
+  }
+  editMode = !editMode; $("#btnEdit").textContent = editMode ? "✓ Simpan" : "✎ Perbarui angka"; renderEcoPanel();
+};
+
+/* =========================================================
+   PASAR
+   ========================================================= */
+let mktTab = "ringkas";
+function renderMarket() {
+  renderKPIs();
+  const tabs = {ringkas:"Rupiah & Emas", overview:"Ikhtisar pasar", ihsg:"Grafik IHSG", ta:"Teknikal IHSG", kurs:"Tabel kurs"};
+  $("#mkt-tabs").innerHTML = Object.entries(tabs).map(([k, v]) => `<button data-v="${k}" aria-pressed="${k === mktTab}">${v}</button>`).join("");
+  segBind("mkt-tabs", v => { mktTab = v; renderMktPanel(); });
+  renderMktPanel();
+  carousel($("#mkt-news"), byTema("pasar").slice(0, 10).map(newsCard), {empty: "Belum ada berita pasar."});
+}
+function renderMktPanel() {
+  const P = $("#mkt-panel");
+  if (mktTab === "ringkas") {
+    const p = pct(FX.usd, FX.prev), gp = GOLD.prev ? pct(GOLD.usd, GOLD.prev) : null;
+    P.innerHTML = `<div class="grid g2">
+      <div class="ccard"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px"><h3>Rupiah terhadap US$ · 45 hari</h3><span class="last">${FX.date || ""}</span></div>
+        <div style="font-size:26px;font-weight:800;margin-top:4px">Rp${nf(FX.usd, 0)} <span style="font-size:13px">${chg(p, true)}</span></div>
+        <div class="small t2">${p > 0 ? "Rupiah melemah" : p < 0 ? "Rupiah menguat" : "Stabil"} dibanding hari kerja sebelumnya (kurs referensi ECB)</div><div class="chart" id="idr-chart"></div></div>
+      <div class="ccard"><h3>Emas</h3>
+        <div style="display:flex;gap:18px;flex-wrap:wrap;margin:6px 0"><div><div class="small t2">Dunia (XAU/USD)</div><div style="font-size:24px;font-weight:800">US$${nf(GOLD.usd)}</div><div class="small">${gp != null ? chg(gp) + " sejak " + fmtDate(GOLD.prevDate, {day:"numeric", month:"short"}) : "perubahan tampil mulai besok"}</div></div>
+        <div><div class="small t2">Setara per gram</div><div style="font-size:24px;font-weight:800;color:var(--gold)">Rp${nf(GOLD.idrGram, 0)}</div><div class="small muted">belum termasuk biaya cetak & pajak</div></div></div>
+        <div class="tv" id="tv-gold"></div></div></div>`;
+    if (FX.series.length) lineChart($("#idr-chart"), FX.series, {d: 0, height: 160});
+    loadTV("tv-gold");
+  } else if (mktTab === "kurs") {
+    P.innerHTML = `<div class="card"><table class="tbl"><thead><tr><th>Mata uang</th><th class="r">Rupiah</th><th class="r">Perubahan</th></tr></thead><tbody>${Object.keys(CUR).filter(k => FX.rates[k]).map(k => { const m = k === "JPY" ? 100 : 1, v = m / FX.rates[k], pv = FX.prevRates[k] ? m / FX.prevRates[k] : null; return `<tr><td>${CUR[k]} <span class="muted small">${k}</span></td><td class="r">${nf(v)}</td><td class="r">${chg(pct(v, pv), true)}</td></tr>`; }).join("")}</tbody></table>
+      <p class="small muted" style="margin:8px 0 0">Merah = Rupiah melemah. Kurs referensi ECB per ${FX.date || "–"}; kurs JISDOR resmi: <a href="https://www.bi.go.id/id/statistik/informasi-kurs/jisdor/default.aspx" target="_blank" rel="noopener">bi.go.id</a>.</p></div>`;
+  } else {
+    const id = {overview: "tv-overview", ihsg: "tv-ihsg", ta: "tv-ta"}[mktTab];
+    P.innerHTML = `<div class="card"><div class="tv" id="${id}" style="${mktTab === "ihsg" ? "height:460px" : ""}"></div></div>`; loadTV(id);
+  }
+}
+
+/* =========================================================
+   ARSIP
+   ========================================================= */
+let aTab = "saved";
+segBind("a-tabs", v => { aTab = v; renderArsip(); });
+function renderArsip() {
+  const key = {saved: "saved", news: "savedNews", read: "read"}[aTab];
+  const list = Object.values(store.get(key, {})).sort((a, b) => String(b.at).localeCompare(String(a.at)));
+  $("#a-list").innerHTML = list.length ? list.map(o => o.kind === "news" ? newsCard(o) : jCard(o)).join("") :
+    `<div class="state">${aTab === "news" ? "Belum ada berita yang disimpan. Buka berita lalu ketuk ☆." : aTab === "read" ? "Belum ada jurnal yang ditandai dibaca." : "Belum ada jurnal yang disimpan. Ketuk ☆ pada kartu jurnal."}</div>`;
+}
+$("#btnExport").onclick = () => {
+  const rows = [["Jenis","Judul","Penulis/Sumber","Jurnal/Media","Tahun/Tanggal","Tautan"]];
+  Object.values(store.get("saved", {})).forEach(o => rows.push(["Jurnal", o.title, o.authors, o.source, o.year, o.url]));
+  Object.values(store.get("savedNews", {})).forEach(o => rows.push(["Berita", o.judul, o.sumber, o.sumber, o.waktu, o.link]));
+  const csv = rows.map(r => r.map(c => '"' + String(c ?? "").replace(/"/g, '""') + '"').join(",")).join("\n");
+  const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob(["﻿" + csv], {type: "text/csv"})); a.download = "arsip-ekonomi-" + ymd(TODAY) + ".csv"; a.click();
+};
+
+/* =========================================================
+   PENGATURAN
+   ========================================================= */
+$("#setNama").value = store.get("nama", ""); $("#setWa").value = store.get("wa", "62895353066404");
+$("#btnSave").onclick = () => { store.set("nama", $("#setNama").value.trim()); store.set("wa", $("#setWa").value.replace(/\D/g, "")); toast("Pengaturan disimpan"); renderBrief(); };
+$$("#set-lang button").forEach(b => b.setAttribute("aria-pressed", b.dataset.v === SET.lang));
+$$("#set-rate button").forEach(b => b.setAttribute("aria-pressed", Number(b.dataset.v) === Number(SET.rate)));
+segBind("set-lang", v => { SET.lang = v; toast(v === "id" ? "Suara: Bahasa Indonesia" : "Voice: English"); });
+segBind("set-rate", v => { SET.rate = Number(v); });
+$("#set-autotr").checked = SET.autoTr; $("#set-autotr").onchange = e => SET.autoTr = e.target.checked;
+$("#set-auto").checked = SET.autoplay; $("#set-auto").onchange = e => { SET.autoplay = e.target.checked; toast("Berlaku setelah halaman dimuat ulang"); };
+$("#btnResetInd").onclick = () => { store.del("indikator"); loadIndikator().then(() => { renderKPIs(); renderBrief(); toast("Angka indikator dikembalikan"); }); };
+$("#btnClear").onclick = () => { if (!confirm("Hapus semua arsip, pengaturan, dan cache di perangkat ini?")) return; Object.keys(localStorage).filter(k => k.startsWith("ae_")).forEach(k => localStorage.removeItem(k)); location.reload(); };
+
+/* =========================================================
+   MULAI
+   ========================================================= */
+async function init() {
+  const start = location.hash.slice(1) || "beranda";
+  go(start === "atur" || document.getElementById("page-" + start) ? start : "beranda");
+  loadTV("tv-ticker");
+  await loadIndikator();
+  renderKPIs(); renderBrief(); renderHero();
+  const pNews = loadNews().then(() => { renderHomeNews(); renderHero(); renderBrief(); if (opened.has("berita")) renderNewsPage(); if (opened.has("ekonomi")) renderEcoPanel(); if (opened.has("pasar")) carousel($("#mkt-news"), byTema("pasar").slice(0, 10).map(newsCard)); });
+  const pJ = loadHomeJurnal().then(renderHero);
+  await loadFX(); await loadGold();
+  renderKPIs(); renderBrief(); renderHero();
+  if (opened.has("pasar")) renderMktPanel();
+  if (opened.has("ekonomi")) renderEcoPanel();
+  await Promise.all([pNews, pJ]);
+}
+init();
+})();

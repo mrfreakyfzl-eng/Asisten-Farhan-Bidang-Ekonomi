@@ -212,6 +212,25 @@ def susun():
     L.append(f"_Angka indikator per {diperbarui}_")
     L.append("")
 
+    # Berita teratas (dari data/berita.json yang diperbarui tiap jam)
+    try:
+        bj = json.loads((ROOT / "data" / "berita.json").read_text(encoding="utf-8"))
+        nama_tema = {"moneter": "Moneter", "fiskal": "Fiskal", "pasar": "Pasar", "pertanian": "Pertanian",
+                     "energi": "Energi", "syariah": "Syariah", "global": "Global", "makro": "Makro"}
+        pilih, dipakai = [], set()
+        for b in bj.get("berita", []):
+            if b.get("bahasa") == "id" and b["tema"] not in dipakai:
+                pilih.append(b); dipakai.add(b["tema"])
+            if len(pilih) == 5:
+                break
+        if pilih:
+            L.append("*📰 Berita Ekonomi Terkini*")
+            for b in pilih:
+                L.append(f"• [{nama_tema.get(b['tema'], 'Ekonomi')}] {b['judul']} — _{b['sumber']}_")
+            L.append("")
+    except Exception as e:
+        print("berita gagal:", e, file=sys.stderr)
+
     # Headline riset
     try:
         res = openalex(frm=(TODAY - timedelta(days=365)).isoformat(), to=TODAY.isoformat(), per=10)

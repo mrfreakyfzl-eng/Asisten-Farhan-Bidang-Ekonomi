@@ -1,0 +1,39 @@
+name: Perbarui berita ekonomi
+
+on:
+  schedule:
+    - cron: "17 * * * *"      # setiap jam
+  workflow_dispatch: {}
+  push:
+    branches: [main]
+    paths:
+      - "scripts/ambil_berita.py"
+      - ".github/workflows/berita.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: berita
+  cancel-in-progress: false
+
+jobs:
+  ambil:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Ambil RSS media ekonomi
+        run: python scripts/ambil_berita.py
+      - name: Simpan jika ada perubahan
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/berita.json
+          if git diff --cached --quiet; then echo "Tidak ada perubahan"; exit 0; fi
+          git commit -m "Perbarui berita $(date -u +'%Y-%m-%d %H:%M') UTC"
+          git pull --rebase --autostash origin main || true
+          git push
