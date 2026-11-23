@@ -42,6 +42,7 @@ BIDANG = [
     ("Ekonomi Kelautan & Perikanan", "fisheries"),
     ("Ekonomi Pembangunan", "poverty"),
 ]
+# Catatan: tema "Ekonomi Politik & Kebijakan" tersedia di dashboard (menu Jurnal).
 
 
 def get_json(url, timeout=25):
@@ -216,7 +217,8 @@ def susun():
     try:
         bj = json.loads((ROOT / "data" / "berita.json").read_text(encoding="utf-8"))
         nama_tema = {"moneter": "Moneter", "fiskal": "Fiskal", "pasar": "Pasar", "pertanian": "Pertanian",
-                     "energi": "Energi", "syariah": "Syariah", "global": "Global", "makro": "Makro"}
+                     "energi": "Energi", "syariah": "Syariah", "global": "Global", "makro": "Makro",
+                     "politik": "Kebijakan"}
         pilih, dipakai = [], set()
         for b in bj.get("berita", []):
             if b.get("bahasa") == "id" and b["tema"] not in dipakai:

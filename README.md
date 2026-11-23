@@ -97,9 +97,9 @@ Kalender rilis di menu Ekonomi Indonesia menampilkan jadwal ini secara realtime.
 
 Dashboard memakai tema merah dan bisa diganti ke mode terang atau gelap lewat ikon bulan/matahari. Berita dan jurnal tampil dalam slider yang bisa digeser ke kiri dan kanan, dan bergerak otomatis. Slider berhenti sebentar saat disentuh dan bisa dijeda.
 
-**Berita** dikelompokkan per tema: Makro, Moneter & Perbankan, Fiskal & Pajak, Pasar & Investasi, Pertanian & Pangan, Energi & Tambang, Syariah, dan Global. Berita juga bisa disaring per media dan dicari dengan kata kunci.
+**Berita** dikelompokkan per tema: Makro, Moneter & Perbankan, Fiskal & Pajak, Pasar & Investasi, Pertanian & Pangan, Energi & Tambang, Syariah, Politik & Kebijakan, dan Global. Berita politik hanya diambil bila menyangkut ekonomi, anggaran, regulasi, atau kebijakan publik. Berita juga bisa disaring per media dan dicari dengan kata kunci.
 
-**Data ekonomi** dikelompokkan dalam tab Makro, Moneter, Fiskal, Pertanian & Mikro, serta Kalender Rilis. Setiap tab berisi angka indikator, analisis, grafik tren 20 tahun, berita terkait, dan referensi resmi Indonesia.
+**Data ekonomi** dikelompokkan dalam tab Makro, Moneter, Fiskal, Pertanian & Mikro, Politik & Kebijakan (isu kebijakan terhangat, indikator tata kelola World Bank, dan tautan regulasi resmi), serta Kalender Rilis. Setiap tab berisi angka indikator, analisis, grafik tren 20 tahun, berita terkait, dan referensi resmi Indonesia.
 
 **Jurnal dan berita bisa dibaca langsung di dalam aplikasi.** Ketuk sebuah kartu untuk membuka pembaca. Dari pembaca, Anda bisa:
 - menerjemahkan isi (Asli / Indonesia / English);

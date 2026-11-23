@@ -35,6 +35,10 @@ FEEDS = [
     {"sumber": "Google News", "url": "https://news.google.com/rss/search?q=ekonomi+indonesia+when:2d&hl=id&gl=ID&ceid=ID:id", "bahasa": "id"},
     {"sumber": "Google News", "url": "https://news.google.com/rss/search?q=bank+indonesia+OR+BPS+OR+APBN+when:2d&hl=id&gl=ID&ceid=ID:id", "bahasa": "id"},
     {"sumber": "Google News", "url": "https://news.google.com/rss/search?q=petani+OR+pangan+OR+perikanan+OR+kehutanan+when:3d&hl=id&gl=ID&ceid=ID:id", "bahasa": "id", "saring": True},
+    # Ekonomi politik & kebijakan (berita politik hanya diambil bila menyangkut ekonomi/kebijakan)
+    {"sumber": "Antara", "url": "https://www.antaranews.com/rss/politik.xml", "bahasa": "id", "tema": "politik", "kebijakan": True},
+    {"sumber": "CNN Indonesia", "url": "https://www.cnnindonesia.com/nasional/rss", "bahasa": "id", "tema": "politik", "kebijakan": True},
+    {"sumber": "Google News", "url": "https://news.google.com/rss/search?q=kebijakan+ekonomi+OR+regulasi+OR+DPR+anggaran+OR+peraturan+pemerintah+when:2d&hl=id&gl=ID&ceid=ID:id", "bahasa": "id", "tema": "politik", "kebijakan": True},
     # Internasional (bahasa Inggris, bisa diterjemahkan di dashboard)
     {"sumber": "CNBC International", "url": "https://www.cnbc.com/id/20910258/device/rss/rss.html", "bahasa": "en", "tema": "global"},
     {"sumber": "CNBC International", "url": "https://www.cnbc.com/id/10000664/device/rss/rss.html", "bahasa": "en", "tema": "global"},
@@ -48,9 +52,11 @@ TEMA = {
     "energi":    ["minyak", "bbm", "batu bara", "batubara", "listrik", "pln", "pertamina", "nikel", "tambang", "energi", "gas", "hilirisasi", "smelter", "oil", "energy", "coal"],
     "syariah":   ["syariah", "halal", "zakat", "wakaf", "sukuk", "islamic", "bsi"],
     "makro":     ["pertumbuhan ekonomi", "pdb", "bps", "ekspor", "impor", "neraca perdagangan", "investasi", "daya beli", "konsumsi", "pengangguran", "kemiskinan", "umkm", "ekonomi", "industri", "manufaktur", "pmi", "gdp", "economy", "recession", "trade"],
+    "politik":   ["dpr", "dpd", "mpr", "presiden", "wakil presiden", "kabinet", "istana", "kebijakan", "regulasi", "deregulasi", "peraturan pemerintah", "perpres", "inpres", "keppres", "undang-undang", "ruu", "omnibus", "pilkada", "pemilu", "partai", "koalisi", "oposisi", "danantara", "bumn", "kppu", "mahkamah konstitusi", "policy", "election", "parliament", "government"],
     "global":    ["global", "amerika", "china", "tiongkok", "tarif", "perang dagang", "imf", "bank dunia", "world bank", "tariff", "wall street", "europe"],
 }
-URUTAN_TEMA = ["moneter", "fiskal", "pasar", "pertanian", "energi", "syariah", "global", "makro"]
+URUTAN_TEMA = ["moneter", "fiskal", "pasar", "pertanian", "energi", "syariah", "global", "politik", "makro"]
+KATA_KEBIJAKAN = ["kebijakan", "regulasi", "deregulasi", "anggaran", "apbn", "perpres", "peraturan", "undang-undang", "ruu", "pajak", "subsidi", "investasi", "ekonomi", "bumn", "danantara", "tarif", "harga", "upah", "ump", "pangan", "energi", "fiskal", "moneter"]
 
 
 def fetch(url):
@@ -127,6 +133,11 @@ def parse(feed):
         tema, skor = klasifikasi(judul + " " + desc, feed.get("tema"))
         if feed.get("saring") and skor == 0:
             continue
+        if feed.get("kebijakan"):
+            t = (judul + " " + desc).lower()
+            if not any(re.search(r"(?<!\w)" + re.escape(k) + r"(?!\w)", t) for k in KATA_KEBIJAKAN):
+                continue  # berita politik murni tanpa kaitan ekonomi/kebijakan dilewati
+            tema = "politik"
         hasil.append({
             "judul": judul, "link": link, "ringkasan": desc, "gambar": gambar(it, desc_raw),
             "sumber": sumber, "tema": tema or "makro", "bahasa": feed["bahasa"],

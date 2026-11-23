@@ -727,7 +727,7 @@ function carousel(root, slides, opt = {}) {
   if (!slides.length) { root.innerHTML = `<div class="state">${opt.empty || "Belum ada data."}</div>`; return; }
   root.innerHTML = `<div class="car-track">${slides.join("")}</div>
     <button class="car-btn prev" aria-label="Sebelumnya">‹</button><button class="car-btn next" aria-label="Berikutnya">›</button>
-    <div class="car-foot"><div class="car-dots">${slides.map((_, i) => `<button aria-label="Slide ${i + 1}"></button>`).join("")}</div>${slides.length > 1 ? '<button class="car-play" title="Jeda/putar otomatis">❚❚</button>' : ""}</div>`;
+    <div class="car-foot"><div class="car-dots">${slides.map((_, i) => `<button aria-label="Slide ${i + 1}"></button>`).join("")}</div>${slides.length > 1 && Number(root.dataset.auto) ? '<button class="car-play" title="Jeda/putar otomatis">❚❚</button>' : ""}</div>`;
   const track = $(".car-track", root), dots = $$(".car-dots button", root), play = $(".car-play", root);
   const step = () => { const c = track.children; return c.length > 1 ? c[1].offsetLeft - c[0].offsetLeft : track.clientWidth; };
   const idx = () => Math.round(track.scrollLeft / Math.max(1, step()));
@@ -1000,7 +1000,7 @@ function renderKPIs() {
 /* =========================================================
    BERITA
    ========================================================= */
-const NTEMA = {semua:"Semua", makro:"Makro", moneter:"Moneter & Perbankan", fiskal:"Fiskal & Pajak", pasar:"Pasar & Investasi", pertanian:"Pertanian & Pangan", energi:"Energi & Tambang", syariah:"Syariah", global:"Global"};
+const NTEMA = {semua:"Semua", makro:"Makro", moneter:"Moneter & Perbankan", fiskal:"Fiskal & Pajak", pasar:"Pasar & Investasi", pertanian:"Pertanian & Pangan", energi:"Energi & Tambang", syariah:"Syariah", politik:"Politik & Kebijakan", global:"Global"};
 const KW = {
   moneter:["bank indonesia","bi rate","bi-rate","suku bunga","rupiah","kurs","inflasi","moneter","kredit","perbankan","ojk","dolar","cadangan devisa"],
   fiskal:["apbn","pajak","kemenkeu","menkeu","defisit","utang","sbn","subsidi","anggaran"],
@@ -1008,6 +1008,7 @@ const KW = {
   pertanian:["petani","pertanian","pangan","beras","padi","jagung","pupuk","bulog","sawit","cpo","kopi","perikanan","nelayan","ikan","hutan","kehutanan","peternak","cabai","gula"],
   energi:["minyak","bbm","batu bara","listrik","pln","pertamina","nikel","tambang","energi","hilirisasi"],
   syariah:["syariah","halal","zakat","wakaf","sukuk"],
+  politik:["dpr","presiden","kabinet","kebijakan","regulasi","deregulasi","perpres","peraturan pemerintah","undang-undang","ruu","pemilu","pilkada","partai","danantara","bumn"],
   global:["global","amerika","china","tiongkok","tarif","imf","bank dunia"],
   makro:["ekonomi","pdb","bps","ekspor","impor","investasi","konsumsi","umkm","industri"]
 };
@@ -1094,7 +1095,8 @@ const BIDANG = [
   {id:"pembangunan", nama:"Ekonomi Pembangunan", hari:0, q:"poverty", qid:"kemiskinan"},
   {id:"moneter", nama:"Moneter & Perbankan", hari:-1, q:"monetary policy", qid:"moneter"},
   {id:"investasi", nama:"Pasar Modal & Investasi", hari:-1, q:"stock market", qid:"saham"},
-  {id:"transmigrasi", nama:"Regional & Transmigrasi", hari:-1, q:"migration rural", qid:"transmigrasi"}
+  {id:"transmigrasi", nama:"Regional & Transmigrasi", hari:-1, q:"migration rural", qid:"transmigrasi"},
+  {id:"ekopol", nama:"Ekonomi Politik & Kebijakan", hari:-1, q:"political economy", qid:"kebijakan publik"}
 ];
 const SELECT = "id,doi,title,publication_year,publication_date,cited_by_count,counts_by_year,primary_location,best_oa_location,authorships,abstract_inverted_index,open_access,language,primary_topic,keywords";
 function oaURL({q, origin, yf, yt, from, to, sort, per = 25, page = 1, field = true}) {
@@ -1336,6 +1338,9 @@ const ETEMA = {
   pertanian: {nama:"Pertanian & Mikro", ind:["ntp","ntn","inflasi_pangan"], berita:"pertanian",
     wb:[["NV.AGR.TOTL.ZS","Pertanian, kehutanan & perikanan (% PDB)","%"],["SL.AGR.EMPL.ZS","Tenaga kerja pertanian (%)","%"],["AG.LND.FRST.ZS","Luas hutan (% daratan)","%"],["AG.PRD.FOOD.XD","Indeks produksi pangan",""]],
     ref:[["Kementan – Satu Data","https://satudata.pertanian.go.id/"],["Bapanas – Panel Harga","https://panelharga.badanpangan.go.id/"],["PIHPS – Harga Pangan","https://www.bi.go.id/hargapangan"],["KKP","https://kkp.go.id/"],["KLHK/Kemenhut","https://www.menlhk.go.id/"],["BPS – NTP","https://www.bps.go.id/id/pressrelease"]]},
+  politik: {nama:"Politik & Kebijakan", ind:[], berita:"politik",
+    wb:[["GE.EST","Efektivitas pemerintah (WGI)","",3],["RQ.EST","Kualitas regulasi (WGI)","",3],["CC.EST","Pengendalian korupsi (WGI)","",3],["PV.EST","Stabilitas politik (WGI)","",3],["IC.BUS.EASE.XQ","Kemudahan berusaha (skor)","",2]],
+    ref:[["JDIH – Database Peraturan","https://peraturan.go.id/"],["JDIH BPK","https://peraturan.bpk.go.id/"],["Sekretariat Kabinet","https://setkab.go.id/"],["DPR RI","https://www.dpr.go.id/"],["Kemenko Perekonomian","https://www.ekon.go.id/"],["JDIH Kemenkeu (PMK)","https://jdih.kemenkeu.go.id/"],["Peraturan BI","https://www.bi.go.id/id/publikasi/peraturan/default.aspx"],["KPPU","https://kppu.go.id/"],["Bappenas","https://www.bappenas.go.id/"]]},
   kalender: {nama:"Kalender Rilis"}
 };
 let ecoTema = "makro", editMode = false;
@@ -1352,9 +1357,10 @@ function gauge(i) {
 }
 function renderEcoPanel() {
   const t = ETEMA[ecoTema], P = $("#eco-panel");
-  $("#btnEdit").classList.toggle("hide", ecoTema === "kalender");
+  $("#btnEdit").classList.toggle("hide", ecoTema === "kalender" || ecoTema === "politik");
   if (ecoTema === "kalender") { P.innerHTML = `<div class="card"><div class="tv" id="tv-cal"></div></div>`; loadTV("tv-cal"); return; }
   const inds = t.ind.map(findInd).filter(Boolean);
+  if (ecoTema === "politik") { renderPolitik(P, t); return; }
   P.innerHTML = `
     <div class="igrid">${inds.map(i => `<div class="icard"><div class="nm">${esc(i.nama)}</div>
       ${editMode ? `<input type="number" step="any" data-id="${i.id}" data-f="nilai" value="${i.nilai}"><input data-id="${i.id}" data-f="periode" value="${esc(i.periode)}"><input data-id="${i.id}" data-f="keterangan" value="${esc(i.keterangan)}">`
@@ -1372,13 +1378,40 @@ function renderEcoPanel() {
   carousel($("#eco-charts"), t.wb.map(([c, n]) => `<div class="ccard"><div style="display:flex;justify-content:space-between;gap:8px;align-items:baseline"><h3>${esc(n)}</h3><span class="last" id="wl-${c.replace(/\./g, "_")}"></span></div><div class="chart" id="wc-${c.replace(/\./g, "_")}"><div class="skel" style="min-height:140px"></div></div></div>`));
   t.wb.forEach(([c, , u]) => loadWB(c, u));
 }
+const ISU = ["APBN","pajak","subsidi","tarif","investasi","BUMN","Danantara","DPR","Perpres","regulasi","deregulasi","upah","pangan","energi","hilirisasi","utang","RUU","pemilu","pilkada","IKN","transmigrasi","koperasi","makan bergizi"];
+let isuSel = null;
+function renderPolitik(P, t) {
+  const list = byTema("politik"), lc = n => (n.judul + " " + (n.ringkasan || "")).toLowerCase();
+  const counts = ISU.map(k => [k, list.filter(n => lc(n).includes(k.toLowerCase())).length]).filter(x => x[1] > 0).sort((a, b) => b[1] - a[1]).slice(0, 10);
+  const shown = isuSel ? list.filter(n => lc(n).includes(isuSel.toLowerCase())) : list;
+  P.innerHTML = `
+    <div class="card" style="background:var(--hero);color:#fff;border:0">
+      <span class="pill w">🏛️ Ekonomi politik & kebijakan</span>
+      <h3 style="margin:10px 0 4px;font-size:20px">${list.length} berita kebijakan dalam ${NEWSMETA && NEWSMETA.cadangan ? "feed cadangan" : "4 hari terakhir"}</h3>
+      <p style="margin:0;opacity:.9;font-size:14px">Berita politik yang ditampilkan hanya yang menyangkut ekonomi, anggaran, regulasi, atau kebijakan publik. Pilih isu untuk menyaring.</p>
+    </div>
+    <div class="sec"><h2>Isu kebijakan terhangat</h2><span class="note">frekuensi kemunculan di judul & ringkasan</span></div>
+    <div class="chips" id="isu-chips"><button class="chip" data-i="" aria-pressed="${!isuSel}">Semua<span class="n">${list.length}</span></button>${counts.map(([k, n]) => `<button class="chip" data-i="${esc(k)}" aria-pressed="${isuSel === k}">${esc(k)}<span class="n">${n}</span></button>`).join("")}</div>
+    <div class="car" id="eco-news" data-auto="6000"></div>
+    <div class="sec"><h2>Tata kelola & iklim kebijakan</h2><span class="note">World Bank WGI: skala −2,5 (lemah) s.d. +2,5 (kuat)</span></div>
+    <div class="car chart" id="eco-charts"></div>
+    <div class="sec"><h2>Regulasi & lembaga resmi</h2></div>
+    <div class="refs">${t.ref.map(([n, u]) => `<a href="${u}" target="_blank" rel="noopener">${esc(n)} ↗</a>`).join("")}</div>
+    <div class="sec"><h2>Jurnal ekonomi politik</h2><button class="link" id="go-ekopol">Jelajahi →</button></div>
+    <p class="disc" style="margin-top:0">Bagian ini menyajikan berita dan data apa adanya dari sumbernya, tanpa penilaian terhadap partai atau tokoh politik mana pun.</p>`;
+  $$("#isu-chips .chip").forEach(c => c.onclick = () => { isuSel = c.dataset.i || null; renderPolitik(P, t); });
+  $("#go-ekopol").onclick = () => { J.field = "ekopol"; const again = opened.has("jurnal"); go("jurnal"); if (again) { renderJChips(); loadJurnal(true); } };
+  carousel($("#eco-news"), shown.slice(0, 12).map(newsCard), {empty: "Belum ada berita kebijakan untuk isu ini."});
+  carousel($("#eco-charts"), t.wb.map(([c, n]) => `<div class="ccard"><div style="display:flex;justify-content:space-between;gap:8px;align-items:baseline"><h3>${esc(n)}</h3><span class="last" id="wl-${c.replace(/\./g, "_")}"></span></div><div class="chart" id="wc-${c.replace(/\./g, "_")}"><div class="skel" style="min-height:140px"></div></div></div>`));
+  t.wb.forEach(([c, , u, src]) => loadWB(c, u, src));
+}
 const WBC = {};
-async function loadWB(code, unit) {
+async function loadWB(code, unit, source) {
   const k = code.replace(/\./g, "_");
   try {
-    if (!WBC[code]) { const d = await getJSON(`https://api.worldbank.org/v2/country/IDN/indicator/${code}?format=json&per_page=60&date=${YEAR - 21}:${YEAR}`); WBC[code] = (d[1] || []).filter(r => r.value != null).map(r => ({x: r.date, y: r.value})).sort((a, b) => a.x - b.x); }
+    if (!WBC[code]) { const d = await getJSON(`https://api.worldbank.org/v2/country/IDN/indicator/${code}?format=json&per_page=60&date=${YEAR - 21}:${YEAR}${source ? "&source=" + source : ""}`); WBC[code] = (d[1] || []).filter(r => r.value != null).map(r => ({x: r.date, y: r.value})).sort((a, b) => a.x - b.x); }
     const pts = WBC[code], el = document.getElementById("wc-" + k); if (!el) return;
-    const dec = Math.abs(pts.at(-1)?.y || 0) > 1000 ? 0 : 1;
+    const dec = Math.abs(pts.at(-1)?.y || 0) > 1000 ? 0 : Math.abs(pts.at(-1)?.y || 0) < 3 ? 2 : 1;
     lineChart(el, pts, {unit, d: dec});
     if (pts.length) document.getElementById("wl-" + k).textContent = nf(pts.at(-1).y, dec) + unit + " (" + pts.at(-1).x + ")";
   } catch (e) { const el = document.getElementById("wc-" + k); if (el) el.innerHTML = '<div class="state">Data belum dapat dimuat</div>'; }
