@@ -370,7 +370,7 @@ function kpiHTML(lb, v, unit, meta, go, dot) {
 }
 function renderKPIs() {
   const k = [];
-  k.push(kpiHTML("USD/IDR", FX.usd ? nf(FX.usd, 0) : "…", "Rp", FX.usd ? chg(pct(FX.usd, FX.prev), true) + " hari ini" : "memuat", "pasar"));
+  k.push(kpiHTML("USD/IDR", FX.usd ? nf(FX.usd, 0) : "…", "Rp", FX.usd ? chg(pct(FX.usd, FX.prev)) + " hari ini" : "memuat", "pasar"));
   k.push(kpiHTML("Emas dunia", GOLD.usd ? nf(GOLD.usd, 0) : "…", "US$/oz", GOLD.idrGram ? "≈ Rp" + nf(GOLD.idrGram, 0) + "/g" : "memuat", "pasar", "var(--gold)"));
   [["bi_rate","BI-Rate"],["inflasi","Inflasi"],["pdb","Pertumbuhan PDB"],["defisit","Defisit APBN"],["cadev","Cadangan devisa"],["ntp","NTP petani"]].forEach(([id, lb]) => { const i = findInd(id); if (i) k.push(kpiHTML(lb, nf(i.nilai, 2), i.satuan, esc(i.periode), "ekonomi")); });
   $("#kpis").innerHTML = k.join("");
@@ -792,7 +792,7 @@ function renderMktPanel() {
     const p = pct(FX.usd, FX.prev), gp = GOLD.prev ? pct(GOLD.usd, GOLD.prev) : null;
     P.innerHTML = `<div class="grid g2">
       <div class="ccard"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px"><h3>Rupiah terhadap US$ · 45 hari</h3><span class="last">${FX.date || ""}</span></div>
-        <div style="font-size:26px;font-weight:800;margin-top:4px">Rp${nf(FX.usd, 0)} <span style="font-size:13px">${chg(p, true)}</span></div>
+        <div style="font-size:26px;font-weight:800;margin-top:4px">Rp${nf(FX.usd, 0)} <span style="font-size:13px">${chg(p)}</span></div>
         <div class="small t2">${p > 0 ? "Rupiah melemah" : p < 0 ? "Rupiah menguat" : "Stabil"} dibanding hari kerja sebelumnya (kurs referensi ECB)</div><div class="chart" id="idr-chart"></div></div>
       <div class="ccard"><h3>Emas</h3>
         <div style="display:flex;gap:18px;flex-wrap:wrap;margin:6px 0"><div><div class="small t2">Dunia (XAU/USD)</div><div style="font-size:24px;font-weight:800">US$${nf(GOLD.usd)}</div><div class="small">${gp != null ? chg(gp) + " sejak " + fmtDate(GOLD.prevDate, {day:"numeric", month:"short"}) : "perubahan tampil mulai besok"}</div></div>
@@ -801,8 +801,8 @@ function renderMktPanel() {
     if (FX.series.length) lineChart($("#idr-chart"), FX.series, {d: 0, height: 160});
     loadTV("tv-gold");
   } else if (mktTab === "kurs") {
-    P.innerHTML = `<div class="card"><table class="tbl"><thead><tr><th>Mata uang</th><th class="r">Rupiah</th><th class="r">Perubahan</th></tr></thead><tbody>${Object.keys(CUR).filter(k => FX.rates[k]).map(k => { const m = k === "JPY" ? 100 : 1, v = m / FX.rates[k], pv = FX.prevRates[k] ? m / FX.prevRates[k] : null; return `<tr><td>${CUR[k]} <span class="muted small">${k}</span></td><td class="r">${nf(v)}</td><td class="r">${chg(pct(v, pv), true)}</td></tr>`; }).join("")}</tbody></table>
-      <p class="small muted" style="margin:8px 0 0">Merah = Rupiah melemah. Kurs referensi ECB per ${FX.date || "–"}; kurs JISDOR resmi: <a href="https://www.bi.go.id/id/statistik/informasi-kurs/jisdor/default.aspx" target="_blank" rel="noopener">bi.go.id</a>.</p></div>`;
+    P.innerHTML = `<div class="card"><table class="tbl"><thead><tr><th>Mata uang</th><th class="r">Rupiah</th><th class="r">Perubahan</th></tr></thead><tbody>${Object.keys(CUR).filter(k => FX.rates[k]).map(k => { const m = k === "JPY" ? 100 : 1, v = m / FX.rates[k], pv = FX.prevRates[k] ? m / FX.prevRates[k] : null; return `<tr><td>${CUR[k]} <span class="muted small">${k}</span></td><td class="r">${nf(v)}</td><td class="r">${chg(pct(v, pv))}</td></tr>`; }).join("")}</tbody></table>
+      <p class="small muted" style="margin:8px 0 0">Hijau = naik, merah = turun (kurs naik berarti Rupiah melemah). Kurs referensi ECB per ${FX.date || "–"}; kurs JISDOR resmi: <a href="https://www.bi.go.id/id/statistik/informasi-kurs/jisdor/default.aspx" target="_blank" rel="noopener">bi.go.id</a>.</p></div>`;
   } else {
     const id = {overview: "tv-overview", ihsg: "tv-ihsg", ta: "tv-ta"}[mktTab];
     P.innerHTML = `<div class="card"><div class="tv" id="${id}" style="${mktTab === "ihsg" ? "height:460px" : ""}"></div></div>`; loadTV(id);
