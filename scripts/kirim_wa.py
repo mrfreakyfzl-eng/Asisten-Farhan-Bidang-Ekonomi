@@ -141,6 +141,36 @@ def terjemah(t):
         return t
 
 
+CUE = {
+    "tujuan": re.compile(r"\b(this (paper|study|article|research)|we (examine|investigate|analy[sz]e|explore|study|assess|estimate)|aims? to|purpose|objective|penelitian ini|studi ini|bertujuan|tujuan)", re.I),
+    "metode": re.compile(r"\b(using|employ|panel data|survey|regression|model|sample|method|approach|menggunakan|metode|sampel|regresi|pendekatan)", re.I),
+    "temuan": re.compile(r"\b(we find|find that|found|show(s|ed)? that|results?|reveal|evidence|indicate|demonstrate|significant|hasil|menunjukkan|ditemukan|berpengaruh|signifikan)", re.I),
+    "implikasi": re.compile(r"\b(implication|suggest|recommend|policy|policies|conclude|should|need to|contribut|implikasi|disarankan|rekomendasi|kebijakan|kesimpulan|perlu)", re.I),
+}
+
+
+def iai(w):
+    """Pilah kalimat abstrak menjadi Informasi, Argumentasi, Interpretasi."""
+    inv = w.get("abstract_inverted_index") or {}
+    pos = {p: word for word, ps in inv.items() for p in ps}
+    t = re.sub(r"^(abstract|abstrak)\s*[:.\-–]?\s*", "", " ".join(pos[k] for k in sorted(pos)), flags=re.I)
+    S = [x.strip() for x in re.findall(r"[^.!?]+[.!?]+(?=\s|$)", t) if len(x.strip()) > 25] or ([t] if t else [])
+    info, arg, interp = [], [], []
+    n = len(S)
+    for i, x in enumerate(S):
+        p = i / (n - 1) if n > 1 else 0
+        if CUE["implikasi"].search(x) and (p >= .5 or re.search(r"implication|implikasi|suggest|recommend", x, re.I)):
+            interp.append(x)
+        elif CUE["temuan"].search(x) and i > 0:
+            arg.append(x)
+        elif CUE["tujuan"].search(x) or CUE["metode"].search(x) or i == 0:
+            info.append(x)
+        else:
+            (interp if p > .7 else arg).append(x)
+    pendek = lambda a: (a[0][:260].rsplit(" ", 1)[0] + "…") if a and len(a[0]) > 260 else (a[0] if a else "")
+    return pendek(info), pendek(arg), pendek(interp)
+
+
 def judul(w):
     return re.sub(r"<[^>]+>", "", w.get("title") or "(tanpa judul)")
 
@@ -254,7 +284,10 @@ def susun():
             w = res[(doy + geser) % len(res)]
             L.append(f"{label}: _{judul(w)}_ ({sumber(w)}, {w['publication_year']}; {w['cited_by_count']} sitasi, "
                      f"{sitasi_baru(w)} dalam 2 tahun terakhir)")
-            L.append(f"Ringkasan: {terjemah(abstrak(w))}")
+            i_, a_, t_ = iai(w)
+            if i_: L.append(f"ℹ️ Informasi: {terjemah(i_)}")
+            if a_: L.append(f"⚖️ Argumentasi: {terjemah(a_)}")
+            L.append(f"💡 Interpretasi: {terjemah(t_) if t_ else 'masih dikutip ' + str(sitasi_baru(w)) + ' kali dalam 2 tahun terakhir, tanda argumennya masih dipakai riset terbaru.'}")
             L.append(link(w))
             L.append("")
         except Exception as e:
@@ -270,7 +303,10 @@ def susun():
                 continue
             w = res[0]
             L.append(f"{label}: _{judul(w)}_ ({sumber(w)}, {w['publication_date']})")
-            L.append(f"Ringkasan: {terjemah(abstrak(w))}")
+            i_, a_, t_ = iai(w)
+            if i_: L.append(f"ℹ️ Informasi: {terjemah(i_)}")
+            if a_: L.append(f"⚖️ Argumentasi: {terjemah(a_)}")
+            if t_: L.append(f"💡 Interpretasi: {terjemah(t_)}")
             L.append(link(w))
             L.append("")
         except Exception as e:

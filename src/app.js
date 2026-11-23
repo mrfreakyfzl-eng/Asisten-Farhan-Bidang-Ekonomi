@@ -183,12 +183,14 @@ async function listen(item, lang) {
   speechSynthesis.cancel();
   showPlayer(item.judul, lang === "id" ? "Bahasa Indonesia" : "English", true);
   let parts = [item.judul, ...item.teks].filter(Boolean);
+  const extra = item.tambahan || [];
   if ((item.bahasa || "id") !== lang) {
     $("#pl-s").textContent = "menerjemahkan…";
     try { parts = await Promise.all(parts.map(p => translate(p, lang, item.bahasa))); } catch (e) { toast("Terjemahan gagal, dibacakan dalam bahasa asli"); lang = item.bahasa || "id"; }
     if (my !== TTS.token) return;
     $("#pl-s").textContent = lang === "id" ? "Bahasa Indonesia" : "English";
   }
+  parts = parts.concat(extra);
   const v = voiceFor(lang);
   if (!v) toast(lang === "id" ? "Suara Indonesia belum terpasang di perangkat; memakai suara bawaan" : "English voice not installed; using default voice");
   const sentences = parts.flatMap(p => chunks(p, 200));
@@ -522,17 +524,69 @@ function workObj(w, mode) {
     authorsAll: au.slice(0, 20), authors: au.slice(0, 3).join(", ") + (au.length > 3 ? ", dkk." : ""),
     countries: [...new Set((w.authorships || []).flatMap(a => a.countries || []))],
     lang: w.language || "en", abstract: abstractOf(w), rel: relevansi(w),
+    recent: (w.counts_by_year || []).filter(c => c.year >= YEAR - 1).reduce((a, c) => a + c.cited_by_count, 0),
     topik: [w.primary_topic?.display_name, w.primary_topic?.subfield?.display_name].filter(Boolean),
     kata: (w.keywords || []).map(k => k.display_name).slice(0, 6)
   };
 }
+/* ---------- Informasi · Argumentasi · Interpretasi (ekstraksi dari abstrak) ---------- */
+const CUE = {
+  tujuan: /\b(this (paper|study|article|research|work)|we (examine|investigate|analy[sz]e|explore|study|assess|estimate|evaluate|propose)|aims? to|purpose|objective|seeks? to|penelitian ini|studi ini|artikel ini|kajian ini|bertujuan|tujuan)/i,
+  metode: /\b(using|we use|employ|panel data|dataset|survey|regression|econometric|model|sample|method|approach|estimat|ardl|vecm|var model|gmm|difference-in-difference|propensity|case study|qualitative|quantitative|interview|questionnaire|menggunakan|metode|sampel|regresi|pendekatan|wawancara|kuesioner|data (sekunder|primer|panel))/i,
+  temuan: /\b(we find|find that|found|show(s|ed)? that|results?|reveal|evidence|indicate|demonstrate|significant(ly)?|hasil|menunjukkan|ditemukan|berpengaruh|signifikan)/i,
+  implikasi: /\b(implication|suggest|recommend|policy|policies|conclude|conclusion|should|need to|important (for|to)|contribut|inform|implikasi|disarankan|saran|rekomendasi|kebijakan|kesimpulan|perlu|sebaiknya|berkontribusi)/i
+};
+const METODE = [["panel data","Data panel"],["difference-in-difference","Difference-in-Differences"],["propensity score","Propensity Score Matching"],["instrumental variable","Variabel instrumen"],["ardl","ARDL"],["vecm","VECM"],["var ","VAR"],["gmm","GMM"],["dsge","DSGE"],["cge","CGE"],["structural equation","SEM"],["sem-pls","SEM-PLS"],["pls-sem","SEM-PLS"],["ahp","AHP"],["scor","SCOR"],["stochastic frontier","Stochastic Frontier"],["data envelopment","DEA"],["meta-analysis","Meta-analisis"],["systematic literature review","Tinjauan literatur sistematis"],["bibliometric","Bibliometrik"],["randomized","Eksperimen acak (RCT)"],["experiment","Eksperimen"],["survey","Survei"],["questionnaire","Kuesioner"],["interview","Wawancara"],["case study","Studi kasus"],["qualitative","Kualitatif"],["regression","Regresi"],["time series","Runtun waktu"],["machine learning","Machine learning"],["input-output","Input-Output"],["regresi","Regresi"],["kuesioner","Kuesioner"],["wawancara","Wawancara"],["kualitatif","Kualitatif"],["kuantitatif","Kuantitatif"],["data panel","Data panel"],["studi kasus","Studi kasus"]];
+const WILAYAH = ["Indonesia","Indonesian","Java","Jawa","Sumatra","Sumatera","Kalimantan","Borneo","Sulawesi","Papua","Bali","Malaysia","Thailand","Vietnam","Philippines","China","India","Africa","Europe","United States","Latin America","ASEAN","OECD","developing countries","emerging"];
+function sentencesOf(t) { return (t || "").match(/[^.!?]+[.!?]+(?=\s|$)/g)?.map(x => x.trim()).filter(x => x.length > 25) || (t ? [t] : []); }
+function analisisJurnal(o) {
+  if (o._iai) return o._iai;
+  const S = sentencesOf(o.abstract), n = S.length, lang = srcLang(o);
+  const role = S.map((x, i) => {
+    const pos = n > 1 ? i / (n - 1) : 0;
+    if (CUE.implikasi.test(x) && (pos >= .5 || /implication|implikasi|suggest|disarankan|recommend|rekomendasi/i.test(x))) return "interp";
+    if (CUE.temuan.test(x) && i > 0) return "arg";
+    if (CUE.tujuan.test(x) || CUE.metode.test(x) || i === 0) return "info";
+    return pos > .7 ? "interp" : "arg";
+  });
+  let info = S.filter((_, i) => role[i] === "info"), arg = S.filter((_, i) => role[i] === "arg"), interp = S.filter((_, i) => role[i] === "interp");
+  if (!arg.length && n > 2) arg = [S[Math.floor(n / 2)]];
+  const low = (o.title + " " + o.abstract).toLowerCase();
+  const metode = [...new Set(METODE.filter(([k]) => low.includes(k)).map(m => m[1]))].slice(0, 5);
+  const wilayah = [...new Set(WILAYAH.filter(w => low.includes(w.toLowerCase())).map(w => w === "Indonesian" ? "Indonesia" : w))].slice(0, 4);
+  const age = YEAR - (o.year || YEAR);
+  const rec = o.recent ?? null;
+  const catatan = [];
+  if (o.kind === "jurnal") {
+    if (o.cites >= 500) catatan.push(`Dengan ${o.cites.toLocaleString("id-ID")} sitasi, artikel ini termasuk rujukan utama di bidangnya; argumennya sudah banyak diuji dan dikembangkan peneliti lain.`);
+    else if (o.cites >= 50) catatan.push(`Dengan ${o.cites.toLocaleString("id-ID")} sitasi, artikel ini cukup sering dirujuk dan argumennya sudah mendapat perhatian luas.`);
+    else if (age <= 1) catatan.push("Artikel ini masih baru, sehingga argumennya belum banyak diuji oleh penelitian lain; baca sebagai temuan awal.");
+    if (wilayah.includes("Indonesia") || (o.countries || []).includes("ID")) catatan.push("Kajian ini berkaitan langsung dengan Indonesia, sehingga temuannya dapat dipakai sebagai rujukan konteks lokal maupun kebijakan nasional.");
+    else if (wilayah.length) catatan.push(`Kajian ini berlatar ${wilayah.join(", ")}; penerapannya di Indonesia perlu menyesuaikan kondisi kelembagaan dan wilayah setempat.`);
+    else catatan.push("Abstrak tidak menyebut wilayah spesifik; temuannya bersifat umum dan perlu diuji pada konteks Indonesia.");
+  }
+  if (!interp.length) catatan.unshift("Abstrak tidak menuliskan implikasi secara eksplisit; makna temuannya disarikan dari argumen utama di atas.");
+  o._iai = {info, arg, interp, metode, wilayah, catatan, lang};
+  return o._iai;
+}
+const first = (a, f = "") => a && a.length ? a[0] : f;
+function iaiMini(o) {
+  if (!o.abstract) return `<p>Abstrak tidak tersedia di basis data terbuka.</p>`;
+  const A = analisisJurnal(o);
+  const info = first(A.info, first(sentencesOf(o.abstract)));
+  return `<div class="iai">
+    <div><b class="l-info">Informasi</b>${esc(info)}</div>
+    <div><b class="l-arg">Argumentasi</b>${esc(first(A.arg, "—"))}</div>
+    <div><b class="l-int">Interpretasi</b>${esc(first(A.interp, first(A.catatan, "—")))}</div></div>`;
+}
+
 const CACHE = new Map();
 function jCard(o) {
   CACHE.set(o.id, o); const saved = !!store.get("saved", {})[o.id];
   return `<article class="jcard" data-open="${esc(o.id)}">
     <div class="top"><span class="pill ${o.mode === "fondasi" ? "" : "gray"}">${o.mode === "fondasi" ? "Fondasi" : "Terbaru"}</span>${o.countries.includes("ID") ? '<span class="pill gold">Indonesia</span>' : ""}${o.lang === "id" ? '<span class="pill gray">Bahasa ID</span>' : ""}</div>
     <h3>${esc(o.title)}</h3><div class="meta">${esc(o.authors || "Penulis tidak tercatat")} · <i>${esc(o.source)}</i> · ${o.mode === "fondasi" ? o.year : fmtDate(o.date)}</div>
-    <p>${esc(ringkas(o.abstract, 2))}</p>
+    ${iaiMini(o)}
     <div class="foot"><span class="cite">★ ${o.cites.toLocaleString("id-ID")} sitasi</span><span style="display:flex;gap:6px"><button class="btn sm pri" data-open="${esc(o.id)}">Baca</button><button class="star" data-star="${esc(o.id)}" title="Simpan">${saved ? "★" : "☆"}</button></span></div>
   </article>`;
 }
@@ -643,6 +697,23 @@ async function openReader(o, view) {
   renderReader(); const d = $("#reader"); if (!d.open) d.showModal();
   $(".rd-body", d).scrollTop = 0;
 }
+function trx(text, lang, tag = "span") { return `<${tag} class="trx" data-l="${lang}" data-o="${esc(text)}">${esc(text)}</${tag}>`; }
+function iaiFull(o) {
+  if (!o.abstract) return "";
+  const A = analisisJurnal(o), L = A.lang;
+  const li = arr => arr.map(x => `<li>${trx(x, L)}</li>`).join("");
+  return `<h4>Analisis jurnal</h4>
+    <div class="iai3">
+      <div class="col c-info"><div class="hd">ℹ️ Informasi</div><div class="sub">Konteks, tujuan, data & metode</div>
+        <ul>${li(A.info.length ? A.info : sentencesOf(o.abstract).slice(0, 1))}</ul>
+        <div class="tags" style="margin-top:6px">${A.metode.map(m => `<span>🔬 ${esc(m)}</span>`).join("")}${A.wilayah.map(w => `<span>📍 ${esc(w)}</span>`).join("")}<span>📅 ${o.year}</span><span>📚 ${esc(o.source)}</span></div></div>
+      <div class="col c-arg"><div class="hd">⚖️ Argumentasi</div><div class="sub">Klaim & temuan utama yang diajukan penulis</div>
+        <ul>${li(A.arg.length ? A.arg : ["Abstrak tidak memuat klaim temuan yang dapat dipisahkan secara otomatis."])}</ul></div>
+      <div class="col c-int"><div class="hd">💡 Interpretasi</div><div class="sub">Makna, implikasi & relevansi</div>
+        <ul>${li(A.interp)}${A.catatan.map(c => `<li>${trx(c, "id")}</li>`).join("")}</ul></div>
+    </div>
+    <p class="small muted" style="margin:6px 0 0">Kolom Informasi dan Argumentasi disusun otomatis dengan memilah kalimat abstrak menurut perannya. Catatan Interpretasi berbahasa Indonesia dihitung dari data sitasi dan wilayah kajian.</p>`;
+}
 async function renderReader() {
   const o = RD.item, src = srcLang(o), T = rdTexts(o), news = o.kind === "news";
   const target = RD.view === "asli" ? null : RD.view;
@@ -661,8 +732,9 @@ async function renderReader() {
         <button class="btn sm pri" data-rd="listen-id">🔊 Dengar ID</button><button class="btn sm" data-rd="listen-en">🔊 Listen EN</button>
         ${news ? "" : `<button class="btn sm" data-rd="cite">📋 Kutip APA</button><button class="btn sm" data-rd="read">${read ? "✓ Sudah dibaca" : "○ Tandai dibaca"}</button>`}
       </div>
-      <h4>${news ? "Ringkasan berita" : "Abstrak"}</h4>
-      <div class="rd-text" id="rd-text">${T.paras.map(p => `<p>${esc(p)}</p>`).join("")}</div>
+      ${news ? "" : iaiFull(o)}
+      <h4>${news ? "Ringkasan berita" : "Abstrak lengkap"}</h4>
+      <div class="rd-text" id="rd-text">${T.paras.map(p => trx(p, src, "p")).join("")}</div>
       ${news ? `<div class="rd-box">Artikel lengkap milik ${esc(o.sumber)} dan hanya dapat dibaca utuh di situsnya. <a href="${esc(o.link)}" target="_blank" rel="noopener">Baca selengkapnya ↗</a></div>` : `
         ${o.mode === "fondasi" ? `<h4>Mengapa masih relevan</h4><div class="rd-box">${esc(o.rel)}</div>` : ""}
         ${o.topik.length || o.kata.length ? `<h4>Topik & kata kunci</h4><div class="tags">${[...o.topik, ...o.kata].map(t => `<span>${esc(t)}</span>`).join("")}</div>` : ""}
@@ -674,18 +746,19 @@ async function renderReader() {
   applyTranslation();
 }
 async function applyTranslation() {
-  const o = RD.item, src = srcLang(o), T = rdTexts(o), box = $("#rd-text");
+  const o = RD.item, src = srcLang(o), T = rdTexts(o), body = $(".rd-body");
   $$("#rd-view button").forEach(b => b.setAttribute("aria-pressed", b.dataset.v === RD.view));
-  const to = RD.view === "asli" ? null : RD.view;
-  if (!to || to === src) { box.innerHTML = T.paras.map(p => `<p>${esc(p)}</p>`).join(""); $("#rd-trt").textContent = ""; return; }
-  box.classList.add("loading"); $("#rd-trt").textContent = "Menerjemahkan…";
+  const to = RD.view === "asli" ? null : RD.view, els = $$(".trx", body);
+  if (!to) { els.forEach(el => el.textContent = el.dataset.o); $("#rd-trt").textContent = ""; return; }
+  body.classList.add("loading"); $("#rd-trt").textContent = to === src ? "" : "Menerjemahkan…";
   try {
-    const [tt, ...ps] = await Promise.all([translate(T.judul, to, src), ...T.paras.map(p => translate(p, to, src))]);
+    const tt = to === src ? "" : await translate(T.judul, to, src);
+    await Promise.all(els.map(async el => { el.textContent = el.dataset.l === to ? el.dataset.o : await translate(el.dataset.o, to, el.dataset.l); }));
     if (RD.item !== o) return;
-    $("#rd-trt").textContent = tt; box.innerHTML = ps.map(p => `<p>${esc(p)}</p>`).join("");
+    $("#rd-trt").textContent = tt;
   } catch (e) {
     $("#rd-trt").innerHTML = `Terjemahan gagal dimuat. <a href="https://translate.google.com/?sl=auto&tl=${to}&op=translate&text=${encodeURIComponent((T.judul + "\n\n" + T.paras.join("\n\n")).slice(0, 4500))}" target="_blank" rel="noopener">Buka di Google Translate</a>`;
-  } finally { box.classList.remove("loading"); }
+  } finally { body.classList.remove("loading"); }
 }
 $("#reader").addEventListener("click", e => {
   if (e.target === $("#reader")) { $("#reader").close(); return; }
@@ -693,7 +766,16 @@ $("#reader").addEventListener("click", e => {
   const a = b.dataset.rd;
   if (a === "close") $("#reader").close();
   if (a === "save") { toggleSave(o); b.textContent = isSaved(o) ? "★" : "☆"; }
-  if (a === "listen-id" || a === "listen-en") { const T = rdTexts(o); listen({judul: T.judul, teks: T.paras, bahasa: srcLang(o)}, a.slice(-2)); }
+  if (a === "listen-id" || a === "listen-en") {
+    const T = rdTexts(o), lang = a.slice(-2);
+    if (o.kind === "news" || !o.abstract) { listen({judul: T.judul, teks: T.paras, bahasa: srcLang(o)}, lang); return; }
+    const A = analisisJurnal(o);
+    const lab = lang === "id" ? ["Informasi.", "Argumentasi.", "Interpretasi."] : ["Information.", "Argument.", "Interpretation."];
+    (async () => {
+      const cat = lang === "id" ? A.catatan : await Promise.all(A.catatan.map(c => translate(c, "en", "id")));
+      listen({judul: T.judul, teks: [lab[0], ...A.info, lab[1], ...A.arg, lab[2], ...A.interp], bahasa: srcLang(o), tambahan: cat}, lang);
+    })();
+  }
   if (a === "cite") { const t = apa(o); (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(() => toast("Sitasi APA disalin"), () => { const r = document.createRange(); r.selectNode($("#rd-apa")); getSelection().removeAllRanges(); getSelection().addRange(r); toast("Sitasi dipilih, salin manual"); }); }
   if (a === "read") { const r = store.get("read", {}); if (r[o.id]) delete r[o.id]; else r[o.id] = {...o, at: new Date().toISOString()}; store.set("read", r); b.textContent = r[o.id] ? "✓ Sudah dibaca" : "○ Tandai dibaca"; }
   if (a === "pdf") {
@@ -854,9 +936,9 @@ function renderArsip() {
     `<div class="state">${aTab === "news" ? "Belum ada berita yang disimpan. Buka berita lalu ketuk ☆." : aTab === "read" ? "Belum ada jurnal yang ditandai dibaca." : "Belum ada jurnal yang disimpan. Ketuk ☆ pada kartu jurnal."}</div>`;
 }
 $("#btnExport").onclick = () => {
-  const rows = [["Jenis","Judul","Penulis/Sumber","Jurnal/Media","Tahun/Tanggal","Tautan"]];
-  Object.values(store.get("saved", {})).forEach(o => rows.push(["Jurnal", o.title, o.authors, o.source, o.year, o.url]));
-  Object.values(store.get("savedNews", {})).forEach(o => rows.push(["Berita", o.judul, o.sumber, o.sumber, o.waktu, o.link]));
+  const rows = [["Jenis","Judul","Penulis/Sumber","Jurnal/Media","Tahun/Tanggal","Sitasi","Informasi","Argumentasi","Interpretasi","Metode","Tautan"]];
+  Object.values(store.get("saved", {})).forEach(o => { const A = o.abstract ? analisisJurnal(o) : {info:[],arg:[],interp:[],catatan:[],metode:[]}; rows.push(["Jurnal", o.title, o.authors, o.source, o.year, o.cites, A.info.join(" "), A.arg.join(" "), [...A.interp, ...A.catatan].join(" "), A.metode.join("; "), o.url]); });
+  Object.values(store.get("savedNews", {})).forEach(o => rows.push(["Berita", o.judul, o.sumber, o.sumber, o.waktu, "", o.ringkasan || "", "", "", "", o.link]));
   const csv = rows.map(r => r.map(c => '"' + String(c ?? "").replace(/"/g, '""') + '"').join(",")).join("\n");
   const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob(["﻿" + csv], {type: "text/csv"})); a.download = "arsip-ekonomi-" + ymd(TODAY) + ".csv"; a.click();
 };

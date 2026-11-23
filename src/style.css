@@ -274,3 +274,21 @@ footer{color:var(--muted);font-size:12px;text-align:center;padding:20px 0}
 
 .igrid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
 @media (max-width:700px){.igrid{grid-auto-flow:column;grid-template-columns:none;grid-auto-columns:84%;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -16px;padding:2px 16px 8px;scrollbar-width:none}.igrid::-webkit-scrollbar{display:none}.igrid>*{scroll-snap-align:start;scroll-margin-left:16px}}
+
+/* Informasi · Argumentasi · Interpretasi */
+.iai{display:grid;gap:6px;margin:2px 0}
+.iai div{font-size:12.8px;line-height:1.45;color:var(--text-2);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.iai b{display:inline-block;font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;padding:1px 7px;border-radius:6px;margin-right:6px;vertical-align:1px}
+.l-info{background:color-mix(in srgb,#2563eb 14%,transparent);color:#2563eb}
+.l-arg{background:var(--brand-soft);color:var(--brand-ink)}
+.l-int{background:color-mix(in srgb,var(--gold) 18%,transparent);color:var(--gold)}
+:root[data-theme="dark"] .l-info{color:#93c5fd}
+@media (prefers-color-scheme: dark){:root:where(:not([data-theme="light"])) .l-info{color:#93c5fd}}
+.iai3{display:grid;gap:10px;grid-template-columns:1fr}
+@media (min-width:720px){.iai3{grid-template-columns:repeat(3,1fr)}}
+.iai3 .col{background:var(--surface-2);border-radius:14px;padding:12px 14px;border-top:4px solid var(--brand)}
+.iai3 .c-info{border-top-color:#2563eb} .iai3 .c-int{border-top-color:var(--gold)}
+.iai3 .hd{font-weight:800;font-size:14.5px}
+.iai3 .sub{font-size:11.5px;color:var(--muted);margin-bottom:6px}
+.iai3 ul{margin:0;padding-left:18px;font-size:14px;line-height:1.6}
+.iai3 li{margin-bottom:6px}

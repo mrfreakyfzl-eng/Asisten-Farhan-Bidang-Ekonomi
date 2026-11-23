@@ -101,6 +101,13 @@ Dashboard memakai tema merah dan bisa diganti ke mode terang atau gelap lewat ik
 
 **Data ekonomi** dikelompokkan dalam tab Makro, Moneter, Fiskal, Pertanian & Mikro, Politik & Kebijakan (isu kebijakan terhangat, indikator tata kelola World Bank, dan tautan regulasi resmi), serta Kalender Rilis. Setiap tab berisi angka indikator, analisis, grafik tren 20 tahun, berita terkait, dan referensi resmi Indonesia.
 
+**Setiap jurnal memiliki tiga kolom analisis:**
+- **Informasi** berisi konteks, tujuan, data, metode, dan wilayah kajian.
+- **Argumentasi** berisi klaim dan temuan utama penulis.
+- **Interpretasi** berisi implikasi dan relevansi, termasuk catatan sitasi dan kaitannya dengan Indonesia.
+
+Kolom-kolom ini disusun otomatis dengan memilah kalimat abstrak menurut perannya. Ketiganya tampil di kartu jurnal, di pembaca, dan di pesan WhatsApp, serta ikut terekspor ke CSV.
+
 **Jurnal dan berita bisa dibaca langsung di dalam aplikasi.** Ketuk sebuah kartu untuk membuka pembaca. Dari pembaca, Anda bisa:
 - menerjemahkan isi (Asli / Indonesia / English);
 - mendengarkan dalam Bahasa Indonesia atau Inggris;
