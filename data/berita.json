@@ -1,11 +1,11 @@
 {
- "diperbarui": "2026-11-23T14:28:15.491618+00:00",
+ "diperbarui": "2026-11-23T14:47:38.274346+00:00",
  "sumber": [
   {
    "sumber": "CNBC Indonesia",
    "url": "https://www.cnbcindonesia.com/news/rss",
    "ok": true,
-   "jumlah": 46
+   "jumlah": 59
   },
   {
    "sumber": "CNBC Indonesia",
@@ -34,8 +34,8 @@
   {
    "sumber": "Detik Finance",
    "url": "https://finance.detik.com/rss",
-   "ok": false,
-   "galat": "<urlopen error _ssl.c:994: The handshake operation timed out>"
+   "ok": true,
+   "jumlah": 100
   },
   {
    "sumber": "Tempo Bisnis",
@@ -74,6 +74,24 @@
    "jumlah": 100
   },
   {
+   "sumber": "Antara",
+   "url": "https://www.antaranews.com/rss/politik.xml",
+   "ok": true,
+   "jumlah": 2
+  },
+  {
+   "sumber": "CNN Indonesia",
+   "url": "https://www.cnnindonesia.com/nasional/rss",
+   "ok": true,
+   "jumlah": 8
+  },
+  {
+   "sumber": "Google News",
+   "url": "https://news.google.com/rss/search?q=kebijakan+ekonomi+OR+regulasi+OR+DPR+anggaran+OR+peraturan+pemerintah+when:2d&hl=id&gl=ID&ceid=ID:id",
+   "ok": true,
+   "jumlah": 14
+  },
+  {
    "sumber": "CNBC International",
    "url": "https://www.cnbc.com/id/20910258/device/rss/rss.html",
    "ok": true,
@@ -87,6 +105,86 @@
   }
  ],
  "berita": [
+  {
+   "judul": "Dukung Swasembada Pangan, Hamawas Salurkan Bantuan Alat Pertanian untuk Petani Simalungun",
+   "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQbnpEZS1pZVlJaF81U1BzRDJoclNJaVF0SmNjRWk1ckZSbExWNzczM1Z0M0JRTzdDbThubEpON2dnSFZNSU9xZFM4U00zOG9zUWZoREdwWnNUUFBYZVJzd2RHc3ZFY0pXQ21nQVJyaEQ1NEZldEVHNVBiRkgzNGN3dDQ0X08tbjVDeFR5R3ZFcnFHTWU1b09qRVdMVG5tY01maXo3MS1aeFkya290NHZrYXQ4Zw?oc=5",
+   "ringkasan": "",
+   "gambar": null,
+   "sumber": "rmolsumut.id",
+   "tema": "pertanian",
+   "bahasa": "id",
+   "waktu": "2026-11-23T14:36:03+00:00"
+  },
+  {
+   "judul": "Pulihkan Sumatera Pascabencana, Saat TKD Tambahan Rp 10,65 Triliun Gerakkan Pangan, Jalan, dan Mitigasi Banjir",
+   "link": "https://news.google.com/rss/articles/CBMixgFBVV95cUxNdTU3c2JWdEhfYm4tWEI5dm0zYVBrcld6cDFfSGcwWVhBdEpxN1FLZ3RteXctbU41cGN4S0xra19tR3puNkZDaEIwaloxd2daSFc1UElFS0prTUhRM0FCQzNFSmNkY2sycUNaYUxETmN6Y0lJQWtkV3IyNm82bUxYRXphZGhjMkdFNFByR3ppZ1AyRzVlWUJzbks5dXFzSEUwUFoySkZiVlZDTzllR0c2TUJyb3A2QkctUGgwakxQVTFUX0lkUFE?oc=5",
+   "ringkasan": "",
+   "gambar": null,
+   "sumber": "Kompas.com",
+   "tema": "pertanian",
+   "bahasa": "id",
+   "waktu": "2026-11-23T14:35:00+00:00"
+  },
+  {
+   "judul": "KPAI: Kerentanan Ekonomi Keluarga Picu Perdagangan Bayi di Indonesia",
+   "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxNd0daQ2V4YlkzaFNPSDdibHNUWDZCcDBRVFlnM3NVUmxETVNMQi0yN3VOZlhuWmFkVmNjenVRTHZiS281U2dDYXVRQi1hUnFEWXVETmN5ZjduOGZEaTQtSUNzMzFoeEpIODdjU1hOaVAtVFF4YzdPVFhPM1dmYkdnakxvTVpROXpxa2dTc3RZTTZILS1VSEtUMjl1aFdwZzBKWGZCYlctU3ZvUDFROUhr?oc=5",
+   "ringkasan": "",
+   "gambar": null,
+   "sumber": "BeritaSatu.com",
+   "tema": "makro",
+   "bahasa": "id",
+   "waktu": "2026-11-23T14:33:26+00:00"
+  },
+  {
+   "judul": "25 Tahun Otsus, Velix Wanggai Dorong Penyesuaian Regulasi dengan Dinamika Papua",
+   "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxOQ3NGSkVWbWRSTFBpSEhCMEJVRHdScllzNmZzZEw5X3d3eE9EcUtwX0hIQ3NIYWdUT1FRbmRLN0tVM0R0WUp3eHZZVHRQN0ZVZUJxQ0JkQS1vd1BzLV9XLVNWTXlzRGRYcktvS1hzT29VeDFOQkJYRkZoNlhjM1NUeXd2dFRhQU1DOUNHcnpCN05HY1NFZFNGeFNUcjZic2U3WllwZm5XNkxUaVg2RzdMR0xkYw?oc=5",
+   "ringkasan": "",
+   "gambar": null,
+   "sumber": "seputarpapua.com",
+   "tema": "politik",
+   "bahasa": "id",
+   "waktu": "2026-11-23T14:31:29+00:00"
+  },
+  {
+   "judul": "Bank QNB Indonesia Naikkan Kredit 19 Persen hingga September",
+   "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPUGk5YlkzSlRvUWtiMGhSS3VlWWRjV2tGclAzZTFocFJvR0xyRE5mLTJxZUpwQ2wxLUNlbmo5WFB3akdIc0tmNEJHOWVKdmNNS2g2VU9XTk9sam1TdE9iUlBaZ2Q4UjlLdWRueHNvRWZHR09RR1FQQmRtUTk2RTl4dmc5dzBjRkc5?oc=5",
+   "ringkasan": "",
+   "gambar": null,
+   "sumber": "JournalArta",
+   "tema": "moneter",
+   "bahasa": "id",
+   "waktu": "2026-11-23T14:31:02+00:00"
+  },
+  {
+   "judul": "Perusahaan Beralih ke Industri Hijau Bisa Hemat Energi hingga Rp1,75 T",
+   "link": "https://www.cnnindonesia.com/ekonomi/20261123162501-92-1430467/perusahaan-beralih-ke-industri-hijau-bisa-hemat-energi-hingga-rp175-t",
+   "ringkasan": "Kemenperin mencatat perusahaan yang tengah bertransformasi menuju industri hijau berhasil menghemat energi 1.755 gigawat per tahun atau senilai Rp1,75 triliun.",
+   "gambar": "https://akcdn.detik.net.id/visual/2026/11/10/menperin-beber-tahun-depan-mobil-hybrid-bisa-dapat-insentif-asal-tkdn-capai-60-persen-1794312029462_169.jpeg?w=360&q=90",
+   "sumber": "CNN Indonesia",
+   "tema": "energi",
+   "bahasa": "id",
+   "waktu": "2026-11-23T14:30:53+00:00"
+  },
+  {
+   "judul": "Dukungan Anggaran untuk Sektor Pertanian",
+   "link": "https://news.google.com/rss/articles/CBMifkFVX3lxTE0xbUxYQWNQV0pLS2hBWkp0OVVhQ0V0T2R3RUtFRGRaSE96Ny1jYUdPUUd5Q3lxZU1sRGphSjlaQzRfQl9wRWNRZGpQeWtoREQwQlF0ZTRoa2hJbGVibFNiazF3SFp0LWduVjVYXzhRWjY0Mkp1YklUaFYxWlNUZw?oc=5",
+   "ringkasan": "",
+   "gambar": null,
+   "sumber": "SUARANTB.com",
+   "tema": "politik",
+   "bahasa": "id",
+   "waktu": "2026-11-23T14:25:46+00:00"
+  },
+  {
+   "judul": "BP Tapera Bakal Dirombak, Gabung di RUU Perumahan dan Kawasan Permukiman",
+   "link": "https://www.cnbcindonesia.com/news/20261123205200-4-787785/bp-tapera-bakal-dirombak-gabung-di-ruu-perumahan-kawasan-permukiman",
+   "ringkasan": "Pemerintah usulkan perombakan BP Tapera dalam RUU Perumahan untuk efektivitas program perumahan. BP Tapera akan jadi lembaga pengelola dana perumahan nasional.",
+   "gambar": "https://awsimages.detik.net.id/visual/2024/06/05/komisioner-bp-tapera-heru-pudyo-nugroho-saat-konpres-di-bp-tapera-jakarta-rabu-562024-cnbc-indonesiatri-susilo-1_169.jpeg?w=1200&q=90",
+   "sumber": "CNBC Indonesia",
+   "tema": "politik",
+   "bahasa": "id",
+   "waktu": "2026-11-23T14:25:02+00:00"
+  },
   {
    "judul": "BEI Suspensi Saham BTPN, Ini Alasannya",
    "link": "https://www.liputan6.com/bisnis/read/8341030/bei-suspensi-saham-btpn-ini-alasannya",
@@ -103,7 +201,7 @@
    "ringkasan": "Rosan Roeslani menyebut laporan keuangan Danantara 2025 akan dipaparkan kepada publik pada Rabu, 25 November 2026.",
    "gambar": "https://cdn1-production-images-kly.akamaized.net/kqW4iqQz8m85nZJyYEPeE2vUq8k=/673x379/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/5310081/original/076121800_1754654848-DSC08392.JPG",
    "sumber": "Liputan6 Bisnis",
-   "tema": "makro",
+   "tema": "politik",
    "bahasa": "id",
    "waktu": "2026-11-23T14:20:35+00:00"
   },
@@ -118,6 +216,16 @@
    "waktu": "2026-11-23T14:20:10+00:00"
   },
   {
+   "judul": "Lapas Magelang Rutin Lakukan Pengecekan Kondisi Hewan Peliharaan Bersama Dinas Pertanian dan Pangan",
+   "link": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxNdF9jQ2hndDl0V055OUlCLTdGWkJISEZIcnB2Uk50OWFfMW51d3lJbUZqR1U3QmpiMzVfX19mSURoeDRGRlV0a0EtV0xzUDdVbEpQLVNweTBpcS00SE45S0RRVElJek1IQ3F5eTB0enQweFlCVkR0c2s2N19ZSlN3cGpMcVY3UE5mX1RuWVdBN0RHMTZkaExiazI1QXl2ZUxhMEN2MTh6RGJXZXhxa254VWpKbFUwQTNsMVJ3NXF3QUFZZlk?oc=5",
+   "ringkasan": "",
+   "gambar": null,
+   "sumber": "IndoSatuNews.com",
+   "tema": "pertanian",
+   "bahasa": "id",
+   "waktu": "2026-11-23T14:19:41+00:00"
+  },
+  {
    "judul": "Penyaluran Beras SPHP di Daerah Belum Merata, Cuma 3 yang Hijau!",
    "link": "https://www.cnbcindonesia.com/news/20261123204939-4-787784/penyaluran-beras-sphp-di-daerah-belum-merata-cuma-3-yang-hijau",
    "ringkasan": "Penyaluran beras SPHP di Indonesia belum merata. Hanya 3 dari 19 daerah yang hijau. Sekjen Kemendagri minta Bulog perbaiki distribusi beras.",
@@ -126,6 +234,26 @@
    "tema": "pertanian",
    "bahasa": "id",
    "waktu": "2026-11-23T14:15:40+00:00"
+  },
+  {
+   "judul": "Bulog Rejang Lebong salurkan bantuan pangan tiga kabupaten di Bengkulu",
+   "link": "https://news.google.com/rss/articles/CBMijAJBVV95cUxQdEVzdWNOeV9ZUUJCdF9DWDl3dnFDbm94b21iNFMxY3pkRUNvTVBzZkphTVFGUklQdFVlUjJJdGZhckh6ZExNc1J4RGhLWFhWMzlzOXIwOGtfal9XRVh0X2pSQ1RHNGNpRUVZYllfVlQwS0RBWk9ZNjBSVlhRN2ZEeHV3dlZ4VUdJR2lvWUIta0VMT0dwTF9jZWx3aUE5SUhLN0p3Q25ieFFNaVRua09VOEtXTDkxTHB0bHRSemQtRXdSVTB5YjM3N01vWXB0LWdyN1ZVV01sbzJKcFlwbW5Sbl9rejU4RjUzUDhTcVlaTzZ5SlhTUHdpNzVObTZIbDhobUdqa1lTVlA0RDlm?oc=5",
+   "ringkasan": "",
+   "gambar": null,
+   "sumber": "ANTARA News",
+   "tema": "pertanian",
+   "bahasa": "id",
+   "waktu": "2026-11-23T14:14:44+00:00"
+  },
+  {
+   "judul": "DPR dorong percepatan belanja pemerintah guna pertumbuhan ekonomi",
+   "link": "https://news.google.com/rss/articles/CBMisgFBVV95cUxNUmNxMWpRcW02QWFMaTBwZ0FmVEtjSXRxeGxNdU1PUWtYRkJidVBHVV9ubGc1MzRwUUtMcDlCclk1SFJXQmhMT1gycldDeFp3d09DVk1GLWt2SlpURkJHeF8yeXdRNkpOcXc4VEF4LTdiVVI1QUx0Q2FMX1dIMVh4NmdDQkk3MUZGeUFCazU1M0stTktwTHFjckpLTl9ob2U0YXJQb3lxbllwaHB1ZXZyTWN3?oc=5",
+   "ringkasan": "",
+   "gambar": null,
+   "sumber": "ANTARA News",
+   "tema": "makro",
+   "bahasa": "id",
+   "waktu": "2026-11-23T14:14:24+00:00"
   },
   {
    "judul": "Usai Panen Padi, Petani di Abdya Ditemukan Meninggal di Sawah",
@@ -163,7 +291,7 @@
    "ringkasan": "PT PII siap menjamin proyek infrastruktur skala kecil di daerah pada 2027, seperti alat penerangan jalan senilai Rp 150 miliar, serta membidik proyek Danantara.",
    "gambar": "https://cdn0-production-images-kly.akamaized.net/tZX_ef2EU75eqeCnfZUCTCx3dtw=/673x379/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/9404145/original/027273500_1795440240-email-attachment_2026_11_23_ariefhakim-at-klyid_pii-lirik-penjaminan-proyek-penerangan-jalan-dan-perbaikan-jalan-di-2027_1000516242.jpg",
    "sumber": "Liputan6 Bisnis",
-   "tema": "makro",
+   "tema": "politik",
    "bahasa": "id",
    "waktu": "2026-11-23T14:10:57+00:00"
   },
@@ -308,6 +436,16 @@
    "waktu": "2026-11-23T13:46:58+00:00"
   },
   {
+   "judul": "Calon Wapres, Amran Sulaiman Punya Harta Rp 1,72 Triliun",
+   "link": "https://finance.detik.com/infrastruktur/d-8766572/calon-wapres-amran-sulaiman-punya-harta-rp-1-72-triliun",
+   "ringkasan": "Presiden Prabowo Subianto menyerahkan dua nama calon Wakil Presiden menggantikan Gibran Rakabuming Raka, pada Senin (23/11/2026). Salah satunya Amran Sulaiman",
+   "gambar": "https://akcdn.detik.net.id/community/media/visual/2026/11/01/menteri-pertanian-andi-amran-sulaiman-1793519316401_169.jpeg?w=360&q=90",
+   "sumber": "Detik Finance",
+   "tema": "politik",
+   "bahasa": "id",
+   "waktu": "2026-11-23T13:46:30+00:00"
+  },
+  {
    "judul": "Kalsel Tampilkan Inovasi Olahan Ikan di Grand Final Lomba Masak Serba Ikan Tingkat Nasional 2026",
    "link": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxOSm11SDZrTXNMTkd5V0pVcm1SV2F6RWR3QnlKV0MyUGJXTEktWjh2MTQwRnNGalJCVHJZU0tSblJaYkNvVk5iLXZIM0RlZGwwUzJHSHNEY3RZYVVkd3lQdU5YVHRaT2dsTFhzbWxuUDFVZW1tQ19lUW5vNUVqdC00U3VFc1dfTl9kbl9GNU1GOHB3NkJEY3VvQmJ0VXNvNnlTZFpEYUMzb1dkZm4zZ0JLUnJVZnplY1VuU1I2S180M2tmUUdjTV9iNnhTeVhmbGxVZUZQTFZPWUpKVFpJUkFB?oc=5",
    "ringkasan": "",
@@ -319,7 +457,7 @@
   },
   {
    "judul": "Fatayat NU Majalengka Didorong Jadi Kekuatan Ekonomi dan Sosial Perempuan",
-   "link": "https://news.google.com/rss/articles/CBMixAFBVV95cUxQYXFDRU82TVVEWVFmN0hva3JZenp0eXNsTmxnb2NHazlmcmFZSzY5RHFVWERPLVlWX3VxcmdIT3RZLVlEaEs5QlpCZnNrMUwwNGthcHpXY0VxODJFYkhHeTVFSW9EY1lqbS1CalJvYlE1aGhYR2lLWHlNb2pDd3lwNzZHTnB5cGlrb0R3OVdYeDRYa3ZOWFBvQTRLTWRyRXduSWhuY2d6UEZKWjF4WGdWUVhiSEw5RXRBTUNDaWVKNmVwMXp3?oc=5",
+   "link": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQNGNQbzBUTWphR3JDM21tWjBGSlVPamJ5TUZWUDBVLVYydE4tYUhyUEhDWFBnVlZfelZfcGd2VEtYQlV6WnNDRDdYNGNEX0lHMldPVUZKSjZINUo4UnQ1QVBnUHNINlNPaTlCNkx2cUItaEZ4dlNGN052d190VUlDYzUzMkJXLThxSEFPQXUwWmpLLWF1QXFuNWtXSFQ3cUNoei1wbi1rblJBRU9ybTlvWjZtMnE5ZVFSa01v?oc=5",
    "ringkasan": "",
    "gambar": null,
    "sumber": "TIMES Indonesia",
@@ -386,6 +524,16 @@
    "tema": "fiskal",
    "bahasa": "id",
    "waktu": "2026-11-23T13:29:13+00:00"
+  },
+  {
+   "judul": "Pajak Digital di Tengah Defisit Anggaran: Solusi atau Beban Usaha? Halaman 1",
+   "link": "https://news.google.com/rss/articles/CBMixwFBVV95cUxQenkwVHZPYVFkWnhwd3VoTTRvalMzck1fMjdXWWR4OUVLSFRsZ0k1Z1lkUzc4LXBweXVjV1llbXhpYUNrbWRCTWJiN1R4NVg1dnZVUGhjMDFHb1dvV3o1bGhFdVlTelY3QW1Lb0lqWXNLb24xMzJkOW8tNDk3aktOcEZ6aTF3XzRJbDAxQ1JIVnZjQmVCOFJUckswRnZHMTBEMnVlVmpxTmxVaTJscmxvWXZxOFM1SDNuWWVTSXdaNlBwaEJwaVZn?oc=5",
+   "ringkasan": "",
+   "gambar": null,
+   "sumber": "Kompasiana.com",
+   "tema": "politik",
+   "bahasa": "id",
+   "waktu": "2026-11-23T13:27:52+00:00"
   },
   {
    "judul": "Kata Siapa Gen Z Gak Bisa Beli Rumah? Kenali Peran Kebijakan Bank Indonesia Halaman 1",
@@ -493,7 +641,7 @@
    "ringkasan": "Danantara akan mengembangkan kawasan komersial di Taman Nasional Way Kambas, Lampung.",
    "gambar": "https://cdn1-production-images-kly.akamaized.net/8SBfe2aD4mQknnPIrp2MBatgc7c=/673x379/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/9404075/original/015097900_1795435113-IMG_9098.jpg",
    "sumber": "Liputan6 Bisnis",
-   "tema": "makro",
+   "tema": "politik",
    "bahasa": "id",
    "waktu": "2026-11-23T13:19:11+00:00"
   },
@@ -506,6 +654,16 @@
    "tema": "moneter",
    "bahasa": "id",
    "waktu": "2026-11-23T13:17:45+00:00"
+  },
+  {
+   "judul": "Karyawan Mogok Kerja, Bandara Lumpuh, Seluruh Penerbangan Dibatalkan",
+   "link": "https://finance.detik.com/infrastruktur/d-8766496/karyawan-mogok-kerja-bandara-lumpuh-seluruh-penerbangan-dibatalkan",
+   "ringkasan": "Penerbangan di Brussel, Belgia lumpuh sepanjang imbas aksi mogok nasional para pekerja, termasuk para petugas pengatur lalu lintas udara di bandara.",
+   "gambar": "https://akcdn.detik.net.id/community/media/visual/2022/06/21/kala-penumpang-ngemper-di-bandara-belgia-gegara-pegawai-mogok-kerja-1_169.jpeg?w=360&q=90",
+   "sumber": "Detik Finance",
+   "tema": "makro",
+   "bahasa": "id",
+   "waktu": "2026-11-23T13:16:44+00:00"
   },
   {
    "judul": "BI Rate 6%, Bunga KPR Rumah Subsidi Ikut Terkerek Naik?",
@@ -748,6 +906,16 @@
    "waktu": "2026-11-23T12:37:57+00:00"
   },
   {
+   "judul": "Asta Citra Presiden Masuk Dalam Rakornas Produk Hukum Untuk Mampu Mengantisipasi Ekonomi Nasional",
+   "link": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxPb3hlb1VLQXNqWm5QOW5RNHU3SzJZSmZqdU1DeUNZcGFnU0E5Zm1hZi1WWmpJWXJTa1J6WTRKMThvd1c0dUpQWjN5Z3QwQnVMbW1ldW9YU0pNZFdfa2lpanRyUG5adldBbk92Y3c5Vkt2Vjd6TEFLQU9EdnlUMXJ0WktjVHZUb0JJNEJUVW84aENlS0RoOFdramczZWRKWU9lS0U1REhaaHlMWUYwTzlVOGV3dHA4Y2gzSFRKNnZPMXJsTEpQaVh2bzVUNFNFamktMi1yeWh3ZXlQTmpjSUE?oc=5",
+   "ringkasan": "",
+   "gambar": null,
+   "sumber": "Medan Pos",
+   "tema": "politik",
+   "bahasa": "id",
+   "waktu": "2026-11-23T12:37:00+00:00"
+  },
+  {
    "judul": "Bank Hadapi Tantangan Penuhi Batas Saham Publik 15 Persen",
    "link": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE0yY2dPeFMxN1E0NnVCRm0wcndyNGNrMmlVZTJmYWxERTloVG5BLVI5Q0VoNzd5WmlrZmp3QXVqQ3V0cV93M0phS2tVVlhLVlhBMGg4?oc=5",
    "ringkasan": "",
@@ -818,14 +986,14 @@
    "waktu": "2026-11-23T12:33:30+00:00"
   },
   {
-   "judul": "Babinsa Jenalas dan Warga Gotong Royong Bangun Saluran Irigasi untuk Petani",
-   "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxONDZVUld4ellaS3AzMXd1aE53eFRhdU9SSk5paE11TnJ0akVQdnRBNUdHMUMxTUNIcnBiNWd1YUQ1VHl6ZDdPVnNVMFBOZVJnS0szdkxGX1VuUWlWdV9XTTJELVc2Z05XLXlweDJWblpBZUhKQ1AydTJwMVowUk5HNlB6VUdSYm9VZ1ZZMHI3OEd0a2IzVjBPeEI4TGZMNGxJ?oc=5",
+   "judul": "KABAR BAIK BAGI PPPK PARUH WAKTU! KOMISI II DPR RI DUKUNG PENGANGKATAN MENJADI PPPK PENUH WAKTU, PEMERINTAH DIMINTA SIAPKAN SKEMA ANGGARAN",
+   "link": "https://news.google.com/rss/articles/CBMiggJBVV95cUxNTXZ0N1RQZktJSFVYZEJMbnlBMFI5cFZFWG1yQjVHVWNkNUNwcWJiY0VGOEpVQ3lQSnpjcDNWOVdrSEFtbWpVNEZPbVNRcUw0N0NkdDZGeUpTX0FDV2s4VmQ4aFVsRUxRNm9HLXhMYzZEdUt1V1doMWNMdEVxeUhXQ3REd1UzS21yRnlQSDhlRDZLU3dfeV93QlY1VFdCcWotMjRVRnVVdVpKUGxpQUM4cUZNRzkyajFRLXZUeXhkTGdMT2w4X205d0tPSXFoSFgtRDFrYndRT1ZLR2NDdnBKUVMzNWxpaXNCY3N2R0ZoR2lmTFk1RXVLVjU4RDlId3J3cGfSAYICQVVfeXFMTU12dDdUUGZLSUhVWGRCTG55QTBSOXBWRVhtckI1R1VjZDVDcHFiYmNFRjhKVUN5UEp6Y3AzVjlXa0hBbW1qVTRGT21TUXFMNDdDZHQ2RnlKU19BQ1drOFZkOGhVbEVMUTZvRy14TGM2RHVLdVdXaDFjTHRFcXlIV0N0RHdVM0ttckZ5UEg4ZUQ2S1N3X3lfd0JWNVRXQnFqLTI0VUZ1VXVaSlBsaUFDOHFGTUc5MmoxUS12VHl4ZExnTE9sOF9tOXdLT0lxaEhYLUQxa2J3UU9WS0djQ3ZwSlFTMzVsaWlzQmNzdkdGaEdpZkxZNUV1S1Y1OEQ5SHdyd3Bn?oc=5",
    "ringkasan": "",
    "gambar": null,
-   "sumber": "kabarjateng.id",
-   "tema": "pertanian",
+   "sumber": "Tajuk Peristiwa",
+   "tema": "politik",
    "bahasa": "id",
-   "waktu": "2026-11-23T12:33:17+00:00"
+   "waktu": "2026-11-23T12:33:09+00:00"
   },
   {
    "judul": "Kebakaran Pabrik Permen Cikande, Menaker Minta Selidiki Hal Ini",
@@ -963,7 +1131,7 @@
    "ringkasan": "Rosan menjelaskan laporan keuangan Danantara akan segera dipaparkan ke publik setelah pihaknya menerima dokumen resmi dari BPK.",
    "gambar": "https://akcdn.detik.net.id/visual/2026/11/23/pemerintah-siapkan-ecotourism-di-taman-nasional-way-kambas-1795434533837_169.jpeg?w=360&q=90",
    "sumber": "CNN Indonesia",
-   "tema": "makro",
+   "tema": "politik",
    "bahasa": "id",
    "waktu": "2026-11-23T12:18:20+00:00"
   },
@@ -1078,6 +1246,16 @@
    "waktu": "2026-11-23T12:00:13+00:00"
   },
   {
+   "judul": "Strategi INKA Sediakan Kereta Api di 2027",
+   "link": "https://finance.detik.com/berita-ekonomi-bisnis/d-8766381/strategi-inka-sediakan-kereta-api-di-2027",
+   "ringkasan": "PT INKA menargetkan penyelesaian proyek kereta hingga 2027, termasuk KRL dan kereta penumpang.",
+   "gambar": "https://akcdn.detik.net.id/community/media/visual/2025/12/29/krl-baru-seri-cli-225-buatan-inka-resmi-beroperasi-per-selasa-1612-jabbar-ramdhanidetikcom-1766995985039_169.jpeg?w=360&q=90",
+   "sumber": "Detik Finance",
+   "tema": "makro",
+   "bahasa": "id",
+   "waktu": "2026-11-23T12:00:07+00:00"
+  },
+  {
    "judul": "Nasi Hangat Harga Normal di Tengah Krisis Pangan Dunia, Ini Peran Andi Amran Sulaiman",
    "link": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQOW5oNnF3c1VyZ0IwNlRIV1A0WjdiY3R5VHVKbHpFV0xCTXFXenRrWUVxNXlTZk5KaEZhbHhXVkhlUXNVdF9CTW5SdXd0cFJWdm5nS3BjaFEzTzVoVnl6QUh5MHV4QWEzd2diSmtfWGloWXRSQ2VmM3FZSk9VdjJnZHkxRXpJTXhFSFU4ajF2TkFiM1JkTWFCR2dCNXRwUWg5VnRCLV9yeWNQWFktNWVuTm5oOXRMMnM?oc=5",
    "ringkasan": "",
@@ -1108,6 +1286,16 @@
    "waktu": "2026-11-23T11:55:00+00:00"
   },
   {
+   "judul": "Wagub Sumut Hadiri Rakornas Produk Hukum Daerah 2026, Mendagri Tekankan Pentingnya Sinkronisasi Regulasi",
+   "link": "https://news.google.com/rss/articles/CBMihAJBVV95cUxQMjNQZkRSZVV0Q0hoQ01Ca2JDbGJzR1hhMy1FNkRRV3NGMkZpYjlyUkhBN2dhVm0tU2pGaVVSejFGWFhWcUFCbl9HQUV1TzR3aGVFdjlvRm5IVGhKY3NMQnpWRXVJc0tDU0xPcFVId3VNUXg0bkpWdEVkNGdjN01uOVBkblAtVTNocHg3MUhXSG9wQWswS2ctMXZnSmZvaUkyTllYVFpDV3FTMXRteDBaaWZ2OXg1LU1vNnRXMjc0VlJkYkZOQjdCYTNJZDNXei1obHZ5THhmR0F6VjVPMmotV2xzMDU0WUdOSlZxNkhSMUFvTUtnRVVFcFU2S3NYeWxmR0g2Yg?oc=5",
+   "ringkasan": "",
+   "gambar": null,
+   "sumber": "Sekretariat DPRD Provinsi Sumatera Utara",
+   "tema": "politik",
+   "bahasa": "id",
+   "waktu": "2026-11-23T11:53:55+00:00"
+  },
+  {
    "judul": "STIE Cendekia-Umsida dorong produktivitas petani dan peternak Bojonegoro",
    "link": "https://news.google.com/rss/articles/CBMitwFBVV95cUxNSkpETEZJZ2RHNVluSUhER0JsTlNBRWxDVDhWMndHWm85aVVuS1AxaGRNQTVwbjJsTmlid1g0VFNnUjBWZy05WkxVZE9TWTVBNnp6bXU2Q3YwQ241N0cwaXhFMXZ1dkR3RE53SEQ2V0FDVFY2cElQS1JXT1p3NGRxdVNseVFVajhERkpMdDBxNHozRnoyWTBkMFFONVlialdlNUNSQ000MzkyZFU5cXl1N2ZIUHJjTUnSAbwBQVVfeXFMUDZZZVBMd0MxbW00ZVFLbGViYkdrOEdQb29sX1NIczFLTEtoMXhCc3lyV3habUxDRXRxdEhscGJleWhXRFpYRkFKRGM1YTdjcDNHNkNKVTd0RHl4ZUhhRmdBNHhha0s1SEFVQUsxbEFlZkhlNE9Od2Ytdk9veEVNYjl5ZmNuNWJIVHNieXhuNUI0cGhBRGc0emRkdHp5RUQyRnFWRkd2YmJjdXVIT3lISE43OVBwSmlWNy03dUQ?oc=5",
    "ringkasan": "",
@@ -1133,16 +1321,16 @@
    "ringkasan": "Pemerintah mengembangkan ekowisata di Taman Nasional Way Kambas dengan skema BLU dan menggandeng Danantara guna meredam konflik gajah dan manusia.",
    "gambar": "https://cdn1-production-images-kly.akamaized.net/TYS7ttKMSWz7_CKNYIqs4kGCRJE=/673x379/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/9404058/original/094355900_1795433542-email-attachment_2026_11_23_immanuel-christian_eco-tourism-way-kambas-menhut-agar-atasi-konflik-gajah-vs-manusia_IMG_9102.jpeg",
    "sumber": "Liputan6 Bisnis",
-   "tema": "makro",
+   "tema": "politik",
    "bahasa": "id",
    "waktu": "2026-11-23T11:51:09+00:00"
   },
   {
    "judul": "Komitmen Investasi RI & China Tembus Rp 274 T, Ketahanan Pangan-Hilirisasi",
-   "link": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxOS1RLTjJZSmZhcEdMaXFOWkZxXzh1dU9STHQzejlkM1ZqRGZfeF9VZjd5TTlEV0Q5N0oxeW51N01Sd2pWbEJKSmw0VkJBTFB4LW9ES0ZRcnBCSlhsSEhTV0E5M1hCWXBVQjRoVER6S3FqVXFoRTd5cUxVa3Q5QndjZTFLVmFPNzl1MFA4SGhfTHh1R09OMjhXcnJKZEVxVDNIZWVQVzNWUndGZVFjazMwRzBjR0lCQkJDdmdETVhDZ0NVOUVKU1ctRdIBzgFBVV95cUxNdWVwc2pLaEJFVTVlRmQ5Q1h0dUNxMVhtN0NyQmhzY0VXRnNnN0drUlVvVVBpaDZUX1JKdHVDc3hDYU5iaWhPcTJ5U2Rvc2FTbVZWT3BWLWpXVjNQUndmblExZmZJU3ptVGR6X0hyUThwSjZmeHkzaXVmWlNEOW9zTC03SDRUWE9fLV8ybHNCN3N3Yk1yMURHbTRSVWQ3MDdYSWxjR1F3ZmJ0blNMdElLaXZBLXZ0UndVa3hMWERxc1pBeFdLdmdFVXhjTGZkdw?oc=5",
-   "ringkasan": "",
-   "gambar": null,
-   "sumber": "detikFinance",
+   "link": "https://finance.detik.com/berita-ekonomi-bisnis/d-8766363/komitmen-investasi-ri-china-tembus-rp-274-t-ketahanan-pangan-hilirisasi",
+   "ringkasan": "Sebanyak 35 kesepakatan kerja sama antara pengusaha Indonesia dan China diteken dalam Forum Bisnis Indonesia-China 2026.",
+   "gambar": "https://akcdn.detik.net.id/community/media/visual/2025/05/24/ketua-kadin-komite-tiongkok-garibaldi-boy-thohir-1748095457096_169.jpeg?w=360&q=90",
+   "sumber": "Detik Finance",
    "tema": "pertanian",
    "bahasa": "id",
    "waktu": "2026-11-23T11:49:23+00:00"
@@ -1228,6 +1416,16 @@
    "waktu": "2026-11-23T11:34:47+00:00"
   },
   {
+   "judul": "Detik-Detik Presiden Prabowo Serahkan 2 Nama Calon Wapres ke MPR",
+   "link": "https://www.cnbcindonesia.com/news/20261123180112-7-787742/detik-detik-presiden-prabowo-serahkan-2-nama-calon-wapres-ke-mpr",
+   "ringkasan": "Prabowo menyerahkan dua nama calon wakil presiden sisa masa jabatan 2024-2029 kepada MPR, yakni Sugiono dan Andi Amran Sulaiman.",
+   "gambar": "https://awsimages.detik.net.id/visual/2026/11/23/presiden-ri-prabowo-subianto-menyerahkan-berkas-nama-calon-wakil-presiden-ri-kepada-ketua-mpr-ri-ahmad-muzani-di-gedung-nusant-1795431024993_169.jpeg?w=1200&q=90",
+   "sumber": "CNBC Indonesia",
+   "tema": "politik",
+   "bahasa": "id",
+   "waktu": "2026-11-23T11:33:55+00:00"
+  },
+  {
    "judul": "Bahlil Tolak Tambang di Ujung Kulon: Hanya Orang Tak Waras Mau Kasih Izin",
    "link": "https://www.liputan6.com/bisnis/read/8340743/bahlil-tolak-tambang-di-ujung-kulon-hanya-orang-tak-waras-mau-kasih-izin",
    "ringkasan": "Menko Bahlil menegaskan tidak akan menerbitkan izin tambang di Taman Nasional Ujung Kulon meski ada potensi cadangan emas, demi menjaga kawasan konservasi.",
@@ -1246,6 +1444,16 @@
    "tema": "fiskal",
    "bahasa": "id",
    "waktu": "2026-11-23T11:32:00+00:00"
+  },
+  {
+   "judul": "Menaker Pastikan Korban Kebakaran Pabrik Cikande Dapat Pesangon-Santunan",
+   "link": "https://finance.detik.com/berita-ekonomi-bisnis/d-8766319/menaker-pastikan-korban-kebakaran-pabrik-cikande-dapat-pesangon-santunan",
+   "ringkasan": "Kemnaker pastikan hak pekerja korban kebakaran pabrik PT Fonusa Agung Mulia terpenuhi.",
+   "gambar": "https://akcdn.detik.net.id/community/media/visual/2026/11/23/pabrik-permen-cikande-luluh-lantak-petugas-masih-lakukan-pendinginan-1795426229899_169.jpeg?w=360&q=90",
+   "sumber": "Detik Finance",
+   "tema": "makro",
+   "bahasa": "id",
+   "waktu": "2026-11-23T11:30:00+00:00"
   },
   {
    "judul": "Bank Indonesia Perkuat Kapasitas Umkm Bangka Belitung Melalui Inovasi Produk dan Kemasan - babelpos.disway.id",
@@ -1313,7 +1521,7 @@
    "ringkasan": "Presiden Prabowo Subianto serahkan dua nama cawapres ke MPR: Andi Amran Sulaiman dan Sugiono.",
    "gambar": "https://awsimages.detik.net.id/visual/2026/11/23/kolase-foto-menteri-pertanian-mentan-andi-amran-sulaiman-dan-mantan-menteri-luar-negeri-sugiono-1795432619090_169.jpeg?w=1200&q=90",
    "sumber": "CNBC Indonesia",
-   "tema": "pasar",
+   "tema": "politik",
    "bahasa": "id",
    "waktu": "2026-11-23T11:23:47+00:00"
   },
@@ -1336,6 +1544,16 @@
    "tema": "pertanian",
    "bahasa": "id",
    "waktu": "2026-11-23T11:19:00+00:00"
+  },
+  {
+   "judul": "Prabowo Usulkan Amran dan Sugiono Jadi Cawapres, Ini Tanggapan Dasco",
+   "link": "https://www.cnbcindonesia.com/news/20261123181502-4-787737/prabowo-usulkan-amran-sugiono-jadi-cawapres-ini-tanggapan-dasco",
+   "ringkasan": "Prabowo mengusulkan Andi Amran dan Sugiono sebagai cawapres. Dasco menegaskan kewenangan ada pada presiden dan mengajak semua pihak mengikuti proses MPR.",
+   "gambar": "https://awsimages.detik.net.id/visual/2026/11/23/wakil-ketua-dewan-perwakilan-rakyat-dari-fraksi-gerakan-indonesia-raya-sufmi-dasco-ahmad-saat-ditemui-di-jakarta-senin-2311202-1795432000498_169.jpeg?w=1200&q=90",
+   "sumber": "CNBC Indonesia",
+   "tema": "politik",
+   "bahasa": "id",
+   "waktu": "2026-11-23T11:18:00+00:00"
   },
   {
    "judul": "PNM Raih Good Impact Awards Lewat Program Kartu Madani, Dorong Kemajuan Ekonomi Desa",
@@ -1428,6 +1646,26 @@
    "waktu": "2026-11-23T11:08:19+00:00"
   },
   {
+   "judul": "Prabowo Ajukan Sugiono dan Amran Jadi Cawapres, Ini Tahapan Pemilihannya",
+   "link": "https://www.cnbcindonesia.com/news/20261123175444-4-787732/prabowo-ajukan-sugiono-amran-jadi-cawapres-ini-tahapan-pemilihannya",
+   "ringkasan": "MPR menerima dua calon wakil presiden dari Prabowo: Sugiono dan Andi Amran Sulaiman. Pemungutan suara dijadwalkan pada 11 Desember 2026.",
+   "gambar": "https://awsimages.detik.net.id/visual/2026/11/23/presiden-ri-prabowo-subianto-menyerahkan-berkas-nama-calon-wakil-presiden-ri-kepada-ketua-mpr-ri-ahmad-muzani-di-gedung-nusant-1795431025204_169.jpeg?w=1200&q=90",
+   "sumber": "CNBC Indonesia",
+   "tema": "politik",
+   "bahasa": "id",
+   "waktu": "2026-11-23T11:07:05+00:00"
+  },
+  {
+   "judul": "Dibayar Rp10 Ribu per Jam, Pedagang Rekam Aktivitas Jualan untuk Latih AI",
+   "link": "https://finance.detik.com/foto-bisnis/d-8765683/dibayar-rp10-ribu-per-jam-pedagang-rekam-aktivitas-jualan-untuk-latih-ai",
+   "ringkasan": "Sejumlah pedagang di pujasera Jakarta mengenakan topi berkamera saat memasak untuk melatih teknologi AI. Mereka mendapat bayaran Rp10 ribu per jam.",
+   "gambar": "https://akcdn.detik.net.id/community/media/visual/2026/11/23/rekam-aktivitas-masak-pedagang-dibayar-rp10-ribu-per-jam-untuk-latih-ai-1795416115958.jpeg?w=360&q=90",
+   "sumber": "Detik Finance",
+   "tema": "makro",
+   "bahasa": "id",
+   "waktu": "2026-11-23T11:00:51+00:00"
+  },
+  {
    "judul": "Rupiah Menguat ke Rp18.203 per Dolar AS, BI Lanjutkan Stabilisasi Pasar",
    "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNWTRaM1g5YkozWkdWVDdseExqOTh0YWN2dUl0U3dYNy1oVmdfQ2lndHBJRXRHOTVodUZGWks4QWstOThVdHh4RHJYeEt1NW1aRjlLY0EzR0xvdll1NWFhUTdPcjNYZDFKUVItRlpzMUhUdzkxa1hWbGgtSGREQmpvdVZLOWZYLTJIdEllZ3BCQjk?oc=5",
    "ringkasan": "",
@@ -1458,6 +1696,16 @@
    "waktu": "2026-11-23T11:00:13+00:00"
   },
   {
+   "judul": "ESDM Targetkan 400 Ribu Rumah Tangga Dapat Listrik Gratis 2027",
+   "link": "https://finance.detik.com/energi/d-8766284/esdm-targetkan-400-ribu-rumah-tangga-dapat-listrik-gratis-2027",
+   "ringkasan": "Kementerian Energi dan Sumber Daya Mineral (ESDM) menargetkan penerima program Bantuan Pasang Baru Listrik (BPBL) 400 ribu rumah tangga pada 2027.",
+   "gambar": "https://akcdn.detik.net.id/community/media/visual/2025/02/03/diskon-50-bikin-tarif-listrik-alami-deflasi-3203-2_169.jpeg?w=360&q=90",
+   "sumber": "Detik Finance",
+   "tema": "energi",
+   "bahasa": "id",
+   "waktu": "2026-11-23T10:59:13+00:00"
+  },
+  {
    "judul": "Korsel Punya Kereta Cepat Bawah Tanah 82 Km, Telan Investasi Rp66,06 T",
    "link": "https://www.cnnindonesia.com/ekonomi/20261123174421-92-1430490/korsel-punya-kereta-cepat-bawah-tanah-82-km-telan-investasi-rp6606-t",
    "ringkasan": "Korea Selatan memiliki kereta ekspres bawah tanah bernama Great Train eXpress (GTX)-A yang menghubungkan kawasan pinggiran dengan pusat Kota Seoul.",
@@ -1486,6 +1734,16 @@
    "tema": "pasar",
    "bahasa": "id",
    "waktu": "2026-11-23T10:56:12+00:00"
+  },
+  {
+   "judul": "Sinkronisasi Regulasi Jadi Kunci Pembangunan, Bupati John Kenedy Azis Dorong Produk Hukum Daerah Lebih Berkualitas",
+   "link": "https://news.google.com/rss/articles/CBMi9wFBVV95cUxNVkRNdkRRdzJ3SHpmT2JaaDhiQzl2bnFJRE1TOVNMdzM2Y0YtbVctVVZaODRScTE0RVBvQ0JfeGxIVmJneUh1dXRHMEJzbmp0ejBaT1JCaHRkSVNaMEJLVmo4WU9HY0Z1LXRzR3N3MXRNcG1aenJvTnpXdlpkVEFEQUxmWjlyNFV4a3dPOVU4ZlZpNHk4SW4yeF9ydDZvRWtfcXp2TjhqUEE0ZGpkOV9WREFfOFJNdU5ubV9xVFM4ZHpBbm54UFQySWQ3X1ptaEdZbFBiSE1IWG5DeDBHSFdmOWsyQ1NtUHBUZzE4dDRVUU5CblExLUxJ?oc=5",
+   "ringkasan": "",
+   "gambar": null,
+   "sumber": "Pemkab Padang Pariaman",
+   "tema": "politik",
+   "bahasa": "id",
+   "waktu": "2026-11-23T10:52:34+00:00"
   },
   {
    "judul": "Sleman perkuat infrastruktur irigasi pertanian jaga ketahanan pangan",
@@ -1533,7 +1791,7 @@
    "ringkasan": "BPI Danantara Indonesia akan rilis laporan keuangan perdana pada 25 November 2026. CEO Rosan Roeslani pastikan laporan lengkap dan terbuka untuk publik.",
    "gambar": "https://awsimages.detik.net.id/visual/2026/10/19/ceo-danantara-rosan-roeslani-1792412326981_169.png?w=1200&q=90",
    "sumber": "CNBC Indonesia",
-   "tema": "pasar",
+   "tema": "politik",
    "bahasa": "id",
    "waktu": "2026-11-23T10:45:02+00:00"
   },
@@ -1546,6 +1804,16 @@
    "tema": "makro",
    "bahasa": "id",
    "waktu": "2026-11-23T10:45:00+00:00"
+  },
+  {
+   "judul": "Ini Profil Sugiono, Cawapres Pilihan Prabowo Gantikan Gibran",
+   "link": "https://www.cnbcindonesia.com/news/20261123173545-4-787727/ini-profil-sugiono-cawapres-pilihan-prabowo-gantikan-gibran",
+   "ringkasan": "Presiden Prabowo Subianto serahkan dua nama cawapres ke MPR, termasuk Sugiono, Menko PMK. Simak profil dan kekayaan Sugiono yang mencapai Rp10,99 miliar",
+   "gambar": "https://awsimages.detik.net.id/visual/2026/09/28/menlu-ri-sugiono-pidato-di-sidang-majelis-umum-pbb-1790561209484_169.png?w=1200&q=90",
+   "sumber": "CNBC Indonesia",
+   "tema": "politik",
+   "bahasa": "id",
+   "waktu": "2026-11-23T10:43:22+00:00"
   },
   {
    "judul": "Tanggul Laut Raksasa Teluk Jakarta Dibangun 2027, Titik Awal Babelan",
@@ -1563,7 +1831,7 @@
    "ringkasan": "Amran Sulaiman dan Sugiono diusulkan sebagai calon wakil presiden Prabowo Subianto. Amran adalah Mentan dikenal dengan program swasembada pangan.",
    "gambar": "https://awsimages.detik.net.id/visual/2026/10/19/menteri-pertanian-mentan-amran-sulaiman-saat-ditemui-di-kantornya-jakarta-senin-19102026-1792384821423_169.jpeg?w=1200&q=90",
    "sumber": "CNBC Indonesia",
-   "tema": "pertanian",
+   "tema": "politik",
    "bahasa": "id",
    "waktu": "2026-11-23T10:42:14+00:00"
   },
@@ -1598,6 +1866,16 @@
    "waktu": "2026-11-23T10:40:45+00:00"
   },
   {
+   "judul": "Pemerintah Perkuat Koordinasi Percepat Hilirisasi- Dorong Transisi Energi",
+   "link": "https://finance.detik.com/energi/d-8766241/pemerintah-perkuat-koordinasi-percepat-hilirisasi-dorong-transisi-energi",
+   "ringkasan": "Pemerintah perkuat koordinasi lintas kementerian percepat hilirisasi dan ketahanan energi. Fokus industrialisasi demi pertumbuhan ekonomi dan lapangan kerja.",
+   "gambar": "https://akcdn.detik.net.id/community/media/visual/2026/11/23/pemerintah-perkuat-koordinasi-percepat-hilirisasi-transisi-energi-1795430357685_169.jpeg?w=360&q=90",
+   "sumber": "Detik Finance",
+   "tema": "energi",
+   "bahasa": "id",
+   "waktu": "2026-11-23T10:40:27+00:00"
+  },
+  {
    "judul": "BI Rate Naik Jadi 6 Persen, Tabungan Haji Tetap Jadi Andalan Bank Syariah Himpun Dana",
    "link": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxNTkdOVGhwSGdhcUVIQ0pUY1JnX3Z1Z0Q1ZGxoU25Rc3VQWmJpNHdxUGNQaS1KMXAxa0RsUVdOWkx0dmVydDBXU2hHMUlwbTJDaTB5Mm1wLXQ4SlhKVzkwMXN6M2wxYWFXamxxRlZXQ0pEakd2MnVUckRLenJ3Q29QNzNsTE9RM2pzZ0tUdEVsLURTY0VZZjVHZ1ZaaHhMSEl6R0d3TWJ6QmJXR1luR2h1Y0FnOXhEZmRTaGR3?oc=5",
    "ringkasan": "",
@@ -1606,6 +1884,16 @@
    "tema": "moneter",
    "bahasa": "id",
    "waktu": "2026-11-23T10:40:00+00:00"
+  },
+  {
+   "judul": "Kebijakan Ekonomi Bukan Sekadar Angka:Seberapa Besar Dampak bagi Kehidupan Halaman 1",
+   "link": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxQcEE5Ulp3em5FREpUZThRWFBLSV96UU9mall2cC1qU0l2X3hTZDctMDdsc1JFd085YnU5UldURFhGUUpNMTE4a1dRSW45X0FrSGRUSUlNVkgzQlY4NkI0VzdPSFAtY0VRdHd4RmowOGl4V3dwX21FZmJ3dG0yNWt6d0Noa285VFNzXzhTdVlOZFRua3ZVdmtMRmpaVDZoT0hPVU1ldUlSNzNabG1EUlU3ZzR6cHBwdXdrRU9SSERTUGJfNzhTcnZzamNkZjFHbE1nZmFqbmNB?oc=5",
+   "ringkasan": "",
+   "gambar": null,
+   "sumber": "Kompasiana.com",
+   "tema": "politik",
+   "bahasa": "id",
+   "waktu": "2026-11-23T10:36:54+00:00"
   },
   {
    "judul": "Kursi ICAO Indonesia bukan sekadar prestise",
@@ -1673,7 +1961,7 @@
    "ringkasan": "Prabowo Serahkan 2 Nama Calon Wapres Pengganti Gibran ke MPR RI",
    "gambar": "https://awsimages.detik.net.id/visual/2026/11/23/prabowo-serahkan-2-nama-calon-wapres-pengganti-gibran-ke-mpr-ri-1795429833176_169.png?w=1200&q=90",
    "sumber": "CNBC Indonesia",
-   "tema": "pasar",
+   "tema": "politik",
    "bahasa": "id",
    "waktu": "2026-11-23T10:31:33+00:00"
   },
@@ -1718,6 +2006,16 @@
    "waktu": "2026-11-23T10:23:54+00:00"
   },
   {
+   "judul": "2 Nama Cawapres yang Disetor Prabowo ke MPR: Amran Sulaiman dan Sugiono",
+   "link": "https://www.cnbcindonesia.com/news/20261123171843-4-787720/2-nama-cawapres-yang-disetor-prabowo-ke-mpr-amran-sulaiman-sugiono",
+   "ringkasan": "Presiden Prabowo Subianto menyerahkan dua nama calon wakil presiden kepada MPR. Nama-nama tersebut adalah Andi Amran Sulaiman dan Sugiono.",
+   "gambar": "https://awsimages.detik.net.id/visual/2026/11/23/presiden-ri-prabowo-subianto-menyerahkan-berkas-nama-calon-wakil-presiden-ri-kepada-ketua-mpr-ri-ahmad-muzani-di-gedung-nusant-1795428480669_169.png?w=1200&q=90",
+   "sumber": "CNBC Indonesia",
+   "tema": "politik",
+   "bahasa": "id",
+   "waktu": "2026-11-23T10:23:46+00:00"
+  },
+  {
    "judul": "Kredit BRI Tumbuh 14,5 Persen di Triwulan III 2026, NPL Membaik",
    "link": "https://www.cnnindonesia.com/ekonomi/20261123171446-625-1430484/kredit-bri-tumbuh-145-persen-di-triwulan-iii-2026-npl-membaik",
    "ringkasan": "Seluruh capaian ini menegaskan kemampuan BRI untuk bertumbuh secara berkelanjutan dengan menjaga fungsi intermediasi, kualitas aset, dan profitabilitas.",
@@ -1746,6 +2044,16 @@
    "tema": "fiskal",
    "bahasa": "id",
    "waktu": "2026-11-23T10:16:44+00:00"
+  },
+  {
+   "judul": "Bahlil Buka-bukaan Nasib Ekspor Gas ke Singapura, Masih Dipangkas?",
+   "link": "https://finance.detik.com/energi/d-8766192/bahlil-buka-bukaan-nasib-ekspor-gas-ke-singapura-masih-dipangkas",
+   "ringkasan": "Menko Hilirisasi dan Energi Bahlil Lahadalia buka-bukaan nasib ekspor gas ke Singapura.",
+   "gambar": "https://akcdn.detik.net.id/community/media/visual/2024/11/22/menteri-energi-sumber-daya-mineral-esdm-bahlil-lahadalia_169.jpeg?w=360&q=90",
+   "sumber": "Detik Finance",
+   "tema": "energi",
+   "bahasa": "id",
+   "waktu": "2026-11-23T10:15:12+00:00"
   },
   {
    "judul": "Menperin: Hilirisasi Jadi Tahapan Penting Dalam Proses Industrialisasi — Berita APNI",
@@ -1788,14 +2096,14 @@
    "waktu": "2026-11-23T10:12:00+00:00"
   },
   {
-   "judul": "Produk Halal di Pasar Global berasal dari Thailand, Muslimah Indonesia Diimbau Bangkit",
-   "link": "https://news.google.com/rss/articles/CBMizwFBVV95cUxOc3ZCZ2RjVy1vUlFZa05lcUtUSTROaHZ2blZJNDg1Xy1YVFR2UWxlaXdyN3pvZ2lHNkdkOVNBSFk4c2ZWSFc4ZkJ4SVNXd2JDdFRidV8wb2xrc2JIZVNFYWdqd3drZGVpcEtJV2E1d0RGLXc2bzhTRi0weEYzUE5Ed3hpcU5vZWotOVFuR1JHdFJRbm9MQmdXNDVSMThueDhsWFJDY09icFNQNTFCUVhNNlpGMEZmaUZ6UG9tcFU4cWxCaHRIeGowV1NlWkM1alE?oc=5",
-   "ringkasan": "",
-   "gambar": null,
-   "sumber": "republika.co.id",
-   "tema": "syariah",
+   "judul": "Prabowo Resmi Setor 2 Nama Cawapres Pengganti Gibran kepada MPR",
+   "link": "https://www.cnbcindonesia.com/news/20261123165934-4-787716/prabowo-resmi-setor-2-nama-cawapres-pengganti-gibran-kepada-mpr",
+   "ringkasan": "Presiden Prabowo Subianto resmi menyerahkan dua nama calon wakil presiden ke MPR untuk sisa masa jabatan 2024-2029. Penyerahan dilakukan di Gedung MPR.",
+   "gambar": "https://awsimages.detik.net.id/visual/2026/11/23/presiden-ri-prabowo-subianto-menyerahkan-berkas-nama-calon-wakil-presiden-ri-kepada-ketua-mpr-ri-ahmad-muzani-di-gedung-nusant-1795428480734_169.png?w=1200&q=90",
+   "sumber": "CNBC Indonesia",
+   "tema": "politik",
    "bahasa": "id",
-   "waktu": "2026-11-23T10:11:20+00:00"
+   "waktu": "2026-11-23T10:10:30+00:00"
   },
   {
    "judul": "BPS Warning! Harga Gula Pasir Sudah Naik di 126 Kabupaten/Kota RI",
@@ -1858,6 +2166,16 @@
    "waktu": "2026-11-23T10:06:09+00:00"
   },
   {
+   "judul": "Surabaya Raih Dua Penghargaan Nasional Berkat Inovasi Smart City",
+   "link": "https://www.cnnindonesia.com/nasional/20261123163203-25-1430471/surabaya-raih-dua-penghargaan-nasional-berkat-inovasi-smart-city",
+   "ringkasan": "Pemkot Surabaya raih 2 penghargaan di Forum Nasional Kota Cerdas 2026, Inovasi digitalnya tingkatkan pelayanan publik dan stabilitas ekonomi melalui teknologi.",
+   "gambar": "https://akcdn.detik.net.id/visual/2026/11/23/pemprov-surabaya-1795425927986_169.jpeg?w=360&q=90",
+   "sumber": "CNN Indonesia",
+   "tema": "politik",
+   "bahasa": "id",
+   "waktu": "2026-11-23T10:05:04+00:00"
+  },
+  {
    "judul": "Daftar UMP 2027 di 32 Provinsi, Ada yang Naik 42,15%",
    "link": "https://www.liputan6.com/bisnis/read/8340541/daftar-ump-2027-di-32-provinsi-ada-yang-naik-4215",
    "ringkasan": "Daftar UMP 2027 di 32 provinsi per 23 November 2026: Jakarta tertinggi Rp6.136.941, Bali naik 42,15%. Cek angka tiap provinsi dan daerah yang belum umumkan.",
@@ -1866,6 +2184,16 @@
    "tema": "makro",
    "bahasa": "id",
    "waktu": "2026-11-23T10:04:23+00:00"
+  },
+  {
+   "judul": "IHSG Ditutup Menguat ke Level 5.200an",
+   "link": "https://finance.detik.com/bursa-dan-valas/d-8766161/ihsg-ditutup-menguat-ke-level-5-200an",
+   "ringkasan": "IHSG ditutup di zona hijau pada level 5.215,85, naik 1,35%. Meskipun menguat hari ini, IHSG masih melemah secara mingguan dan tahunan.",
+   "gambar": "https://akcdn.detik.net.id/community/media/visual/2026/10/16/ihsg-ambruk-1157-ditutup-di-level-5185-1792144638880_169.jpeg?w=360&q=90",
+   "sumber": "Detik Finance",
+   "tema": "pasar",
+   "bahasa": "id",
+   "waktu": "2026-11-23T10:02:30+00:00"
   },
   {
    "judul": "Bank Neo Commerce Dorong AI untuk Perbankan Cerdas",
@@ -1898,6 +2226,16 @@
    "waktu": "2026-11-23T10:00:39+00:00"
   },
   {
+   "judul": "InJourney Airports Siap Perkuat Posisi RI di Kancah Aviasi Dunia",
+   "link": "https://www.cnbcindonesia.com/news/20261123165522-4-787714/injourney-airports-siap-perkuat-posisi-ri-di-kancah-aviasi-dunia",
+   "ringkasan": "Indonesia terpilih kembali sebagai anggota Dewan ICAO 2026-2028, membuka peluang kontribusi dalam kebijakan penerbangan internasional.",
+   "gambar": "https://awsimages.detik.net.id/visual/2026/11/23/injourney-airports-1795428170846_169.jpeg?w=1200&q=90",
+   "sumber": "CNBC Indonesia",
+   "tema": "politik",
+   "bahasa": "id",
+   "waktu": "2026-11-23T10:00:04+00:00"
+  },
+  {
    "judul": "Bima Arya Dorong Daerah Bangun Ekosistem Ekonomi Hulu Hilir",
    "link": "https://news.google.com/rss/articles/CBMickFVX3lxTE10VU9JQmFlMVRVdUQwaUV2TF9ocVo3bmY3aWlrYWNsVkl3cjFyNHJjMmtQZFk1bmJlNWYwUnNGa0k4cFFzT2NTM1dHTmU1YjNtTTNEcVhvemJJUGVfSjhpTHhyZUJxUnpvekNYLTFydGdGQQ?oc=5",
    "ringkasan": "",
@@ -1916,6 +2254,16 @@
    "tema": "pertanian",
    "bahasa": "id",
    "waktu": "2026-11-23T09:58:22+00:00"
+  },
+  {
+   "judul": "Prabowo Tiba di Gedung MPR, Siap Setor Nama Cawapres Pengganti Gibran",
+   "link": "https://www.cnbcindonesia.com/news/20261123161823-4-787713/prabowo-tiba-di-gedung-mpr-siap-setor-nama-cawapres-pengganti-gibran",
+   "ringkasan": "Presiden Prabowo Subianto tiba di Gedung MPR untuk menyerahkan nama cawapres sisa masa jabatan 2024-2029. Sidang paripurna dijadwalkan 11 Desember.",
+   "gambar": "https://awsimages.detik.net.id/visual/2026/11/23/presiden-ri-prabowo-subianto-saat-tiba-di-gedung-nusantara-iv-dalam-rangka-penyerahan-nama-calon-wakil-presiden-ri-sisa-masa-j-1795427638781_169.jpeg?w=1200&q=90",
+   "sumber": "CNBC Indonesia",
+   "tema": "politik",
+   "bahasa": "id",
+   "waktu": "2026-11-23T09:56:30+00:00"
   },
   {
    "judul": "Resmi Terbit! Ini Aturan Kemenko Hilirisasi yang Bawahi 4 Kementerian",
@@ -2083,7 +2431,7 @@
    "ringkasan": "BPI Danantara menggelar rapat koordinasi dengan menteri Kabinet Merah Putih. Pembahasan agenda dan laporan keuangan 2025 masih belum terkonfirmasi.",
    "gambar": "https://awsimages.detik.net.id/visual/2026/11/23/menteri-keuangan-menkeu-suahasil-nazara-saat-ditemui-di-wisma-danantara-jakarta-senin-23112026-1795425935605_169.jpeg?w=1200&q=90",
    "sumber": "CNBC Indonesia",
-   "tema": "fiskal",
+   "tema": "politik",
    "bahasa": "id",
    "waktu": "2026-11-23T09:35:09+00:00"
   },
@@ -2108,6 +2456,16 @@
    "waktu": "2026-11-23T09:34:06+00:00"
   },
   {
+   "judul": "Misbakhun Minta Pemerintah Kebut Belanja Rp 1.300 T Jelang Akhir Tahun",
+   "link": "https://finance.detik.com/berita-ekonomi-bisnis/d-8766105/misbakhun-minta-pemerintah-kebut-belanja-rp-1-300-t-jelang-akhir-tahun",
+   "ringkasan": "Ketua Komisi XI Mukhamad Misbakhun optimis belanja pemerintah Rp 1.300 triliun di kuartal IV-2026 dapat dorong pertumbuhan ekonomi.",
+   "gambar": "https://akcdn.detik.net.id/community/media/visual/2026/03/12/dpr-setujui-lima-calon-dewan-komisioner-ojk-2026-2031-1773297933635_169.jpeg?w=360&q=90",
+   "sumber": "Detik Finance",
+   "tema": "makro",
+   "bahasa": "id",
+   "waktu": "2026-11-23T09:32:55+00:00"
+  },
+  {
    "judul": "Profil Ary Bastari, Dirut Baru Bayan Pengganti Low Tuck Kwong",
    "link": "https://www.cnbcindonesia.com/market/20261123162436-17-787693/profil-ary-bastari-dirut-baru-bayan-pengganti-low-tuck-kwong",
    "ringkasan": "Bayan Resources Tbk. menunjuk Ary Bastari sebagai Direktur Utama baru dalam RUPSLB, menggantikan Low Tuck Kwong.",
@@ -2126,6 +2484,16 @@
    "tema": "moneter",
    "bahasa": "id",
    "waktu": "2026-11-23T09:32:00+00:00"
+  },
+  {
+   "judul": "PLPI: Demonstrasi harus dijawab dengan penguatan ekonomi, bukan penambahan beban pajak rakyat",
+   "link": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxOWjc2SzJOVlBrS2JDWkUxMmxxOWUxNklwejU0MG9CVWx5Q2ZTRFpLMzZ4aWhNbFBaOHowZmpDS1VzMHdzaWtkWlNBUHFBZFBrREh3TUhXbHJRXy0wV0NiU0xUVFpoYmV6NUZ2YXdGamUwbkhSNThyZ1Racl9zQXhkNDljYm1UUjdOSGdySGRPRlJpdEZPZ1lfSmQwc2ljcFJmdWhldDdJSHgwRlBnYi1qc1JVcXlkSHl5N3pRMDFDSjBLLW1LUHdGeTA0RkpIRW1wQmU1VQ?oc=5",
+   "ringkasan": "",
+   "gambar": null,
+   "sumber": "Elshinta",
+   "tema": "politik",
+   "bahasa": "id",
+   "waktu": "2026-11-23T09:30:16+00:00"
   },
   {
    "judul": "Menperin Turunkan Tim Cek Pabrik Permen yang Terbakar di Cikande",
@@ -2338,6 +2706,26 @@
    "waktu": "2026-11-23T09:14:01+00:00"
   },
   {
+   "judul": "RI-AS Garap Proyek Batu Bara Jadi Gas Rp 36,4 Triliun",
+   "link": "https://finance.detik.com/energi/d-8766044/ri-as-garap-proyek-batu-bara-jadi-gas-rp-36-4-triliun",
+   "ringkasan": "Indonesia dan Amerika Serikat (AS) akan segera menggarap proyek gasifikasi batu bara senilai US$ 2 miliar.",
+   "gambar": "https://akcdn.detik.net.id/community/media/visual/2021/09/10/ada-di-sumsel-tambang-batu-bara-ini-punya-cadangan-3-miliar-ton-6_169.jpeg?w=360&q=90",
+   "sumber": "Detik Finance",
+   "tema": "energi",
+   "bahasa": "id",
+   "waktu": "2026-11-23T09:11:14+00:00"
+  },
+  {
+   "judul": "Pertemuan Prabowo dan CEO MSCI Bikin Rupiah Menguat",
+   "link": "https://finance.detik.com/bursa-dan-valas/d-8766035/pertemuan-prabowo-dan-ceo-msci-bikin-rupiah-menguat",
+   "ringkasan": "Salah satu faktor penguatan rupiah yakni Presiden Prabowo Subianto yang dilaporkan bertemu dengan CEO MSCI, Henry Fernandez.",
+   "gambar": "https://akcdn.detik.net.id/community/media/visual/2026/11/17/rupiah-melemah-dolar-as-tembus-rp18250-1794907297269_169.jpeg?w=360&q=90",
+   "sumber": "Detik Finance",
+   "tema": "moneter",
+   "bahasa": "id",
+   "waktu": "2026-11-23T09:09:10+00:00"
+  },
+  {
    "judul": "Hilirisasi Jadi Kunci Transformasi Ekonomi Indonesia melalui Percepatan Industrialisasi Nasional",
    "link": "https://news.google.com/rss/articles/CBMixwFBVV95cUxNRWp3cFFYeVF3d2NPVzZkdFNLX2pLTWYtTDlFSGdlakw3Tldya2p6YnVmVW9CM25CZkVrZFpuTVBDd1lQclAtVnRnTTFjdnpoNE5Dcmc4XzJ6RmdCRTlyS1dRWDh5UlduRlZ5bHJtQnRVdlhlREljV24wOXpfNDZ4SGM0QThTRV85NkJzWUUzYnRHWjhCNVEzcXk4TG44eW44Y3N4d3FIejFSeWJsZjlEQkZ4YklvTTcwRWFpMFBNZFpFcmgxM084?oc=5",
    "ringkasan": "",
@@ -2376,6 +2764,16 @@
    "tema": "pasar",
    "bahasa": "id",
    "waktu": "2026-11-23T09:06:16+00:00"
+  },
+  {
+   "judul": "Siapa Ary Bastari yang Gantikan Low Tuck Kwong Jadi Dirut BYAN?",
+   "link": "https://finance.detik.com/bursa-dan-valas/d-8766020/siapa-ary-bastari-yang-gantikan-low-tuck-kwong-jadi-dirut-byan",
+   "ringkasan": "Ary Bastari resmi menggantikan Low Tuck Kwong sebagai Direktur Utama PT Bayan Resources Tbk (BYAN). Berikut profilnya.",
+   "gambar": "https://akcdn.detik.net.id/community/media/visual/2026/11/23/dirut-byan-ary-bastari-1795424528918_169.png?w=360&q=90",
+   "sumber": "Detik Finance",
+   "tema": "makro",
+   "bahasa": "id",
+   "waktu": "2026-11-23T09:04:01+00:00"
   },
   {
    "judul": "Kerja Sama Energi Bersih RI-Jepang Buka 118.000 Lapangan Kerja",
@@ -2498,6 +2896,16 @@
    "waktu": "2026-11-23T08:51:08+00:00"
   },
   {
+   "judul": "LPS Batal Bangun Kantor di IKN!",
+   "link": "https://finance.detik.com/berita-ekonomi-bisnis/d-8765993/lps-batal-bangun-kantor-di-ikn",
+   "ringkasan": "LPS batalkan rencana pembangunan kantor di IKN, Kalimantan Timur.",
+   "gambar": "https://akcdn.detik.net.id/community/media/visual/2026/01/22/lps-pertahankan-tingkat-bunga-penjaminan-awal-2026-1769087170820_169.jpeg?w=360&q=90",
+   "sumber": "Detik Finance",
+   "tema": "moneter",
+   "bahasa": "id",
+   "waktu": "2026-11-23T08:50:40+00:00"
+  },
+  {
    "judul": "Profil Ary Bastari, Dirut Baru Bayan Pengganti Taipan Low Tuck Kwong",
    "link": "https://www.cnnindonesia.com/ekonomi/20261123135226-85-1430386/profil-ary-bastari-dirut-baru-bayan-pengganti-taipan-low-tuck-kwong",
    "ringkasan": "Ary Bastari menjadi Direktur Utama (Dirut) PT Bayan Resources Tbk yang baru setelah ditunjuk dalam RUPSLB pada Senin (23/11). Berikut profilnya.",
@@ -2516,6 +2924,16 @@
    "tema": "makro",
    "bahasa": "id",
    "waktu": "2026-11-23T08:49:43+00:00"
+  },
+  {
+   "judul": "Menko Pangan optimalkan pengurus KDKMP untuk bantu manajer",
+   "link": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQQzRGTlNUTGk4aF94Nk5pVy1iZHcwemxfejFaUjA3TlFmTi00Skl6X0tVRnlNNHpud0gwVWdQYUE5alptbmhJZXNuT2FoakdxbGZ3R05xZE5mdEJUbWpJQXdacXBiMXVUNy1lTThNVDNCX0pjbk5BcF94LXgwUC1VWjBRUWNVVEVFU01vNHltMEI3Y19VNHF6dGtpZzhWM2NJVkHSAaQBQVVfeXFMTmJMSUFEU09XSDUxYjBvZG5yMmRpbEhRRkhEMlBMUXMzemFyak5ONkxqWl9NcldVdjctaDQyWFQydUJiYlNicEpIbGUxcFdwcmhUcndMbk1KcDFRMVpiOFJUdzBxM0daNlB1VXVDd0wxODhuVktJYU91MkdZVjVBMjdaTkNFblJ3cjNBUGRJSWlTVUV3dHpDZmgwV3I4amFqSDFDSTg?oc=5",
+   "ringkasan": "",
+   "gambar": null,
+   "sumber": "ANTARA News",
+   "tema": "pertanian",
+   "bahasa": "id",
+   "waktu": "2026-11-23T08:49:15+00:00"
   },
   {
    "judul": "BI Catat Bunga Simpanan Bank Naik pada Oktober 2026",
@@ -2568,6 +2986,26 @@
    "waktu": "2026-11-23T08:43:14+00:00"
   },
   {
+   "judul": "Video: Prabowo Serahkan Nama 2 Calon Wapres Pengganti Gibran Sore Ini",
+   "link": "https://www.cnbcindonesia.com/news/20261123135911-8-787622/video-prabowo-serahkan-nama-2-calon-wapres-pengganti-gibran-sore-ini",
+   "ringkasan": "Prabowo Serahkan Nama 2 Calon Wapres Pengganti Gibran ke MPR Sore Ini",
+   "gambar": "https://awsimages.detik.net.id/visual/2026/11/23/prabowo-serahkan-nama-2-calon-wapres-pengganti-gibran-ke-mpr-sore-ini-1795422140752_169.png?w=1200&q=90",
+   "sumber": "CNBC Indonesia",
+   "tema": "politik",
+   "bahasa": "id",
+   "waktu": "2026-11-23T08:43:08+00:00"
+  },
+  {
+   "judul": "Penampakan Ruang Pustakaloka MPR Jelang Prabowo Setor 2 Nama Cawapres",
+   "link": "https://www.cnbcindonesia.com/news/20261123153143-4-787673/penampakan-ruang-pustakaloka-mpr-jelang-prabowo-setor-2-nama-cawapres",
+   "ringkasan": "Presiden Prabowo Subianto akan menyerahkan dua nama calon wakil presiden baru pengganti Gibran Rakabuming Raka sore ini.",
+   "gambar": "https://awsimages.detik.net.id/visual/2026/11/23/suasana-jelang-pertemuan-presiden-ri-dengan-pimpinan-mpr-ri-dalam-rangka-penyerahan-nama-calon-wakil-presiden-ri-sisa-masa-jab-1795422114487_169.jpeg?w=1200&q=90",
+   "sumber": "CNBC Indonesia",
+   "tema": "politik",
+   "bahasa": "id",
+   "waktu": "2026-11-23T08:42:10+00:00"
+  },
+  {
    "judul": "Tekan Biaya Logistik ke Tanjung Priok, Integrasi Tarif JTCC Terus Didorong",
    "link": "https://ekonomi.republika.co.id/berita/toy5g8370/tekan-biaya-logistik-ke-tanjung-priok-integrasi-tarif-jtcc-terus-didorong",
    "ringkasan": "JAKARTA — DPR RI dan Kementerian Pekerjaan Umum (PU) saat ini sedang mendorong integrasi tarif Jalan Tol Cibitung–Cilincing (JTCC) untuk mendukung efisiensi angkutan logistik menuju Pelabuhan Tanjung Priok. Badan...",
@@ -2588,6 +3026,16 @@
    "waktu": "2026-11-23T08:38:36+00:00"
   },
   {
+   "judul": "Kapolda Jatim Bidik 10 Ribu Anak Muda Berdaya Lewat Program Ketahanan Pangan",
+   "link": "https://news.google.com/rss/articles/CBMirAFBVV95cUxNMzV0M0psT0UzVEN4VVNtLXl5TU5Ld281dTRFQUVGcGxEVmpQWklFMW9qelRoTld6NlhOU2Q0MkJDNXdiT1Q3VnFncXVkWGNadTBTc2FHejNWN2RTclAzblBNMTFKRF8zc2hTYjR5d2NWUkhaY0RnSEU1ckljbnp0S0J1RjYtay1GdjZFcVV1VTA1V3NPSTR2UjVsSHBjSldzREh3MHpHU1NubWxj?oc=5",
+   "ringkasan": "",
+   "gambar": null,
+   "sumber": "DetikNews.ID",
+   "tema": "pertanian",
+   "bahasa": "id",
+   "waktu": "2026-11-23T08:37:42+00:00"
+  },
+  {
    "judul": "Bahlil Siapkan Skema 70% Hasil Tambang Masuk ke Negara",
    "link": "https://www.liputan6.com/bisnis/read/8340725/bahlil-siapkan-skema-70-hasil-tambang-masuk-ke-negara",
    "ringkasan": "Presiden Prabowo mengarahkan minimal 70% pendapatan tambang masuk ke kas negara. Menko Bahlil menyebut pemerintah tengah mengkaji opsi saham dan bagi hasil.",
@@ -2596,16 +3044,6 @@
    "tema": "pasar",
    "bahasa": "id",
    "waktu": "2026-11-23T08:37:21+00:00"
-  },
-  {
-   "judul": "Dukung Swasembada Pangan, Hamawas Salurkan Bantuan Alat Pertanian untuk Petani Simalungun",
-   "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQbnpEZS1pZVlJaF81U1BzRDJoclNJaVF0SmNjRWk1ckZSbExWNzczM1Z0M0JRTzdDbThubEpON2dnSFZNSU9xZFM4U00zOG9zUWZoREdwWnNUUFBYZVJzd2RHc3ZFY0pXQ21nQVJyaEQ1NEZldEVHNVBiRkgzNGN3dDQ0X08tbjVDeFR5R3ZFcnFHTWU1b09qRVdMVG5tY01maXo3MS1aeFkya290NHZrYXQ4Zw?oc=5",
-   "ringkasan": "",
-   "gambar": null,
-   "sumber": "rmolsumut.id",
-   "tema": "pertanian",
-   "bahasa": "id",
-   "waktu": "2026-11-23T08:36:02+00:00"
   },
   {
    "judul": "Gakkum Kehutanan Serahkan Enam Tersangka Pembalakan Liar di SM Kerumutan ke Kejaksaan",
@@ -2626,6 +3064,16 @@
    "tema": "pertanian",
    "bahasa": "id",
    "waktu": "2026-11-23T08:35:13+00:00"
+  },
+  {
+   "judul": "Buwas-Hatta Rajasa Komisaris BYAN, Ary Bastari Dirut & Anak Haji Isam Direktur",
+   "link": "https://finance.detik.com/bursa-dan-valas/d-8765942/buwas-hatta-rajasa-komisaris-byan-ary-bastari-dirut-anak-haji-isam-direktur",
+   "ringkasan": "PT Bayan Resources Tbk (BYAN) resmi merombak jajaran direksi dan komisaris.",
+   "gambar": "https://akcdn.detik.net.id/community/media/visual/2026/11/23/haji-isam-hatta-rajasa-hingga-buwas-hadiri-rupslb-bayan-1795421834748_169.jpeg?w=360&q=90",
+   "sumber": "Detik Finance",
+   "tema": "makro",
+   "bahasa": "id",
+   "waktu": "2026-11-23T08:33:50+00:00"
   },
   {
    "judul": "Video: Dapat Status HQLA 2A, PT SMI Incar Banyak Investor Bank & Ritel",
@@ -2683,9 +3131,19 @@
    "ringkasan": "Bahlil mengakui kebijakan ekspor langsung SDA Indonesia bisa menuai penolakan dari sejumlah pihak.",
    "gambar": "https://cdn1-production-images-kly.akamaized.net/26q1mcvcj_-ET-SYnmLteAjWYG8=/673x379/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/4651321/original/012713000_1700126036-CPO_atau_Sawit.jpg",
    "sumber": "Liputan6 Bisnis",
-   "tema": "makro",
+   "tema": "politik",
    "bahasa": "id",
    "waktu": "2026-11-23T08:22:53+00:00"
+  },
+  {
+   "judul": "Video: MPR: Penetapan Wapres Pengganti Gibran Mundur ke 11 Desember",
+   "link": "https://www.cnbcindonesia.com/news/20261123135752-8-787621/video-mpr-penetapan-wapres-pengganti-gibran-mundur-ke-11-desember",
+   "ringkasan": "Sidang MPR Penetapan Wapres Pengganti Gibran Mundur Lagi ke 11 Desember 2026",
+   "gambar": "https://awsimages.detik.net.id/visual/2026/11/23/sidang-mpr-penetapan-wapres-pengganti-gibran-mundur-lagi-ke-11-desember-2026-1795421973023_169.png?w=1200&q=90",
+   "sumber": "CNBC Indonesia",
+   "tema": "politik",
+   "bahasa": "id",
+   "waktu": "2026-11-23T08:21:01+00:00"
   },
   {
    "judul": "Ary Bastari Jadi Dirut Baru Bayan Resources Gantikan Low Tuck Kwong",
@@ -2726,6 +3184,16 @@
    "tema": "makro",
    "bahasa": "id",
    "waktu": "2026-11-23T08:19:48+00:00"
+  },
+  {
+   "judul": "Haji Isam, Hatta Rajasa, hingga Buwas Hadiri RUPSLB Bayan",
+   "link": "https://finance.detik.com/bursa-dan-valas/d-8765910/haji-isam-hatta-rajasa-hingga-buwas-hadiri-rupslb-bayan",
+   "ringkasan": "PT Bayan Resources menggelar RUPSLB di Jakarta, dihadiri tokoh penting seperti Haji Isam dan Hatta Rajasa.",
+   "gambar": "https://akcdn.detik.net.id/community/media/visual/2026/11/23/haji-isam-hatta-rajasa-hingga-buwas-hadiri-rupslb-bayan-1795421834628_169.jpeg?w=360&q=90",
+   "sumber": "Detik Finance",
+   "tema": "makro",
+   "bahasa": "id",
+   "waktu": "2026-11-23T08:19:34+00:00"
   },
   {
    "judul": "Bahlil Siapkan Ekspor Langsung ke Pembeli, Pangkas Jalur Negara Ketiga",
@@ -2858,6 +3326,16 @@
    "waktu": "2026-11-23T07:58:16+00:00"
   },
   {
+   "judul": "Zulhas Targetkan 10 Ribu Kopdes Beroperasi Akhir Tahun",
+   "link": "https://finance.detik.com/berita-ekonomi-bisnis/d-8765855/zulhas-targetkan-10-ribu-kopdes-beroperasi-akhir-tahun",
+   "ringkasan": "Menteri Koordinator Bidang Pangan Zukifli Hasan (Zullhas) menargetkan 10.000 Koperasi Desa/Kelurahan Merah Putih (KDKMP) bisa beroperasi hingga akhir 2026.",
+   "gambar": "https://akcdn.detik.net.id/community/media/visual/2026/11/23/menteri-koordinator-bidang-pangan-menko-pangan-zulkifli-hasan-zulhas-1795413282477_169.jpeg?w=360&q=90",
+   "sumber": "Detik Finance",
+   "tema": "pertanian",
+   "bahasa": "id",
+   "waktu": "2026-11-23T07:58:14+00:00"
+  },
+  {
    "judul": "Apindo: IEU-CEPA Perkuat Daya Saing dan Investasi Industri Nasional",
    "link": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQc1c0SjhiS1Y2ZG5kQUJnamtiSFpybHBmMTROT1l2NFdKM3RhNWRWRkFiZ0VNRGNyT0I1WDNnUWx5eWt6YjgxNE1POUE5eU5VWGRVVXFjU1ByYTFyekpJVDJ6aTc5OFRhU0liUTJaQ2F4VmxwTkNGTGhnRm1hRXVrZ2lJOXc3cnJPcFZRajBVQ0xaMHZ0ZXM3emIwNzBVSmExbjJHd0pkUHA?oc=5",
    "ringkasan": "",
@@ -2878,6 +3356,26 @@
    "waktu": "2026-11-23T07:55:13+00:00"
   },
   {
+   "judul": "Bahlil Gunakan Anggaran ESDM untuk Operasional Kemenko Hilirisasi",
+   "link": "https://news.google.com/rss/articles/CBMie0FVX3lxTE1SZkpJLXhlbEgyclVBWlJTRmFsbFhwbExTLUFTa2ZDM19rUUxtMFdxMUdaeVhhMGtpNUg1d25fTzhnbV9YMFRxOUZ2NWRyakhldGYwX2FGNk41V0tNVFhlLTlVVjV3MkJPRHNPbE1RTkxxblhGbE9yNm5Uaw?oc=5",
+   "ringkasan": "",
+   "gambar": null,
+   "sumber": "MediaKompeten",
+   "tema": "politik",
+   "bahasa": "id",
+   "waktu": "2026-11-23T07:54:27+00:00"
+  },
+  {
+   "judul": "Ketua DPD Sultan Optimis Pertumbuhan Ekonomi 8 Persen Tercapai",
+   "link": "https://www.cnnindonesia.com/nasional/20261123144620-20-1430404/ketua-dpd-sultan-optimis-pertumbuhan-ekonomi-8-persen-tercapai",
+   "ringkasan": "Ketua DPD RI Sultan Baktiar Najamudin menyampaikan apresiasi terhadap capaian diplomasi multilateral Presiden Prabowo Subianto pada KTT APEC China.",
+   "gambar": "https://akcdn.detik.net.id/visual/2026/11/23/apresiasi-gaya-diplomasi-presiden-di-forum-apec-sultan-optimis-capai-pertumbuhan-ekonomi-8-persen-1795419957847_169.jpeg?w=360&q=90",
+   "sumber": "CNN Indonesia",
+   "tema": "politik",
+   "bahasa": "id",
+   "waktu": "2026-11-23T07:50:09+00:00"
+  },
+  {
    "judul": "Bos Pertamina Beberkan Kriteria Anak Usaha yang Layak Dipangkas",
    "link": "https://www.cnbcindonesia.com/news/20261123141628-4-787632/bos-pertamina-beberkan-kriteria-anak-usaha-yang-layak-dipangkas",
    "ringkasan": "Kriteria anak usaha Pertamina yang layak untuk dipangkas",
@@ -2886,6 +3384,16 @@
    "tema": "energi",
    "bahasa": "id",
    "waktu": "2026-11-23T07:50:03+00:00"
+  },
+  {
+   "judul": "Bahlil: Nggak Ada Gaji Menko, Cuma Gaji Menteri ESDM!",
+   "link": "https://finance.detik.com/energi/d-8765834/bahlil-nggak-ada-gaji-menko-cuma-gaji-menteri-esdm",
+   "ringkasan": "Bahlil Lahadalia menegaskan hanya menerima satu gaji meski merangkap jabatan sebagai Menko Hilirisasi dan Energi serta Menteri ESDM.",
+   "gambar": "https://akcdn.detik.net.id/community/media/visual/2026/10/14/bahlil-lahadalia-rolandodetikcom-1791978307056_169.jpeg?w=360&q=90",
+   "sumber": "Detik Finance",
+   "tema": "energi",
+   "bahasa": "id",
+   "waktu": "2026-11-23T07:48:19+00:00"
   },
   {
    "judul": "Dihadiri 2.350 Inovator dari Seluruh Indonesia, TKMPN 2026 Dongkrak Ekonomi Padang",
@@ -2906,6 +3414,16 @@
    "tema": "makro",
    "bahasa": "id",
    "waktu": "2026-11-23T07:46:00+00:00"
+  },
+  {
+   "judul": "BRI Dorong Perempuan Makin Berdaya Lewat Inspiring Srikandi 2026",
+   "link": "https://finance.detik.com/berita-ekonomi-bisnis/d-8765824/bri-dorong-perempuan-makin-berdaya-lewat-inspiring-srikandi-2026",
+   "ringkasan": "BRI memperkuat peran perempuan dalam keuangan melalui program Inspiring Srikandi 2026, mendukung literasi keuangan dan pengembangan usaha sampingan.",
+   "gambar": "https://akcdn.detik.net.id/community/media/visual/2026/11/23/bri-dorong-perempuan-makin-berdaya-lewat-inspiring-srikandi-2026-1795419652555_169.png?w=360&q=90",
+   "sumber": "Detik Finance",
+   "tema": "makro",
+   "bahasa": "id",
+   "waktu": "2026-11-23T07:44:21+00:00"
   },
   {
    "judul": "Realisasi Belanja Daerah Pemkab Merauke per November 2026 | Pusat Data Ekonomi dan Bisnis Indonesia",
@@ -2998,6 +3516,16 @@
    "waktu": "2026-11-23T07:34:31+00:00"
   },
   {
+   "judul": "Siapa Calon Wapres Pengganti Gibran? Bahlil: Hanya Presiden dan Tuhan yang Tahu",
+   "link": "https://finance.detik.com/energi/d-8765803/siapa-calon-wapres-pengganti-gibran-bahlil-hanya-presiden-dan-tuhan-yang-tahu",
+   "ringkasan": "Menko Hilirisasi dan Energi, yang juga Ketum Partai Golkar, Bahlil Lahadalia menyerahkan pemilihan Wapres kepada Presiden Prabowo.",
+   "gambar": "https://akcdn.detik.net.id/community/media/visual/2026/11/23/menko-bidang-hilirisasi-dan-energi-bahlil-lahadalia-1795411888430_169.jpeg?w=360&q=90",
+   "sumber": "Detik Finance",
+   "tema": "energi",
+   "bahasa": "id",
+   "waktu": "2026-11-23T07:33:54+00:00"
+  },
+  {
    "judul": "Investasi Hilirisasi China di RI Hampir Setara 40% APBN",
    "link": "https://www.liputan6.com/bisnis/read/8340653/investasi-hilirisasi-china-di-ri-hampir-setara-40-apbn",
    "ringkasan": "Menko Bahlil menyebut investasi China senilai hampir US$ 100 miliar di sektor hilirisasi membuktikan kepercayaan investor global terhadap RI terus membaik.",
@@ -3008,14 +3536,14 @@
    "waktu": "2026-11-23T07:30:20+00:00"
   },
   {
-   "judul": "Petik Laut Paciran Lamongan Dorong Ekonomi dan Perlindungan Nelayan",
-   "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxQV3Q5Tnk4U3R0NmNrclVoNk5iTXpYcldoanB6MUJGY0EyWVljTEdHMm5ta3FubnJnWXRITkNWVW5fdHlZakdEbXNlUlM1OFlEMWs5U3YwTjZNeHVyakFVcTlEbmtjZ29OMHJqS1pqbVB2d0JpZDRrRXhobHV4amxPZk03OGxSaFpWTG1vQmVQMXE?oc=5",
-   "ringkasan": "",
-   "gambar": null,
-   "sumber": "TIMES Network AI",
-   "tema": "pertanian",
+   "judul": "Dituduh Serukan Kudeta, Pemerintah Minta X Blokir Akun Mantan Presiden",
+   "link": "https://www.cnbcindonesia.com/news/20261123134711-4-787613/dituduh-serukan-kudeta-pemerintah-minta-x-blokir-akun-mantan-presiden",
+   "ringkasan": "Pemerintah Kolombia meminta X menangguhkan akun mantan Presiden Gustavo Petro setelah ia menyerukan pengunduran diri presiden dan aksi protes.",
+   "gambar": "https://awsimages.detik.net.id/visual/2025/10/25/colombia-politics-1761358172949_169.jpeg?w=1200&q=90",
+   "sumber": "CNBC Indonesia",
+   "tema": "politik",
    "bahasa": "id",
-   "waktu": "2026-11-23T07:30:04+00:00"
+   "waktu": "2026-11-23T07:30:00+00:00"
   },
   {
    "judul": "Diversifikasi Pangan Indonesia Untuk Mengurangi Ketergantungan Terhadap Impor",
@@ -3028,14 +3556,14 @@
    "waktu": "2026-11-23T07:30:00+00:00"
   },
   {
-   "judul": "Shinta W Kamdani: Semua Pihak Harus Menjaga Ekonomi Nasional",
-   "link": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQQmFDUGwzbXNVNjhXbS1CSzVrNk9JRVFiX1Y0WEFUUzRtaTA4MXk4YWhVT05ON0U0Ml9oY1k2UGFtRFk5Umd0bnExb09icEQyRGZ2b0VKcFI0aXdUUkdycTRLVURCejNHdkJFRHhRaVA0M1V1ZmZkYkNxcjNqSGFCcDlYN1BGZ1U1UGFwUUNUeTRVdFJUZGZJcGdnZE4?oc=5",
-   "ringkasan": "",
-   "gambar": null,
-   "sumber": "investor.id",
-   "tema": "makro",
+   "judul": "ASEAN Mau Punya Cadangan Minyak Bersama, RI Ajukan Diri Jadi Hub",
+   "link": "https://finance.detik.com/energi/d-8765795/asean-mau-punya-cadangan-minyak-bersama-ri-ajukan-diri-jadi-hub",
+   "ringkasan": "Indonesia dan negara ASEAN merencanakan pusat penyimpanan cadangan minyak bersama.",
+   "gambar": "https://akcdn.detik.net.id/community/media/visual/2026/11/23/menko-bidang-hilirisasi-dan-energi-bahlil-lahadalia-1795411888430_169.jpeg?w=360&q=90",
+   "sumber": "Detik Finance",
+   "tema": "energi",
    "bahasa": "id",
-   "waktu": "2026-11-23T07:29:00+00:00"
+   "waktu": "2026-11-23T07:28:47+00:00"
   },
   {
    "judul": "Swasembada 8 Komoditas Pangan Perkuat Ketahanan Indonesia",
@@ -3056,6 +3584,16 @@
    "tema": "moneter",
    "bahasa": "id",
    "waktu": "2026-11-23T07:26:39+00:00"
+  },
+  {
+   "judul": "Komentar Bahlil Soal Cawapres: Kami Menyerahkan kepada Bapak Presiden",
+   "link": "https://www.cnbcindonesia.com/news/20261123141122-4-787631/komentar-bahlil-soal-cawapres-kami-menyerahkan-kepada-bapak-presiden",
+   "ringkasan": "Ketua Umum Golkar Bahlil Lahadalia menyerahkan penentuan calon wakil presiden kepada Presiden Prabowo Subianto.",
+   "gambar": "https://awsimages.detik.net.id/visual/2026/06/25/menteri-esdm-bahlil-lahadalia-saat-menyampaikan-pemaparan-dalam-energy-forum-di-singosari-ballroom-hotel-borobudur-jakarta-kam-1782361528259_169.jpeg?w=1200&q=90",
+   "sumber": "CNBC Indonesia",
+   "tema": "politik",
+   "bahasa": "id",
+   "waktu": "2026-11-23T07:23:50+00:00"
   },
   {
    "judul": "Komoditas Pangan Pokok Ramai-ramai Naik Harga",
@@ -3098,6 +3636,16 @@
    "waktu": "2026-11-23T07:20:00+00:00"
   },
   {
+   "judul": "Rp 400 T Barang Subsidi-Bansos Salah Sasaran, Penyaluran Dialihkan ke Kopdes",
+   "link": "https://finance.detik.com/berita-ekonomi-bisnis/d-8765774/rp-400-t-barang-subsidi-bansos-salah-sasaran-penyaluran-dialihkan-ke-kopdes",
+   "ringkasan": "Oleh karena itu semua barang-barang bersubsidi harus, tidak boleh diperjualbelikan, maka diminta menyalurkannya melalui Kopdes, kata Zulhas.",
+   "gambar": "https://akcdn.detik.net.id/community/media/visual/2026/11/23/menteri-koordinator-bidang-pangan-menko-pangan-zulkifli-hasan-zulhas-1795413282477_169.jpeg?w=360&q=90",
+   "sumber": "Detik Finance",
+   "tema": "fiskal",
+   "bahasa": "id",
+   "waktu": "2026-11-23T07:18:49+00:00"
+  },
+  {
    "judul": "Pemerintah Dorong Petani Tak Lagi Bergantung pada Bahan Mentah",
    "link": "https://news.google.com/rss/articles/CBMixAFBVV95cUxPd2lDTFNEYlJlbVAwc2J4RmVla0FtWlhXc29tcnQ2Z2ZLOUZnQzJBVG1TTHQwc2ZSaXhMUEM0MWE5enNLc2NQQU02YlAtNEpnY3FreFYteE10OWZ1WnQ1N2MwdnJzSmtHVV9kNWxENTlOamVDcTFTZ2lvRUVUVTZwdW9SYUVxQzl0SGg1bG1jTmF1T0VIN3h3UUUzdTE5TmZ5TDNZanpseThFY05tOG9KVFpLVjhHeWNha1FkNUpVVGs4YUNs0gHKAUFVX3lxTFA4RG9ZMUJWUkplSHdBcnhGVjRpZDM4QnlUZzZabFN6RDU5OGVsSjl1SGIzMENfUzVidGxzN040WkRPOXVqVENPVEJ0c052Mk1TczI0cm03MTMxcGg1YXZtODdHMG1Ub09VWUxMVVhHeXM4VV85bmNWQ2ZpaVFqeno5ajJpQUdCblo4WTdpTGNRaTlpNk5FVjJCcmNLYzdvUHUyS1VXM0tWWmo0S3pmSWhGMW85LTl0dXYyaHphRXd4UXNxRlZCZFRZNVE?oc=5",
    "ringkasan": "",
@@ -3116,6 +3664,16 @@
    "tema": "pasar",
    "bahasa": "id",
    "waktu": "2026-11-23T07:16:03+00:00"
+  },
+  {
+   "judul": "Anggaran Seleksi CPNS 2026 Tembus Rp 616 M",
+   "link": "https://finance.detik.com/cpns/d-8765752/anggaran-seleksi-cpns-2026-tembus-rp-616-m",
+   "ringkasan": "Kepala BKN Zudan Arif Fakrulloh memperkirakan kebutuhan anggaran seleksi Calon Pegawai Negeri Sipil (CPNS) 2026 sebesar Rp 616,208 miliar.",
+   "gambar": "https://akcdn.detik.net.id/community/media/visual/2025/02/01/kepala-bkn-zudan-arif-1_169.jpeg?w=360&q=90",
+   "sumber": "Detik Finance",
+   "tema": "fiskal",
+   "bahasa": "id",
+   "waktu": "2026-11-23T07:13:52+00:00"
   },
   {
    "judul": "Bank Indonesia Naikkan BI Rate Menjadi 6 Persen",
@@ -3238,6 +3796,16 @@
    "waktu": "2026-11-23T07:00:09+00:00"
   },
   {
+   "judul": "Prabowo Minta 70% Hasil Tambang Dinikmati Negara, Bahlil Siapkan Aturan Ini",
+   "link": "https://finance.detik.com/energi/d-8765724/prabowo-minta-70-hasil-tambang-dinikmati-negara-bahlil-siapkan-aturan-ini",
+   "ringkasan": "Menko Hilirisasi dan Energi Bahlil Lahadalia siapkan formulasi baru agar 70% hasil sumber daya alam Indonesia dinikmati masyarakat.",
+   "gambar": "https://akcdn.detik.net.id/community/media/visual/2024/11/22/menteri-energi-sumber-daya-mineral-esdm-bahlil-lahadalia-1_169.jpeg?w=360&q=90",
+   "sumber": "Detik Finance",
+   "tema": "energi",
+   "bahasa": "id",
+   "waktu": "2026-11-23T07:00:08+00:00"
+  },
+  {
    "judul": "Bhabinkamtibmas Desa Ngadirejo Siap Dukung Program Ketahanan Pangan",
    "link": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOVEV3dGNEUnIxeWRra3hnSEpBTmFqbkVwbnBQYkhGaEVPeGktbFI5MUJNZENyZXF3V0RfVFBBYUg3Vkl1Q2xjeWFhTC1SWXNJaER3c3ROX0gyamo5TTNJYmZzMHJhR3d3Y1Q3VEFCWE5UWE4wSlBDd2NQVEdBTHd1ODQxSG9uT1U3eTdvdzJtMWpYWWJLRGlVM0w1RV9ZRUJfY2FsQjZScFJmOHN4R05qODMydEF3QkZNa1BOMw?oc=5",
    "ringkasan": "",
@@ -3268,14 +3836,14 @@
    "waktu": "2026-11-23T06:57:56+00:00"
   },
   {
-   "judul": "Gelar Gerai Murah, Dinas Perikanan Kotabaru Sediakan 400 Kilogram Ikan",
-   "link": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPWm5PWGpoRmtoSGtxb0loOGlRck43eWxBQ3pMaFEySk55bEJwZUZ2a2FkN0ZOWW1NWlFkbWp0NElma3JlaUo3c2FIQVhWLU00RE5zQlE5cTZLUjY4REhiaS13dTJsMVVDZFNNSzRHWXF6TmJDMkV5b1dBVEpvZ2ZPT2Q0ZkYtbTI1UkY5SXZCd1hyQUItZmVIeVVJUEpvUU9Xc0xmTEZ3MTNiQXRidzNNV3ZwS1k0YzJ4YmhJ?oc=5",
-   "ringkasan": "",
-   "gambar": null,
-   "sumber": "Kabar Kalimantan",
-   "tema": "pertanian",
+   "judul": "Dari Knalpot ke APBN: Jalan Menuju Transportasi Rendah Emisi",
+   "link": "https://www.cnnindonesia.com/nasional/20261120150357-21-1429528/dari-knalpot-ke-apbn-jalan-menuju-transportasi-rendah-emisi",
+   "ringkasan": "Hujan mestinya jadi berkah. Namun saat cuaca ekstrem melanda, hujan juga membawa kecemasan karena bisa menyebabkan banjir.",
+   "gambar": "https://akcdn.detik.net.id/visual/2018/12/04/6d2ed3a9-d804-4254-8394-8076d66a1d9b_169.jpeg?w=360&q=90",
+   "sumber": "CNN Indonesia",
+   "tema": "politik",
    "bahasa": "id",
-   "waktu": "2026-11-23T06:57:11+00:00"
+   "waktu": "2026-11-23T06:57:41+00:00"
   },
   {
    "judul": "Perhutani KPH Jatirogo Sosialisasikan Teknis Pekerjaan Tanaman JPP 2026 kepada Petani Hutan",
@@ -3388,6 +3956,16 @@
    "waktu": "2026-11-23T06:43:44+00:00"
   },
   {
+   "judul": "Menperin Minta Industri Melek Isu Lingkungan biar Nggak Kehilangan Pembeli",
+   "link": "https://finance.detik.com/energi/d-8765677/menperin-minta-industri-melek-isu-lingkungan-biar-nggak-kehilangan-pembeli",
+   "ringkasan": "Menteri Perindustrian Sarmuji menekankan pentingnya industri ramah lingkungan untuk mempertahankan pasar global.",
+   "gambar": "https://akcdn.detik.net.id/community/media/visual/2026/10/02/sertijab-menteri-perindustrian-sarmuji-gantikan-agus-gumiwang-1790919880231_169.jpeg?w=360&q=90",
+   "sumber": "Detik Finance",
+   "tema": "global",
+   "bahasa": "id",
+   "waktu": "2026-11-23T06:41:12+00:00"
+  },
+  {
    "judul": "Manfaatkan Pekarangan Rumah, Ning Marisa Ajak Keluarga Perkuat Ketahanan Pangan untuk Cegah Stunting",
    "link": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxPTFR6Y1MtOW5YMS1XQXNTdW91bmtrdjQ1MHlPX2czVEFRNHVjczl2VjNmOV9aZWFJdFpYQ3h3SjlGSkpTVF9OMlhZa3ZCb0pXbWd0M3FIT3MtcXFWRTYwYi1VZFBjZXNjbE5RLXFqWE1ENGRWNXNvdkhGMjZfMVUxN3lzSUhhRURocE5RYlNYMl8talVDUVdjS3RjcmhGaW15ckJEekRiNmJjUFFVc0ZxYV9qMm1vbGx2ZEwzUEtaTnl1ZG5YaFVBWQ?oc=5",
    "ringkasan": "",
@@ -3408,6 +3986,16 @@
    "waktu": "2026-11-23T06:35:08+00:00"
   },
   {
+   "judul": "Bahlil Benarkan Ada Emas di Ujung Kulon",
+   "link": "https://finance.detik.com/energi/d-8765665/bahlil-benarkan-ada-emas-di-ujung-kulon",
+   "ringkasan": "Menteri ESDM Bahlil Lahadalia mengonfirmasi adanya emas di Taman Nasional Ujung Kulon, namun menegaskan tidak ada izin eksploitasi yang diterbitkan.",
+   "gambar": "https://akcdn.detik.net.id/community/media/visual/2026/10/23/menko-hilirisasi-dan-transisi-energi-bahlil-lahadalia-1792737320584_169.jpeg?w=360&q=90",
+   "sumber": "Detik Finance",
+   "tema": "pasar",
+   "bahasa": "id",
+   "waktu": "2026-11-23T06:34:40+00:00"
+  },
+  {
    "judul": "Indonesia-Uni Eropa Resmi Teken IEU-CEPA, Produk Ekspor Berpeluang Bebas Tarif hingga 0 Persen",
    "link": "https://news.google.com/rss/articles/CBMitAFBVV95cUxNaVBKWlBFTHJzRG52QlZmWEZ5djVWeWJRdHQ1UC1MVGlkdWdYMG1xWi1pT1lsenJfSjhVYmNGYkNnNXBfUWFrQnVnSHh6bWlhX1NGSFVfYU1aMHlYZ3pUaHo4U1F6c0duS20yU2Raajd4RmZkblZyWkhEeXc2Rkd4cC1FSDQ4dkl5SVVhYXUxVVJ3U216MjlhVHlnTlNMdmNrUFVpUHZuNGh2Mmp1R05ZYWhOS2o?oc=5",
    "ringkasan": "",
@@ -3426,6 +4014,16 @@
    "tema": "moneter",
    "bahasa": "id",
    "waktu": "2026-11-23T06:34:23+00:00"
+  },
+  {
+   "judul": "RI Masih Jadi Incaran Investor Global, Bahlil Kasih Buktinya",
+   "link": "https://finance.detik.com/energi/d-8765650/ri-masih-jadi-incaran-investor-global-bahlil-kasih-buktinya",
+   "ringkasan": "Menko Hilirisasi dan Energi Bahlil Lahadalia kasih bukti kepercayaan investor global terhadap Indonesia meningkat.",
+   "gambar": "https://akcdn.detik.net.id/community/media/visual/2025/06/10/pemerintah-cabut-empat-iup-nikel-raja-ampat-1749535041671_169.jpeg?w=360&q=90",
+   "sumber": "Detik Finance",
+   "tema": "energi",
+   "bahasa": "id",
+   "waktu": "2026-11-23T06:30:40+00:00"
   },
   {
    "judul": "Video: Setoran Pajak Digital Tembus Rp60,1 Triliun",
@@ -3458,8 +4056,8 @@
    "waktu": "2026-11-23T06:25:30+00:00"
   },
   {
-   "judul": "Tangani Asuransi Bermasalah 2027, LPS Ajukan Anggaran Rp4,03 Triliun",
-   "link": "https://www.cnbcindonesia.com/market/20261123130205-17-787587/tangani-asuransi-bermasalah-2027-lps-ajukan-anggaran-rp403-triliun",
+   "judul": "Siapkan Aktivasi Penjaminan Polis 2027, LPS Ajukan Anggaran Rp4,03 T",
+   "link": "https://www.cnbcindonesia.com/market/20261123130205-17-787587/siapkan-aktivasi-penjaminan-polis-2027-lps-ajukan-anggaran-rp403-t",
    "ringkasan": "LPS ajukan RKAT 2027 sebesar Rp4,03 triliun kepada DPR.",
    "gambar": "https://awsimages.detik.net.id/visual/2026/11/19/ketua-dewan-komisioner-lembaga-penjamin-simpanan-anggito-abimanyu-saat-menyampaikan-pemaparan-dalam-financial-forum-2026-di-bu-1795077161152_169.jpeg?w=1200&q=90",
    "sumber": "CNBC Indonesia",
@@ -3498,16 +4096,6 @@
    "waktu": "2026-11-23T06:18:02+00:00"
   },
   {
-   "judul": "Bahlil Tegaskan Tak Ada Izin Tambang (IUP) di TN Ujung Kulon!",
-   "link": "https://www.cnbcindonesia.com/news/20261123131219-4-787591/bahlil-tegaskan-tak-ada-izin-tambang--iup--di-tn-ujung-kulon",
-   "ringkasan": "Menko Hilirisasi dan Transisi Energi Bahlil Lahadali tegaskan tak ada izin usaha pertambangan (IUP) di Taman Nasional Ujung Kulon",
-   "gambar": "https://awsimages.detik.net.id/visual/2026/11/23/menko-bidang-hilirisasi-dan-energi-bahlil-lahadalia-tengah-saat-konferensi-pers-youtubekementerianesdm-1795410737743_169.png?w=1200&q=90",
-   "sumber": "CNBC Indonesia",
-   "tema": "energi",
-   "bahasa": "id",
-   "waktu": "2026-11-23T06:16:02+00:00"
-  },
-  {
    "judul": "Ketika Pengusaha Muda Malang Jadikan Bank Syariah Penopang Ekosistem Bisnis Halal",
    "link": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPQ1psU1IySzAzcm1sWmplbVlCdDRoQTJOVXdXS2xYbXVpd3pNdDF6RVkwcW5aR05GU2dDS3NwRWlWeUpobF8tVFBNVVNfd3d5RjdBcFpvaENpaC1CN04tR2VZQlFXbXlPOThTNlB5cVM3U0NQX1VETDlDdFRwblZYV2t0azVjWWRaSGY2X2RleGJyUXNZUUUwNjIyMkhwTXdFUDBFNnpCaFk?oc=5",
    "ringkasan": "",
@@ -3516,576 +4104,6 @@
    "tema": "syariah",
    "bahasa": "id",
    "waktu": "2026-11-23T06:12:40+00:00"
-  },
-  {
-   "judul": "BI Prediksi Tekanan Harga Barang Meningkat Desember 2026 hingga Maret 2027, Masyarakat Diminta Siapkan Keuangan",
-   "link": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxPOFBCbVQ2MFBwV3RrRW84MVdzd2p5TGxzNXU1cC1rZXVsdGpIZVpSZFBTQTZTcnRmb0VPakV6VFIxd093eXR6QjYxRmFFSVpOMkRCZTdQZ1F4Nks4ZHRyMFgycVFCcHh6eGFNNEt3YkZ1cUt3QVZOVjZlT3NUX2VTVEZoUlZvMWxiV093SkpHd0tLaUhfS2o4THByeDJpQ211Z1g4RDJlT3NGeWlrNWI5ZzNYR2dUX19jQUJaZHZ0NXdLNzZSVFllenNfbkpXVzJG?oc=5",
-   "ringkasan": "",
-   "gambar": null,
-   "sumber": "brilian-news.id",
-   "tema": "makro",
-   "bahasa": "id",
-   "waktu": "2026-11-23T06:09:00+00:00"
-  },
-  {
-   "judul": "BI Catat Dana Pihak Ketiga Bank Tumbuh 8,8 Persen",
-   "link": "https://news.google.com/rss/articles/CBMia0FVX3lxTFBEbXJia2Utd1hiYzlCbzJuUWtEamNXZ1Vsc256cEdNQ0hDTWJFSXpDdHpSRjl4N25sX1A3NWs1clNWOE5fZVhqaWttZGxlU1FEck5VRUxZYkJGblI3dWNreWhMdW9WQU9lTzVR?oc=5",
-   "ringkasan": "",
-   "gambar": null,
-   "sumber": "MediaKompeten",
-   "tema": "makro",
-   "bahasa": "id",
-   "waktu": "2026-11-23T06:08:04+00:00"
-  },
-  {
-   "judul": "Gelar RUPSLB, Bayan Bakal Rombak Direksi hingga Komisaris Siang Ini",
-   "link": "https://www.cnnindonesia.com/ekonomi/20261123125227-85-1430357/gelar-rupslb-bayan-bakal-rombak-direksi-hingga-komisaris-siang-ini",
-   "ringkasan": "PT Bayan Resources Tbk bakal merombak susunan direksi hingga komisaris dalam Rapat Umum Pemegang Saham Luar Biasa (RUPSLB) yang digelar pada Senin (23/11).",
-   "gambar": "https://akcdn.detik.net.id/visual/2026/11/23/logo-bayan-1795413602025_169.png?w=360&q=90",
-   "sumber": "CNN Indonesia",
-   "tema": "pasar",
-   "bahasa": "id",
-   "waktu": "2026-11-23T06:07:46+00:00"
-  },
-  {
-   "judul": "Ekonomi Syariah di Indonesia: Tantangan, Partisipasi&Penyelesaian Sengketa Halaman 1",
-   "link": "https://news.google.com/rss/articles/CBMizwFBVV95cUxOR3cyZjNMTnhmcWxpMU13ZXozUmthZ1p2aTdsbzJCRUxwZHNaV0oyajN0STQ5dEltQ0owcUFDT0ROX0JDZ0N4eGFDUTVETFQ5MXhLSm80OUg0Tm41N2pLeDNlVjZzeHp5Y2tfTnFhdlhHQllpQzF0M004N3pXME1Nc2w2UzVTVFJSelMtWjRUcFh0b0pmcDF5dzRGV3MtNEZQWHo3cktKLVJyOWVTbmplWkNUZl9nWHAyUko2V1BRVW9pN0hKcU5vQkUyMWRyWVU?oc=5",
-   "ringkasan": "",
-   "gambar": null,
-   "sumber": "Kompasiana.com",
-   "tema": "syariah",
-   "bahasa": "id",
-   "waktu": "2026-11-23T06:07:14+00:00"
-  },
-  {
-   "judul": "JPMorgan is working on AI agent transactions that don’t involve humans",
-   "link": "https://www.cnbc.com/2026/11/18/jpmorgan-hyundai-card-ai-agents-payments.html",
-   "ringkasan": "JPMorgan and Hyundai Card are looking to expand the use of AI agents in financial transactions.",
-   "gambar": null,
-   "sumber": "CNBC International",
-   "tema": "global",
-   "bahasa": "en",
-   "waktu": "2026-11-23T06:06:55+00:00"
-  },
-  {
-   "judul": "IHSG Hijau Kala Bursa Asia Berdarah, Imbas Prabowo - Bos MSCI Bicara",
-   "link": "https://www.cnbcindonesia.com/market/20261123124613-17-787585/ihsg-hijau-kala-bursa-asia-berdarah-imbas-prabowo--bos-msci-bicara",
-   "ringkasan": "Bursa Asia-Pasifik melemah, namun IHSG menguat 1,59% di tengah pembicaraan Prabowo dengan CEO MSCI.",
-   "gambar": "https://awsimages.detik.net.id/visual/2025/05/16/seberapa-murah-ihsg-vs-bursa-saham-di-asia-pasifik-1747389367728_169.jpeg?w=1200&q=90",
-   "sumber": "CNBC Indonesia",
-   "tema": "pasar",
-   "bahasa": "id",
-   "waktu": "2026-11-23T06:06:41+00:00"
-  },
-  {
-   "judul": "Apresiasi Kebijakan Pangan, KTNA Nilai Keberhasilan Tak Sekadar Produksi",
-   "link": "https://news.google.com/rss/articles/CBMixwFBVV95cUxNdkx3ZUhMTDg1THpJZTlLME5fMHl3cXhDRE1QYjRmTkVGRVpTWDlKekFNckFFUXlWMnc0ckI0Wkc4NFZmM00ycWRHLWYwNlFDX2RhXzA0dnBLbm1PbWFsZlRtRlBfbUt1Qm5CVXdDSk83UEJGNTc3X18xc0VYYUgwYzllZXptekVmNzJaWUg1N0pZQ2pid01iZVpOV3NLTDlqNzVnWFhzZ3g5ZHJNU2c2cGFBaS1lazJvNzFpLXlfY1FFUXJ5Z01B?oc=5",
-   "ringkasan": "",
-   "gambar": null,
-   "sumber": "Tabloid Sinar Tani",
-   "tema": "pertanian",
-   "bahasa": "id",
-   "waktu": "2026-11-23T06:03:00+00:00"
-  },
-  {
-   "judul": "Neraca Pembayaran Indonesia Berbalik Surplus US$ 100 Juta pada Kuartal III 2026",
-   "link": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPMXVuSllzM29Qd1NJaWNwWlFxbUdUQW42WWZTakgxZVN4c28zVDFEdUhKYUtzSUY5eHN6eWg4emNPTEgxRzZYdjZ2a2Vhb2tHZ21DSkJFZXhwQVJ4NmpULWc0ZTFud1liNXJ2SHYyVjFEcENsR08wVzJ1VEFmQWxKNHhQM0NPbGh5ZGpLWGtSeUVEQWF1TVJDRjlxeHB3NlE2cXNpOThRNU44b21xTlh4MVJoTlNLbUdJ?oc=5",
-   "ringkasan": "",
-   "gambar": null,
-   "sumber": "Industry.co.id",
-   "tema": "makro",
-   "bahasa": "id",
-   "waktu": "2026-11-23T05:58:00+00:00"
-  },
-  {
-   "judul": "Indonesia resmi tandatangani kontrak keikutsertaan Expo 2030 Riyadh",
-   "link": "https://news.google.com/rss/articles/CBMisAFBVV95cUxORlNaUGNLNG5hQVZMQTJyT0FtMVNIQlJoODEtcFBicmRlNnZ2dGdBN2FsQWpLZmRDZ3NRY1NReFBfYW13S01NMmhkV0RoX3VfTmFwSjFkNkJaTjFCTnMzU0E3b1EySkE1OWJPcVpOWHRrNXNRODRrUjZXMVBiMWRMM1BnZ1BwdXl3Ym5Rb01TWTFSa2lNMVV3RHpxWHo1ekNjV3hqREZobFU3U3VBU1R5Vg?oc=5",
-   "ringkasan": "",
-   "gambar": null,
-   "sumber": "ANTARA News Sultra",
-   "tema": "makro",
-   "bahasa": "id",
-   "waktu": "2026-11-23T05:55:33+00:00"
-  },
-  {
-   "judul": "Bima Arya: Kepala Daerah Wajib Paham Cara Hitung Pertumbuhan Ekonomi",
-   "link": "https://www.cnnindonesia.com/ekonomi/20261123125017-532-1430354/bima-arya-kepala-daerah-wajib-paham-cara-hitung-pertumbuhan-ekonomi",
-   "ringkasan": "Wamendagri Bima Arya menekankan pentingnya pemahaman kepala daerah dalam menghitung pertumbuhan ekonomi untuk kebijakan yang berdampak nyata.",
-   "gambar": "https://akcdn.detik.net.id/visual/2026/11/23/wamendagri-ingatkan-kepala-daerah-dan-wajib-paham-cara-hitung-pertumbuhan-ekonomi-1795411006985_169.png?w=360&q=90",
-   "sumber": "CNN Indonesia",
-   "tema": "makro",
-   "bahasa": "id",
-   "waktu": "2026-11-23T05:55:04+00:00"
-  },
-  {
-   "judul": "Indonesia bidik perluasan pasar ekspor ke Eropa lewat IEU-CEPA",
-   "link": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxNTVZNZmpYT1FYV2Q5M25DY0xWbzNxYkg2OXpyRVVTRzJteGRhVmtfRmFhSFl4M2J5QlBzbGUwVmtjTnNyYVJ3VDBvLV9uN1lEXzZjMUFGQ0xCTlFDcHFEdnoyRlpIMEt0UnFHVzZNWWZGZVBFQXBWVkE5cUpXcFhuYzNuMnJURzlQTU1mQkZodTRKMktxZm5qU1RQSWdhNEY2WUxYNTBPWUjSAa4BQVVfeXFMUGNYeVgwWDdZVGI5c1VzNkUwMlFuZ0tZYmZjZURGZV9Sa1lzcDJYVVUzUXZURThiX0RUZ0huenhwZ3ltcTVXSUl0MUdqelNfUmRaa0lrMGVNSWtMaE9Ra295bWt4b1EtUDNNNk92TUhjWHFqRUdqZnJLTWxlMDhvRXBiNFVweE1aTzlILUROY3loY0FwMlhVMnNEZ0Q3RjB3VnFibVFkQXBaTTVqX1N3?oc=5",
-   "ringkasan": "",
-   "gambar": null,
-   "sumber": "ANTARA News",
-   "tema": "makro",
-   "bahasa": "id",
-   "waktu": "2026-11-23T05:54:28+00:00"
-  },
-  {
-   "judul": "BTS BAKTI: Transformasi Ekonomi Digital di Daerah Prioritas",
-   "link": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxOclo4QWFyMWNJdDJiWld5ZFFtSkYwYVFZREtNTG1iZGtzakpWb05QM1Zrd2FRcWQ4OG1VMlVCY1N6TDk1ckdsU3Q2Rms1MVpMRXd0eF9XaVF4N1FQLW45NnFCZzE3VGhNaDB0R0JETWY0Zm9tM1IwajlpU0xXQnYya2U2T0tlV29NQnRLZmREVXgzZHRXOHgwcTJ4QWY2S2R4SERyR3AwYmF6SUNNTmF0ajFTbEZOU21w?oc=5",
-   "ringkasan": "",
-   "gambar": null,
-   "sumber": "CNBC Indonesia",
-   "tema": "makro",
-   "bahasa": "id",
-   "waktu": "2026-11-23T05:50:35+00:00"
-  },
-  {
-   "judul": "Kementerian Kehutanan",
-   "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxNclY4X3hab1A5b1pjbGpRSGVGOE5QeGpBZlJZV3ctcFYtdk81VHJWRFFKcXc3Qk1KWDdSSV91RURaSDhibzNGbTliODFfY2tuXzhfTDg2Nkt3R0hSdHVEWkxYSDBhZHVWS3V6VEpIdTZFNnB6VFpQRkJsbmFncDdzaUdybU5WSG42TVkxWXZOSXpiMzQ?oc=5",
-   "ringkasan": "",
-   "gambar": null,
-   "sumber": "Kementerian Kehutanan",
-   "tema": "pertanian",
-   "bahasa": "id",
-   "waktu": "2026-11-23T05:45:50+00:00"
-  },
-  {
-   "judul": "Jalan Usaha Tani Dibangun, Petani Balai Batingkah Solok Yakin Biaya Operasional Bisa Ditekan",
-   "link": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQQ08xdEszdVpqeTBSSWY1Q3kxYk45YVpGR0k0QjFtaGVrejhlOVl0Y1hOdktMdG1YN3JocENyTHRVOUIzWWJELTd3eC1pLXhkdlNNeHZGWTh5MGZLMktIV2JmN21uS2g0TE8xN0toR0VyWWdYTWZvZllkbEtKVDNEMS1LZFFnVnlpcnpOSjV5NE5XUmhYbDUtT3J2WVlVbHRwa1JVbTFIVGY5dUctcnR6WnlyWFp2czQ?oc=5",
-   "ringkasan": "",
-   "gambar": null,
-   "sumber": "KlikPositif.com",
-   "tema": "pertanian",
-   "bahasa": "id",
-   "waktu": "2026-11-23T05:40:37+00:00"
-  },
-  {
-   "judul": "Menko Pangan Pantau Penyaluran 30 Kg Beras Bantuan di Banyuwangi",
-   "link": "https://www.cnnindonesia.com/ekonomi/20261123121248-97-1430341/menko-pangan-pantau-penyaluran-30-kg-beras-bantuan-di-banyuwangi",
-   "ringkasan": "Pemerintah salurkan 30 kg beras untuk 33,24 juta Penerima Bantuan Pangan di Indonesia, Bantuan ini meringankan pengeluaran rumah tangga hingga Desember 2026.",
-   "gambar": "https://akcdn.detik.net.id/visual/2026/11/23/bnr-kemenko-pangan-67150-november-2026-1795409637932_169.jpeg?w=360&q=90",
-   "sumber": "CNN Indonesia",
-   "tema": "pertanian",
-   "bahasa": "id",
-   "waktu": "2026-11-23T05:40:14+00:00"
-  },
-  {
-   "judul": "KKP Tindak 17 Kapal Ikan di Laut Sulawesi, Lima di Antaranya Berbendara Filipina",
-   "link": "https://news.google.com/rss/articles/CBMixAFBVV95cUxNS0JDQW53WVkzUEpKdXJoUXY0bHltb0V5bWtpYUhmYmFhbk1ORGxadjNwQlV3UDl2YjJYSnE3UE9JRjFaakplVWtSbU5obkFiQmlOVEdQNXFDcEZPSFZpT3BiYmkzY3hrUUlaZERPSVJTd1QzVVB4aDd5MTUwZklIR1czdGJucktjOENLTkJuT3FkVXZOOVNLdnJBNlVOUkRXcmNaeEFZNnd1SEszSGh6bERGRkI5NGVEenN4VVhidkY2UWs5?oc=5",
-   "ringkasan": "",
-   "gambar": null,
-   "sumber": "KKP | Kementerian Kelautan dan Perikanan",
-   "tema": "pertanian",
-   "bahasa": "id",
-   "waktu": "2026-11-23T05:40:09+00:00"
-  },
-  {
-   "judul": "Bank Indonesia: Uang Beredar Tumbuh Lebih Tinggi Jadi Rp10.698 Triliun per Oktober 2026",
-   "link": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNYjFSNlE2cTFiTnJlaXA3LVVkVm1Pa0Fzd3pPQnZta3VVOWpid25hUlVwRUhROHR1UjVyMmVhUG92czIwek1LX3hNM2MzZFpOcC1yWjRZSU0zVk91bnRnVk1zOG45aFlhdUY3dk54RmI1QzZZYVJzUGI2OUgzd3JydlpnY2RfSWRJWUxjcFd0Q2phc1I2ZmFzY2w5NWpsaW9FNXo3ZjdB0gGrAUFVX3lxTFB0a25KblEtX0VxakpxcHMwYmpzdkUxSjBmSUlXeFZRX0t1TE9Yc0dXSlB4MjFoMzRsSV9QbzNhcmpKVGl2RmFOSjFvaTdyYy0xRVdQU2VrQ3M5UTJ4OG4zWFRtWjNVQlpoMmxjMzg3ZTkxTGxmZEZFS196a09mQTdmRnpDRUpqRjhySWtjRGRoRnMyRmdoT3FycjZNWmZjVU9vMmhEZ2VQalZHRQ?oc=5",
-   "ringkasan": "",
-   "gambar": null,
-   "sumber": "Olenka",
-   "tema": "moneter",
-   "bahasa": "id",
-   "waktu": "2026-11-23T05:40:00+00:00"
-  },
-  {
-   "judul": "Bulog Wamena pastikan distribusi beras pangan pemerintah sesuai HET",
-   "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxOVDJDSlRGNXhnemFhRUJFYXBQY04wYlB6VW1MbkM1czRfcXRZT29NN3RDdG45MWN1SE5KZDByemJrcUNIWEJkc1cxcDlPTDQ0UmtkVzV3Q29HVkNwclNVcWpfZTVWM1dRRF9SOGlUU1JNRkMwU3lBOUwxSlItRmtuUDY1eDd3dFNQTkkzcXgxOTVJbEQ2SjVCS0Z0MXRXRFIxWVJGdFJsYjNQQkRQS0VJ?oc=5",
-   "ringkasan": "",
-   "gambar": null,
-   "sumber": "ANTARA News Papua",
-   "tema": "pertanian",
-   "bahasa": "id",
-   "waktu": "2026-11-23T05:38:54+00:00"
-  },
-  {
-   "judul": "Jelang Panen, Babinsa Sidrap Bergerak Kawal Tanaman Padi Petani",
-   "link": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQOFRwbzhDLUlBM2EzT0RxRlVrZFF0dVFDSWpGel95QkE0RWVmeHE4a1pQTmFhVE1Sc0RDRDJfZjlKdFprdmg1dXNLejM2TnQzSTgwcmJ1ZHJEemdvR3dfVzlOOE1YWEJfNVVEQVdIeHBpcVVlbFRpdzFxLTdCTFRwVzNJUlI0ZWZEZFB3UlRRUmpWZnJsbkpiSUpQcWVfU0Nja2JRNXBsV0VQci05YmQwNXNzNkNtMlNuRkow?oc=5",
-   "ringkasan": "",
-   "gambar": null,
-   "sumber": "Tabloid Sinar Tani",
-   "tema": "pertanian",
-   "bahasa": "id",
-   "waktu": "2026-11-23T05:37:00+00:00"
-  },
-  {
-   "judul": "TEP Unhas bantu petani cabai Fakfak hemat 79 persen biaya pengendalian hama",
-   "link": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxNN1Q5dWRGZ2J3R1czalh6RktiTng3Q1Jhek5xMVFnVWcxTGpUUXRYNTM4c2ZoSGZpRE03Tkhyb0hfZ21PRFFnMUgyVUJ1cGg1aUN0eHB5U290S3RjemVWVGxCSmRtajNvLXgyLUlwWWxoQmpOWW9IbzBDZ2Nxc3dVNHNrUjdrNWhwR21HdThweTBlZmFsLXZNaDRmS2JrVmxaYmIzSDhCSUo3aUVZVDhoejVzOFRuOHRKQ19zbWJRNDbSAcYBQVVfeXFMUFpMSFd0ZG1OWThvYkdzMlAxS3FTS2plVlVzVGpra0tzd0UtNkFIR1BsamNFeXBZX25QZDZscllDeXo3RWV2MGR6NmNQaFFTOXdCT1pSMjZHSzlXSTRETFAtUno1Q29YTU1VX3VhMmhtRUxjR2RFWVZYdFctX3h5NEdiZzdTNXpEOS1IOHRUMUVvT2VxUnJ1bVNmTDZIN2RkSC1ELTY0ZkJLOU5wcmlTeHpKNTFnUy1XVnp0dW5NNnZpWWxvQUhn?oc=5",
-   "ringkasan": "",
-   "gambar": null,
-   "sumber": "ANTARA News Papua Tengah",
-   "tema": "pertanian",
-   "bahasa": "id",
-   "waktu": "2026-11-23T05:36:31+00:00"
-  },
-  {
-   "judul": "Yogyakarta Kembangkan 'Experience Tourism' Dorong Pertumbuhan Ekonomi",
-   "link": "https://www.cnnindonesia.com/ekonomi/20261123121259-92-1430342/yogyakarta-kembangkan-experience-tourism-dorong-pertumbuhan-ekonomi",
-   "ringkasan": "Kepala Bapperida DIY Danang Setiadi memaparkan inovasi pariwisata berbasis pengalaman (experience tourism) sebagai upaya mendorong pertumbuhan ekonomi daerah.",
-   "gambar": "https://akcdn.detik.net.id/visual/2026/11/23/kepala-bapperida-bapperida-diy-danang-setiadi-di-forum-akselerasi-ekonomi-daerah-2026-regional-jawa-dan-bali-1795409287323_169.png?w=360&q=90",
-   "sumber": "CNN Indonesia",
-   "tema": "makro",
-   "bahasa": "id",
-   "waktu": "2026-11-23T05:35:48+00:00"
-  },
-  {
-   "judul": "BPS Catat Harga Cabai Masih Tinggi, Cabai Rawit Rata-Rata Rp 83.823",
-   "link": "https://ekonomi.republika.co.id/berita/toxwr5370/bps-catat-harga-cabai-masih-tinggi-cabai-rawit-ratarata-rp-83823",
-   "ringkasan": "JAKARTA — Badan Pusat Statistik (BPS) mencatat harga cabai masih berada pada level tinggi pada pekan ketiga November 2026, meskipun komoditas cabai rawit mengalami penurunan harga sebesar 5,14 persen....",
-   "gambar": "https://static.republika.co.id/uploads/images/detailnews/041923300-1786108368-830-556.jpg",
-   "sumber": "Republika Ekonomi",
-   "tema": "pertanian",
-   "bahasa": "id",
-   "waktu": "2026-11-23T05:33:05+00:00"
-  },
-  {
-   "judul": "Zulhas Ajak Kampus Berkolaborasi Percepat Swasembada Pangan",
-   "link": "https://www.cnnindonesia.com/ekonomi/20261123115307-97-1430335/zulhas-ajak-kampus-berkolaborasi-percepat-swasembada-pangan",
-   "ringkasan": "Menko Pangan mendorong perguruan tinggi mendukung swasembada pangan nasional melalui riset, inovasi teknologi, dan pengembangan mekanisasi pertanian.",
-   "gambar": "https://akcdn.detik.net.id/visual/2026/11/23/kemenko-pangan-1795409911287_169.jpeg?w=360&q=90",
-   "sumber": "CNN Indonesia",
-   "tema": "pertanian",
-   "bahasa": "id",
-   "waktu": "2026-11-23T05:32:57+00:00"
-  },
-  {
-   "judul": "Bloomberg: CEO MSCI Bersedia Pertimbangkan Alternatif Penurunan Status Pasar Indonesia",
-   "link": "https://ekonomi.republika.co.id/berita/toxwkx370/bloomberg-ceo-msci-bersedia-pertimbangkan-alternatif-penurunan-status-pasar-indonesia",
-   "ringkasan": "JAKARTA -- CEO MSCI Henry Fernandez disebut menyatakan kesediaannya untuk mempertimbangkan alternatif selain penurunan dua tingkat status pasar saham Indonesia dalam pembicaraan dengan Presiden Prabowo Subianto baru-baru ini. Hal...",
-   "gambar": "https://static.republika.co.id/uploads/images/detailnews/016123700-1792756110-830-556.jpg",
-   "sumber": "Republika Ekonomi",
-   "tema": "pasar",
-   "bahasa": "id",
-   "waktu": "2026-11-23T05:29:21+00:00"
-  },
-  {
-   "judul": "BI Catat Uang Beredar M2 Tembus Rp10.698 T, Tumbuh 9,3%",
-   "link": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPU3FwMTF1OUJUTFpUT3U5b1lGTFZpdVQtaWsta0VjVUxoTDJiaUcxRk42WWFLN0ZRbFZrNHhPaUpiR01oN0gyQzhXY1Z6bkRKUXkxOXgtZ0JmLVcxeTlUZDN3a0xiYk9WbFZKTlFqTkd4bnczUlh4YVpVUEtxT3ZaUHZFYXB1c3V5SHRVQVVUbHVZU1NYeWhFX3VXTEY0c2hxemdKRVlIS1Y?oc=5",
-   "ringkasan": "",
-   "gambar": null,
-   "sumber": "Bloomberg Technoz",
-   "tema": "makro",
-   "bahasa": "id",
-   "waktu": "2026-11-23T05:29:11+00:00"
-  },
-  {
-   "judul": "Indonesia-Tiongkok Sepakati Investasi Rp274 Triliun, 30 Ribu Lapangan Kerja Diproyeksikan Terbuka",
-   "link": "https://news.google.com/rss/articles/CBMixwFBVV95cUxObUN6N2tua0hER1hUUVdGTmp2NUdlLVVzV1ZhSlZ5bVdKOU5tQnBwZ3JMVlpZQUpMNEdCS3NfUnFNQWVqSVZNRks3Tmx5TGF5VXluNjIzVkdIZ2F1aUszcVNBako2LUVhYWlwR056Q1B3VjlZdkdDS1NzWGlMYWhpUi1yWWFlTFNRSjVaMEkzM2RKSktkNDZZRzluWkxrN01ZdFZId3FWcHBEaExVbHdtT1U0UHU2RUw1R0p5OXBpVXJKQ2hMTHg4?oc=5",
-   "ringkasan": "",
-   "gambar": null,
-   "sumber": "Infokini.id",
-   "tema": "global",
-   "bahasa": "id",
-   "waktu": "2026-11-23T05:25:45+00:00"
-  },
-  {
-   "judul": "SAH Dukung Pemasok Lokal Terlibat dalam Program MBG, Petani Jambi Harus Dapat Pasar",
-   "link": "https://news.google.com/rss/articles/CBMixgFBVV95cUxPcFBHc20zczhISVUtX0dnbTYxQmJrMHhwR0M3XzBDY09ySXFHZ1ViQzVPR1ZwaHdQdF9BbXA3cmUtSmVjdkxCXzNUUkhvSGZwQnlwTFpTM2dWejNSTnZKTUxJQ2xSVkswX3lZLUlKNFQ5UFRFSm80R0RHQUhVQnF1cFZyM0JkUnZ6bV9fTGdZZ1JjbUVJZjRWbE95QkdfcEhXNWgxSUtEd2dQWVA1ekk0Tk5fOGhKdUwyX015YVp5Z2xBdXkyZnc?oc=5",
-   "ringkasan": "",
-   "gambar": null,
-   "sumber": "jambiprima.com",
-   "tema": "pertanian",
-   "bahasa": "id",
-   "waktu": "2026-11-23T05:21:23+00:00"
-  },
-  {
-   "judul": "Ekonomi Indonesia Tumbuh",
-   "link": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFBEX1p6Z2hqckhzV096VDRpeU1pZjZrcFVTOExtQ2FNUDhNVmk5OVFaSGlBUktYNnQxVEtGR00yRmt5cExmbndwaVIxNHc1Qjh0cWJhYlJrWUxjODlBQXFlYzd6UUgxZw?oc=5",
-   "ringkasan": "",
-   "gambar": null,
-   "sumber": "Pemerintah Provinsi Banten",
-   "tema": "makro",
-   "bahasa": "id",
-   "waktu": "2026-11-23T05:18:51+00:00"
-  },
-  {
-   "judul": "Jurus BEI Hadang Algo Trading yang Terindikasi Tak Wajar",
-   "link": "https://www.cnbcindonesia.com/market/20261123121436-17-787556/jurus-bei-hadang-algo-trading-yang-terindikasi-tak-wajar",
-   "ringkasan": "Bursa Efek Indonesia mulai 6 November 2026, membuka informasi publik terkait indikasi manipulasi perdagangan saham",
-   "gambar": "https://awsimages.detik.net.id/visual/2026/10/28/direktur-utama-bursa-efek-indonesia-bei-jeffrey-hendrik-saat-menyampaikan-pemaparan-dalam-kearney-100-years-of-impact-di-the-r-1793195456641_169.jpeg?w=1200&q=90",
-   "sumber": "CNBC Indonesia",
-   "tema": "pasar",
-   "bahasa": "id",
-   "waktu": "2026-11-23T05:16:13+00:00"
-  },
-  {
-   "judul": "Jurus Eri Cahyadi Tekan Angka Kemiskinan Surabaya hingga 3,3 Persen",
-   "link": "https://www.cnnindonesia.com/ekonomi/20261123115211-532-1430332/jurus-eri-cahyadi-tekan-angka-kemiskinan-surabaya-hingga-33-persen",
-   "ringkasan": "Angka kemiskinan di Kota Surabaya berhasil ditekan hingga ke level 3,3 persen. Angka itu diklaim menjadi capaian terendah dalam sejarah Kota Pahlawan.",
-   "gambar": "https://akcdn.detik.net.id/visual/2026/11/23/wali-kota-surabaya-eri-cahyadi-di-forum-akselerasi-ekonomi-daerah-2026-regional-jawa-dan-bali-1795408115046_169.png?w=360&q=90",
-   "sumber": "CNN Indonesia",
-   "tema": "makro",
-   "bahasa": "id",
-   "waktu": "2026-11-23T05:15:20+00:00"
-  },
-  {
-   "judul": "Indonesia Gandeng Jepang Perkuat Industri Bioenergi Nasional",
-   "link": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE5ldnNUUFZRUHZKbklEcHcybkk5djJ2THNkOHFnOVQ1MXY2YWZZUndNSUh6YTducWlMb3liNkwyR21DQzEybFdkR2VKYnlLZlgxaG9SeGVweHJPUDUwX0N3ajlHY2h4MVVz?oc=5",
-   "ringkasan": "",
-   "gambar": null,
-   "sumber": "cwibc.co.id",
-   "tema": "makro",
-   "bahasa": "id",
-   "waktu": "2026-11-23T05:15:03+00:00"
-  },
-  {
-   "judul": "Pemkab Kotabaru memastikan pasokan pangan bergizi murah bagi masyarakat",
-   "link": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPN09NX24tMVI4WVJBUE9WZXRaaEQ0VmdrUmI5Q09NSm1aVzllWUVlSWlTVjVZUnEtWU5TdWEyMUFTR2VsM3JaUFVKVmZteGI0ZEhqQkxJTmVZekY1MkxoakI5QmJSRlhOLThtd2dEUFlfdlc0VWVXRkRtaDZwQUNVbllqZ0ZuWGdoejl0T3hSOUlxUFN4cUdMaUVzSm11bmNxNkpmRUlSUVNXM2IyWVpxU2lLckZ3Z9IBuwFBVV95cUxQTi1zOVJiZGlNc21kV05TRk5rcm16SHlPeHh0ZUlTSTd6QTByMXY3eHoxS2hIQnNBWHhXSklNcENsVDdwTHBkbVBXZmM0eHJVcWdwUkZsQ1BxdTdscjgwX1dMalU2Q3hFdHh3c1JzRVdLczZTQ0oxT3A0RXo2bmFzS0VVa2VBZ0pPQXd1NU1MTk1XSUtjWmc5MHRnbkJ1a2xMd0pUZDd4X2R1OTdUVHBCa2JzU0VwNGxKMlow?oc=5",
-   "ringkasan": "",
-   "gambar": null,
-   "sumber": "ANTARA News Kalsel",
-   "tema": "pertanian",
-   "bahasa": "id",
-   "waktu": "2026-11-23T05:14:15+00:00"
-  },
-  {
-   "judul": "Pasuruan Perluas Kawasan Industri Jadi 630 Hektare di 2027",
-   "link": "https://www.cnnindonesia.com/ekonomi/20261123120712-532-1430338/pasuruan-perluas-kawasan-industri-jadi-630-hektare-di-2027",
-   "ringkasan": "Wakil Wali Kota Pasuruan Mokhamad Nawawi mengatakan perluasan tersebut akan dilakukan melalui perubahan Peraturan Daerah (Perda) Rencana Tata Ruang Wilayah.",
-   "gambar": "https://akcdn.detik.net.id/visual/2026/11/23/wakil-wali-kota-pasuruan-h-mokhamad-nawawi-di-forum-akselerasi-ekonomi-daerah-2026-regional-jawa-dan-bali-1795407845979_169.png?w=360&q=90",
-   "sumber": "CNN Indonesia",
-   "tema": "makro",
-   "bahasa": "id",
-   "waktu": "2026-11-23T05:13:00+00:00"
-  },
-  {
-   "judul": "IHSG Hari Ini Senin Sempat Anjlok 1,52%, Saham Bank Besar Jadi Pemberat",
-   "link": "https://news.google.com/rss/articles/CBMidkFVX3lxTFBBTHRHRTd2TEFwYnRzd1dfTkFoOTJ6anB6X1JPV0pRcUdNY0JOR2ZoTjIxV1Q5Tk92UmFYR01hZDQ4RUVVX0RMb3pXQkVtMXB1OHUwWUFwTTQxdXVzcldObFRXMmktZUVYeW8yc2lpZGhkcHpEWFE?oc=5",
-   "ringkasan": "",
-   "gambar": null,
-   "sumber": "Aktualita.co",
-   "tema": "pasar",
-   "bahasa": "id",
-   "waktu": "2026-11-23T05:12:33+00:00"
-  },
-  {
-   "judul": "BI Bicara Soal Pelemahan Rupiah dan Ancaman Inflasi di Tengah Ketidakpastian Global",
-   "link": "https://news.google.com/rss/articles/CBMiowFBVV95cUxOYm41b0VEZXNzQmpYRU5DRkdEVTlJUXoydThXS2ptMTB3TjFoM0tQaUxDYTR6WTlLSTJhdVNyU3FVajEzZC1NQXRoeDdlMmZVZEM2VGRzTGw4NWJtazNTUTlIajUzUFZvVjZ5Szk1X2xoVXpaNDhwa2pwcENIVVhhc2NhUlRpdG9heTFyanhiRFZDT25Wakc2cDYtcGZfVWtxT2RB0gGoAUFVX3lxTE1PWUJhVW1ZMWhodEtPdWZNSVkyU2U0OU5MSm9kVHJmR3lrLUFOZXZOR3M3YTFHbF9tb3RzaEZFTnpiMGJDaXQwZDNSazZvT3ZDV3RjWTBZNTBXM2FucUxOTG44dTBNSXRBUDJaS3RlR2lzY1BJMVBzLUV0UGpVMkduLWpPS2dCS1F1RlZadzNYMUpJN3QxcXF1S3l0a002RkVJU2xnVkIzbw?oc=5",
-   "ringkasan": "",
-   "gambar": null,
-   "sumber": "Olenka",
-   "tema": "moneter",
-   "bahasa": "id",
-   "waktu": "2026-11-23T05:12:29+00:00"
-  },
-  {
-   "judul": "IEU-CEPA Resmi Ditandatangani, Sawit Indonesia Berpeluang Nikmati Tarif Nol Persen ke Pasar Eropa",
-   "link": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxOdGpMUnJpVXNGcGdpb1RpVUNSRURycmlqVkZEbmlwSTZoclRUdmx5d3BjeVN1SUw1NGFDU1lIa3dBSW15dE5fNVM4c3YtNDFsUkMySkhmM3h6LXB0N2NPRVZUcS1WUjh4ZnlDUFgwS25ESHQ4Mmhna2pOM3lOODloZFF6QjZaNnNxYmZHcGZ5V3FfWW5td0ZKRnRpcWdMcGVtZ3lkX0JZb3RNTEc4YWNlbzBQeE1KQXBxZ1prQk9FdkVTYjk2bTFCUEkxRWxicmo3djVnag?oc=5",
-   "ringkasan": "",
-   "gambar": null,
-   "sumber": "sawitsetara.co",
-   "tema": "pertanian",
-   "bahasa": "id",
-   "waktu": "2026-11-23T05:11:12+00:00"
-  },
-  {
-   "judul": "HKN 2026: BRI Peduli Beri 843 Ambulans dan Gelar Cek Kesehatan Gratis",
-   "link": "https://www.cnnindonesia.com/ekonomi/20261123112209-625-1430317/hkn-2026-bri-peduli-beri-843-ambulans-dan-gelar-cek-kesehatan-gratis",
-   "ringkasan": "Sejak 2022, BRI Peduli telah menyalurkan 843 unit ambulans ke berbagai wilayah Indonesia, dan menghadirkan Cek Kesehatan Gratis bagi lebih dari 20 ribu warga.",
-   "gambar": "https://akcdn.detik.net.id/visual/2026/11/23/bnr-bri-corsec-108330-11982-23-november-2026-1795407567722_169.jpeg?w=360&q=90",
-   "sumber": "CNN Indonesia",
-   "tema": "makro",
-   "bahasa": "id",
-   "waktu": "2026-11-23T05:07:09+00:00"
-  },
-  {
-   "judul": "Akhiri Sesi I, IHSG Parkir Menguat 1,59 ke Level 5.228",
-   "link": "https://www.cnbcindonesia.com/market/20261123120334-17-787548/akhiri-sesi-i-ihsg-parkir-menguat-159-ke-level-5228",
-   "ringkasan": "IHSG ditutup menguat di level 5.228,24 dengan total transaksi Rp6,43 triliun. Pekan ini, pasar menghadapi sentimen penting.",
-   "gambar": "https://awsimages.detik.net.id/visual/2026/10/28/layar-menampilkan-pergerakan-indeks-harga-saham-gabungan-ihsg-di-gedung-bursa-efek-indonesia-bei-jakarta-rabu-28102026-1793171038632_169.jpeg?w=1200&q=90",
-   "sumber": "CNBC Indonesia",
-   "tema": "pasar",
-   "bahasa": "id",
-   "waktu": "2026-11-23T05:06:50+00:00"
-  },
-  {
-   "judul": "Prabowo Ajak Jepang Investasi Energi, Indonesia Incar Ketahanan Ekonomi dan Industri",
-   "link": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxOb3h5NS1nSnE1QjJ6UnplTjJseWFFMFJ6TlpnVHduTTh3Mk5FQU5qNTJFOS1Ga2pjV29aMG41dHo2OW5hU0ZnMkFVcm9vY2d3ZExwZWRoYmNSN1VVWEhZclJuYU8yd1VPQ0cwMGdsT1R1Rmh6NE0yYWRfMDVoSllMeENmQ0VYMnlqLTFEZy04WmtTWURjaEplemJqRkxlUlpKZEtleHUwam5xWFBjY0Y1N1VnVUs2YzNReUZ6NDdiWWJhdHkyaXZuTkJHZ1BoeEVY?oc=5",
-   "ringkasan": "",
-   "gambar": null,
-   "sumber": "Kabar24",
-   "tema": "makro",
-   "bahasa": "id",
-   "waktu": "2026-11-23T05:06:49+00:00"
-  },
-  {
-   "judul": "Kota Padang Raih Empat Penghargaan di Festival Pangan Sumatra Barat 2026",
-   "link": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOaDdsMDM1SFRUcldGYVJaVmQwdGR3akU1RGVfcFhNbC1PajdJOTlhanNBRTNSVEtVOERmd0FXRGhwYWFEQnRTcnl0bnVwVGEzVHU4X1JjZG5lM3RveVlkbFFtSkp3anFwTWZma1N2Z1J6LVMwTG1jc1FvcmJoODY2QXNCR2JIa0hGZ1E2TXY3VUFlSmo2SmQ5b2I5WTVGaElSeUxyZ1paV1RVYi1ad05FSzliLTBXUEJiNm5UYw?oc=5",
-   "ringkasan": "",
-   "gambar": null,
-   "sumber": "InfoPublik",
-   "tema": "pertanian",
-   "bahasa": "id",
-   "waktu": "2026-11-23T05:06:00+00:00"
-  },
-  {
-   "judul": "Kepala Bappeda Jabar Beber Strategi Tarik Investor Lewat Transparansi",
-   "link": "https://www.cnnindonesia.com/ekonomi/20261123115350-532-1430334/kepala-bappeda-jabar-beber-strategi-tarik-investor-lewat-transparansi",
-   "ringkasan": "Kepala Bappeda Jawa Barat Dedi Mulyadi membeberkan strategi pemerintah provinsi dalam menggenjot investasi untuk mendongkrak perekonomian daerah.",
-   "gambar": "https://akcdn.detik.net.id/visual/2026/11/23/kepala-bappeda-badan-perencanaan-pembangunan-daerah-provinsi-jawa-barat-dedi-mulyadi-di-forum-akselerasi-ekonomi-daerah-2026-r-1795409605720_169.png?w=360&q=90",
-   "sumber": "CNN Indonesia",
-   "tema": "pasar",
-   "bahasa": "id",
-   "waktu": "2026-11-23T05:04:16+00:00"
-  },
-  {
-   "judul": "Dorong Pengendalian Inflasi Jelang Nataru, Pemprov Kalteng Jaga Stabilitas Harga dan Ketersediaan Pangan",
-   "link": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxOaWk1enM0TnZQMGtfU0JJcWhIUDNBR2c2cHB2RTRNWFV2RWFnenBjMm81NThHNm9kdnI4ckc1LWc4ckdmVHVFWHhRRG0wMXR3aWh4d0U4TEJkMFh3Z1JTNjhjNlVlOHJ0TDRISllMeVpQbmFwZ1UxZWxwcXhfMk1kWXZGVXJXMXllazNzcVgtLUVWeFFJeHVBYXpmakZmWGlVS1kwb1hJbGJiRGd6M1c2ZlBDd2lnbXg2OF9KNko0bURjZnVyUnh6WTlIbDZacHRUTlFIU1gwZFNDdWNlYncyUw?oc=5",
-   "ringkasan": "",
-   "gambar": null,
-   "sumber": "mmckalteng",
-   "tema": "moneter",
-   "bahasa": "id",
-   "waktu": "2026-11-23T05:04:00+00:00"
-  },
-  {
-   "judul": "Perangi Sampah Plastik di Pesisir Jakarta, ABeam Consulting dan NEC Indonesia Gandeng Plastic Bank",
-   "link": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNRjdCV2JpZlJBYXp0R2Zpd3RFNC1DTTVnNC1fbFVwT2MtRGZLT29QX0NIQ3YtbFlPY3ZhOUlFUWxyam5zMGc5dGp4d0V0ZHdCRURZVzFuZFZEUndiOUwzenltZnpnblVpcm0tb2lvaDFCQ2xQWHlDbDJXM1NTcnpzZzZhRmRCNk81TDNsUzRUU2ZOWkJ2RFVCNGpNLWxnaXRnWjFvZVQyaTlBSU5UWEhqd3ZlRnhGbUtx?oc=5",
-   "ringkasan": "",
-   "gambar": null,
-   "sumber": "TIMES Network AI",
-   "tema": "makro",
-   "bahasa": "id",
-   "waktu": "2026-11-23T05:00:03+00:00"
-  },
-  {
-   "judul": "Sosok Calon Direksi dan Komisaris BYAN, Ada Hatta Rajasa-Budi Waseso",
-   "link": "https://www.cnbcindonesia.com/market/20261123114000-17-787531/sosok-calon-direksi-komisaris-byan-ada-hatta-rajasa-budi-waseso",
-   "ringkasan": "Bayan Resources menggelar RUPSLB hari ini untuk persetujuan perubahan direksi dan komisaris.",
-   "gambar": "https://awsimages.detik.net.id/visual/2024/10/15/bayan-resources_169.jpeg?w=1200&q=90",
-   "sumber": "CNBC Indonesia",
-   "tema": "pasar",
-   "bahasa": "id",
-   "waktu": "2026-11-23T04:55:01+00:00"
-  },
-  {
-   "judul": "Gak Alihkan Saham SMCB ke Publik, SMGR Kena Sanksi OJK",
-   "link": "https://www.cnbcindonesia.com/market/20261123102451-17-787489/gak-alihkan-saham-smcb-ke-publik-smgr-kena-sanksi-ojk",
-   "ringkasan": "Otoritas Jasa Keuangan (OJK) resmi menjatuhkan sanksi denda kepada emiten semen pelat merah PT Semen Indonesia (Persero) Tbk (SMGR).",
-   "gambar": "https://awsimages.detik.net.id/visual/2026/10/14/suasana-aktivitas-bongkar-muat-di-gudang-semen-di-kawasan-jakarta-rabu-14102026-cnbc-indonesiatri-susilo-1791966678162_169.jpeg?w=1200&q=90",
-   "sumber": "CNBC Indonesia",
-   "tema": "pasar",
-   "bahasa": "id",
-   "waktu": "2026-11-23T04:50:52+00:00"
-  },
-  {
-   "judul": "Koster Sudah Punya Haluan Bali 100 Tahun 2025-2125, Ini Isinya",
-   "link": "https://www.cnnindonesia.com/ekonomi/20261123113633-532-1430327/koster-sudah-punya-haluan-bali-100-tahun-2025-2125-ini-isinya",
-   "ringkasan": "Gubernur Bali I Wayan Koster sudah membuat haluan untuk menata Bali agar ke depan bisa tumbuh kuat dan berkelanjutan.",
-   "gambar": "https://akcdn.detik.net.id/visual/2026/11/23/gubernur-bali-i-wayan-koster-di-forum-akselerasi-ekonomi-daerah-2026-regional-jawa-dan-bali-1795404793210_169.png?w=360&q=90",
-   "sumber": "CNN Indonesia",
-   "tema": "makro",
-   "bahasa": "id",
-   "waktu": "2026-11-23T04:50:48+00:00"
-  },
-  {
-   "judul": "Rilis Aturan Baru, OJK Tegaskan Larangan Manipulasi Laporan Keuangan",
-   "link": "https://www.cnnindonesia.com/ekonomi/20261123113426-78-1430322/rilis-aturan-baru-ojk-tegaskan-larangan-manipulasi-laporan-keuangan",
-   "ringkasan": "Otoritas Jasa Keuangan (OJK) melarang manipulasi dan intervensi dalam proses pelaporan keuangan perusahaan perasuransian, lembaga penjamin, dan dana pensiun.",
-   "gambar": "https://akcdn.detik.net.id/visual/2018/03/22/f87db07f-e5b6-448f-a110-d5ff191ef785_169.jpeg?w=360&q=90",
-   "sumber": "CNN Indonesia",
-   "tema": "moneter",
-   "bahasa": "id",
-   "waktu": "2026-11-23T04:50:42+00:00"
-  },
-  {
-   "judul": "BRI Bagikan Tips Hindari QRIS Palsu, Jangan Asal Scan Kode QR",
-   "link": "https://www.cnnindonesia.com/ekonomi/20261123113026-625-1430321/bri-bagikan-tips-hindari-qris-palsu-jangan-asal-scan-kode-qr",
-   "ringkasan": "BRI mengingatkan masyarakat waspada terhadap penipuan QRIS, Pastikan kode pembayaran asli dan verifikasi identitas merchant untuk keamanan transaksi digital.",
-   "gambar": "https://akcdn.detik.net.id/visual/2026/11/23/bnr-bri-corsec-107330-11982-23-november-2026-1795407406997_169.jpeg?w=360&q=90",
-   "sumber": "CNN Indonesia",
-   "tema": "makro",
-   "bahasa": "id",
-   "waktu": "2026-11-23T04:50:15+00:00"
-  },
-  {
-   "judul": "Gubernur Jateng Ungkap Tujuan dan Strategi Dorong UMKM Naik Kelas",
-   "link": "https://www.cnnindonesia.com/ekonomi/20261123113631-532-1430326/gubernur-jateng-ungkap-tujuan-dan-strategi-dorong-umkm-naik-kelas",
-   "ringkasan": "Gubernur Jawa Tengah Ahmad Luthfi memaparkan strategi untuk meningkatkan kualitas UMKM, termasuk akses permodalan dan pengemasan.",
-   "gambar": "https://akcdn.detik.net.id/visual/2026/11/23/gubernur-jawa-tengah-jateng-ahmad-luthfi-di-forum-akselerasi-ekonomi-daerah-2026-regional-jawa-dan-bali-1795405542676_169.png?w=360&q=90",
-   "sumber": "CNN Indonesia",
-   "tema": "makro",
-   "bahasa": "id",
-   "waktu": "2026-11-23T04:39:54+00:00"
-  },
-  {
-   "judul": "BRI Perkuat Pemberdayaan Perempuan Lewat Inspiring Srikandi 2026",
-   "link": "https://www.cnnindonesia.com/ekonomi/20261123110339-625-1430304/bri-perkuat-pemberdayaan-perempuan-lewat-inspiring-srikandi-2026",
-   "ringkasan": "BRI mendampingi perempuan pekerja meningkatkan literasi keuangan, mengembangkan potensi diri, serta memanfaatkan layanan perbankan merencanakan finansial.",
-   "gambar": "https://akcdn.detik.net.id/visual/2026/11/23/bri-1795406931979_169.png?w=360&q=90",
-   "sumber": "CNN Indonesia",
-   "tema": "moneter",
-   "bahasa": "id",
-   "waktu": "2026-11-23T04:39:50+00:00"
-  },
-  {
-   "judul": "Dentsu luncurkan Future Mandala di Indonesia dan Thailand dengan 60 wawasan menuju 2030-an",
-   "link": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxQQzgxVld5TWVjTUlsdnYxSDFTSmVsdFpHNFlwd0lILV93YURHTGpHVG1pREFuODM0LU5UcVpjbVgxV3FaYTNzcVVRbEhndzlOTTVteG55Wjd2aWw5VVdvNE9SalY1TDZiUjVGNkYxSFluRmM3N1NZeVZRc1RCblh0Tjd1YlJDT2IzVnRDUTZta2xsZFU4Vy0zcFVhdFNjaG1mMXJqQ2g2YUFJcy1aRnN2dVZMSXlrOTc1aEpjekk3d01YcklpWFJxeVF4UUdYdjhGUmZhQTF3?oc=5",
-   "ringkasan": "",
-   "gambar": null,
-   "sumber": "Campaign Indonesia",
-   "tema": "makro",
-   "bahasa": "id",
-   "waktu": "2026-11-23T04:37:33+00:00"
-  },
-  {
-   "judul": "Turis Lokal Belum Pulih, Koster Minta Pusat Bantu Infrastruktur Bali",
-   "link": "https://www.cnnindonesia.com/ekonomi/20261123110825-92-1430308/turis-lokal-belum-pulih-koster-minta-pusat-bantu-infrastruktur-bali",
-   "ringkasan": "Gubernur Bali Wayan Koster menyoroti kunjungan wisatawan domestik ke Bali yang masih belum pulih sepenuhnya pascapandemi Covid-19.",
-   "gambar": "https://akcdn.detik.net.id/visual/2026/11/23/gubernur-bali-i-wayan-koster-di-forum-akselerasi-ekonomi-daerah-2026-regional-jawa-dan-bali-1795404792860_169.png?w=360&q=90",
-   "sumber": "CNN Indonesia",
-   "tema": "makro",
-   "bahasa": "id",
-   "waktu": "2026-11-23T04:30:21+00:00"
-  },
-  {
-   "judul": "Video:RI dan Uni Eropa Sepakati IEU-CEPA, IHSG dan Rupiah Kompak Menguat",
-   "link": "https://www.cnbcindonesia.com/market/20261123111030-19-787514/videori-dan-uni-eropa-sepakati-ieu-cepa-ihsg-rupiah-kompak-menguat",
-   "ringkasan": "RI dan Uni Eropa Sepakati IEU-CEPA, IHSG dan Rupiah Kompak Menguat",
-   "gambar": "https://awsimages.detik.net.id/visual/2026/11/23/ri-dan-uni-eropa-sepakati-ieu-cepa-ihsg-rupiah-kompak-menguat-1795407177127_169.png?w=1200&q=90",
-   "sumber": "CNBC Indonesia",
-   "tema": "pasar",
-   "bahasa": "id",
-   "waktu": "2026-11-23T04:30:02+00:00"
-  },
-  {
-   "judul": "BI Guyur Likuiditas Rp466 Triliun, Siapa yang Paling Diuntungkan?",
-   "link": "https://news.google.com/rss/articles/CBMixwFBVV95cUxOMWx2UWFrU3dwLTlDX0o0alBGbmJ1b0tGdDZhOTZvb2JLZVNUZnVRTFd5ZG9ZWWg2OTNXc1I4SjZLYU5YUFhTcml1T0ZDbjF2Q1BTM2NRaTdUTzJvaG9FbEZ2UDU2RGpWbVRSTl9sVW05LWhJYXRzSlNmUWZwaHhxMGhnYkFCRnV2VWl1Zzc5eXEyQUhYMFotNXI5aFlleWtYbHp3ODYwUDJwRThYc0dSZm9KZHVqTGdZazQ4d29Qa1AyWlIwZmVB?oc=5",
-   "ringkasan": "",
-   "gambar": null,
-   "sumber": "CNBC Indonesia",
-   "tema": "moneter",
-   "bahasa": "id",
-   "waktu": "2026-11-23T04:25:20+00:00"
-  },
-  {
-   "judul": "Gubernur Ahmad Luthfi: Jawa Tengah Tak Ada Premanisme dan Pungli",
-   "link": "https://www.cnnindonesia.com/ekonomi/20261123111831-532-1430316/gubernur-ahmad-luthfi-jawa-tengah-tak-ada-premanisme-dan-pungli",
-   "ringkasan": "Gubernur Jawa Tengah Ahmad Luthfi mengklaim wilayahnya bebas premanisme dan pungli sehingga bisa mendorong investasi di wilayah Jateng.",
-   "gambar": "https://akcdn.detik.net.id/visual/2026/11/23/gubernur-jawa-tengah-jateng-ahmad-luthfi-di-forum-akselerasi-ekonomi-daerah-2026-regional-jawa-dan-bali-1795405542183_169.png?w=360&q=90",
-   "sumber": "CNN Indonesia",
-   "tema": "makro",
-   "bahasa": "id",
-   "waktu": "2026-11-23T04:22:17+00:00"
-  },
-  {
-   "judul": "Tolong Simak! IHSG Anjlok 1 Persen Hari Ini, Investor Waspadai Risiko Ekonomi Indonesia dan Tekanan Rupiah",
-   "link": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxQZDk1c2hOT3p5M1p1UnVqMDgtMi1OZGMtU2JteF9SX1VYdlAtZExMLU9ERl9yTUROOW5wMjg0bzRDUXdaM2x0VW1OZnhyYnVXY1d2SEtqQk1GYkxQbFdGOEdDRUVTaXdLbm9sQmFhZGNQX1NsZjdia3NhMElQcWh5SE1ScTlyOGZlMFpPdElwYzZ2a1djM1ZVdWU0a0VNb3RCQmF5MU9yOU9hY0tWUHd6YWxWTERoS1dmRE12U1lXNTNZLXdyZjlWVzFFdHZCWVNULVgxUXdpUi1iNG8?oc=5",
-   "ringkasan": "",
-   "gambar": null,
-   "sumber": "Industry.co.id",
-   "tema": "pasar",
-   "bahasa": "id",
-   "waktu": "2026-11-23T04:16:00+00:00"
-  },
-  {
-   "judul": "IHSG Balik Melesat, Kabar Pertemuan Prabowo dan CEO MSCI Jadi Sorotan",
-   "link": "https://www.cnbcindonesia.com/market/20261123111147-17-787517/ihsg-balik-melesat-kabar-pertemuan-prabowo-dan-ceo-msci-jadi-sorotan",
-   "ringkasan": "IHSG menguat tajam 1,46% pada sesi I, Senin (23/11/2026). Pasar juga soroti pertemuan Prabowo dengan CEO MSCI terkait status pasar.",
-   "gambar": "https://awsimages.detik.net.id/visual/2026/10/28/layar-menampilkan-pergerakan-indeks-harga-saham-gabungan-ihsg-di-gedung-bursa-efek-indonesia-bei-jakarta-rabu-28102026-1793171038632_169.jpeg?w=1200&q=90",
-   "sumber": "CNBC Indonesia",
-   "tema": "pasar",
-   "bahasa": "id",
-   "waktu": "2026-11-23T04:15:42+00:00"
   }
  ]
 }
