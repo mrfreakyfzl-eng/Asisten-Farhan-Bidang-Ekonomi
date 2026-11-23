@@ -1,0 +1,151 @@
+{
+  "diperbarui": "2026-11-23",
+  "catatan": "Ubah angka di file ini setiap ada rilis resmi baru (BI, BPS, Kemenkeu). Dashboard dan pesan WhatsApp otomatis memakai file ini.",
+  "kelompok": [
+    {
+      "id": "moneter",
+      "nama": "Moneter",
+      "indikator": [
+        {
+          "id": "bi_rate",
+          "nama": "BI-Rate",
+          "nilai": 6.00,
+          "satuan": "%",
+          "periode": "RDG 17–18 Nov 2026",
+          "keterangan": "Naik 25 bps; Deposit Facility 5,25%, Lending Facility 6,75%",
+          "jadwal": "Bulanan, setelah Rapat Dewan Gubernur BI",
+          "sumber": "Bank Indonesia",
+          "url": "https://www.bi.go.id/id/publikasi/ruang-media/news-release/Pages/sp_2825426.aspx"
+        },
+        {
+          "id": "cadev",
+          "nama": "Cadangan Devisa",
+          "nilai": 146.8,
+          "satuan": "miliar US$",
+          "periode": "Akhir Okt 2026",
+          "keterangan": "setara 5,3 bulan impor (Sep 2026: 146,3)",
+          "jadwal": "Bulanan, sekitar tanggal 7",
+          "sumber": "Bank Indonesia",
+          "url": "https://www.bi.go.id/id/iru/highlight-news/Pages/Cadangan-Devisa-Oktober-2026-Tetap-Terjaga.aspx"
+        }
+      ]
+    },
+    {
+      "id": "makro",
+      "nama": "Makro",
+      "indikator": [
+        {
+          "id": "pdb",
+          "nama": "Pertumbuhan Ekonomi",
+          "nilai": 5.47,
+          "satuan": "% yoy",
+          "periode": "Triwulan III 2026",
+          "keterangan": "Tw II 2026: 5,29%; qtq 1,59%",
+          "jadwal": "Triwulanan, awal Feb/Mei/Agu/Nov",
+          "sumber": "BPS",
+          "url": "https://www.bps.go.id/id/pressrelease"
+        },
+        {
+          "id": "inflasi",
+          "nama": "Inflasi Tahunan",
+          "nilai": 3.23,
+          "satuan": "% yoy",
+          "periode": "Okt 2026",
+          "keterangan": "Bulanan 0,22%; inti 2,56%; sasaran BI 2,5±1%",
+          "jadwal": "Bulanan, hari kerja pertama",
+          "sumber": "BPS",
+          "url": "https://www.bps.go.id/id/pressrelease"
+        },
+        {
+          "id": "neraca",
+          "nama": "Neraca Perdagangan",
+          "nilai": 3.36,
+          "satuan": "miliar US$",
+          "periode": "Sep 2026",
+          "keterangan": "Surplus; kumulatif Jan–Sep US$10,61 miliar",
+          "jadwal": "Bulanan, awal bulan (data 1 bulan sebelumnya)",
+          "sumber": "BPS",
+          "url": "https://www.bps.go.id/id/pressrelease"
+        }
+      ]
+    },
+    {
+      "id": "fiskal",
+      "nama": "Fiskal (APBN)",
+      "indikator": [
+        {
+          "id": "defisit",
+          "nama": "Defisit APBN",
+          "nilai": 1.47,
+          "satuan": "% PDB",
+          "periode": "s.d. 31 Okt 2026",
+          "keterangan": "Rp379,3 triliun; batas UU 3% PDB",
+          "jadwal": "Bulanan, konferensi pers APBN KiTa",
+          "sumber": "Kementerian Keuangan",
+          "url": "https://www.kemenkeu.go.id/informasi-publik/publikasi/apbn-kita"
+        },
+        {
+          "id": "pendapatan",
+          "nama": "Pendapatan Negara",
+          "nilai": 83.0,
+          "satuan": "% target",
+          "periode": "s.d. 31 Okt 2026",
+          "keterangan": "Rp2.618 triliun; pajak Rp1.796,8 T (76,2% target)",
+          "jadwal": "Bulanan, APBN KiTa",
+          "sumber": "Kementerian Keuangan",
+          "url": "https://www.kemenkeu.go.id/informasi-publik/publikasi/apbn-kita"
+        },
+        {
+          "id": "primer",
+          "nama": "Keseimbangan Primer",
+          "nilai": 114.8,
+          "satuan": "triliun Rp",
+          "periode": "s.d. 31 Okt 2026",
+          "keterangan": "Surplus; belanja negara Rp2.997,2 T",
+          "jadwal": "Bulanan, APBN KiTa",
+          "sumber": "Kementerian Keuangan",
+          "url": "https://www.kemenkeu.go.id/informasi-publik/publikasi/apbn-kita"
+        }
+      ]
+    },
+    {
+      "id": "mikro",
+      "nama": "Mikro & Pertanian",
+      "indikator": [
+        {
+          "id": "ntp",
+          "nama": "Nilai Tukar Petani",
+          "nilai": 132.60,
+          "satuan": "indeks",
+          "periode": "Okt 2026",
+          "keterangan": "Naik 1,13% mtm; NTP pangan 120,52; hortikultura 138,41",
+          "jadwal": "Bulanan, hari kerja pertama",
+          "sumber": "BPS",
+          "url": "https://www.bps.go.id/id/pressrelease"
+        },
+        {
+          "id": "ntn",
+          "nama": "Nilai Tukar Nelayan",
+          "nilai": 107.78,
+          "satuan": "indeks",
+          "periode": "Okt 2026",
+          "keterangan": "Turun 0,99% mtm; NTPi pembudidaya 108,67",
+          "jadwal": "Bulanan, hari kerja pertama",
+          "sumber": "BPS",
+          "url": "https://www.bps.go.id/id/pressrelease"
+        },
+        {
+          "id": "inflasi_pangan",
+          "nama": "Inflasi Bahan Makanan",
+          "nilai": 5.61,
+          "satuan": "% yoy",
+          "periode": "Okt 2026",
+          "keterangan": "Harga bergejolak 5,81% yoy; cabai merah penyumbang utama",
+          "jadwal": "Bulanan, bersama rilis inflasi",
+          "sumber": "BPS",
+          "url": "https://www.bps.go.id/id/pressrelease"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+name: Ringkasan ekonomi harian ke WhatsApp
+
+on:
+  schedule:
+    # 21:00 UTC = 06:00 WIT (Papua). Ganti ke "0 23 * * *" untuk 06:00 WIB.
+    - cron: "0 21 * * *"
+  workflow_dispatch: {}   # tombol "Run workflow" untuk uji manual
+
+jobs:
+  kirim:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Susun & kirim ringkasan
+        env:
+          WA_PHONE: ${{ secrets.WA_PHONE }}
+          CALLMEBOT_APIKEY: ${{ secrets.CALLMEBOT_APIKEY }}
+          FONNTE_TOKEN: ${{ secrets.FONNTE_TOKEN }}
+          DASHBOARD_URL: ${{ vars.DASHBOARD_URL }}
+        run: python scripts/kirim_wa.py
